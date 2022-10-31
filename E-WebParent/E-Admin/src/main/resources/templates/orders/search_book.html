@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Search Book', 'none')" />
+<body>
+<div class="main-content container-fluid">
+ <section class="section">
+	<div>
+	
+		<form th:action="@{/orders/search_book}" method="post" 
+				class="form-inline m-3">
+			<div class="row">         					
+					   <div class="col-lg-3 mb-1">
+						   <div class="input-group mb-3">
+							
+							   <span class="input-group-text">Search</span>
+							   <input type="search" name="keyword" th:value="${keyword}" placeholder="More in Books..." class="form-control" required >
+							   &nbsp;&nbsp;
+							   <button type="submit" class="btn btn-primary">
+								   <i class="fas fa-search"></i>
+							   </button>
+							  
+						   </div>
+					   </div>
+					   </div>
+		</form>
+	</div>
+	
+	<div class="row">
+		<th:block th:each="book : ${listBooks}">
+		<div class="col">
+			<div>
+				<a href="" class="linkBook" th:pid="${book.id}">
+					<img th:src="@{${book.mainImagePath}}" height="150">
+					<br/>
+					<b th:id="'pname' + ${book.id}">[[${book.shortName}]]</b>
+				</a>
+			</div>
+		</div>
+		</th:block>
+	</div>
+	<div th:replace="modal_fragments :: confirm_modal" /></div>
+	<div th:replace="fragments :: pagination('/books', 'books')"></div>
+	</section>
+</div>
+<script th:src="@{/js/common_form.js}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		handleLinkBook();
+	});
+	
+	function handleLinkBook() {
+		$(".linkBook").on("click", function(e) {
+			e.preventDefault();
+			bookId = $(this).attr("pid");
+			bookName = $("#pname" + bookId).text();
+			
+			if (window.parent.isBookAlreadyAdded(bookId)) {
+				showWarningModal("The book '" + bookName + "' was already added.");
+			} else {				
+				window.parent.addBook(bookId, bookName);
+			}
+		});
+	}
+</script>
+</body>
+</html>

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.aptech.admin.dashboard.DashboardInfo;
+import com.aptech.admin.dashboard.DashboardService;
+
 @Controller
 public class MainController {
 
