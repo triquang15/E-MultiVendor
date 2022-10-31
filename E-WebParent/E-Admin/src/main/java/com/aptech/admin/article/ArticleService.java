@@ -1,30 +1,74 @@
 package com.aptech.admin.article;
 
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import javax.transaction.Transactional;
 
-import com.aptech.admin.paging.SearchRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface ArticleRepository extends SearchRepository<Article, Integer> {
+import com.aptech.admin.paging.PagingAndSortingHelper;
+import com.aptech.common.entity.Article;
+import com.aptech.common.entity.ArticleType;
+import com.aptech.common.entity.User;
+import com.aptech.common.exception.ArticleNotFoundException;
 
-	@Query("SELECT NEW Article(a.id, a.title, a.type, a.updatedTime, a.published, a.user) "
-			+ "FROM Article a")
-	public Page<Article> findAll(Pageable pageable);
+@Service
+@Transactional
+public class ArticleService {
+	public static final int ARTICLES_PER_PAGE = 5;
 	
-	@Query("SELECT NEW Article(a.id, a.title, a.type, a.updatedTime, a.published, a.user) "
-			+ "FROM Article a WHERE a.title LIKE %?1% OR a.content LIKE %?1%")
-	public Page<Article> findAll(String keyword, Pageable pageable);
+	@Autowired private ArticleRepository repo;
 	
-	@Query("UPDATE Article a SET a.published = ?2 WHERE a.id = ?1")
-	@Modifying
-	public void updatePublishStatus(Integer id, boolean published);
+	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
+		helper.listEntities(pageNum, ARTICLES_PER_PAGE, repo);
+	}	
 	
-	public List<Article> findByTypeOrderByTitle(ArticleType type);
+	public List<Article> listAll() {
+		return repo.findPublishedArticlesWithIDAndTitleOnly();
+	}
 	
-	@Query("SELECT NEW Article(a.id, a.title) From Article a WHERE a.published = true ORDER BY a.title")
-	public List<Article> findPublishedArticlesWithIDAndTitleOnly();
+	public List<Article> listArticlesForMenu() {
+		return repo.findByTypeOrderByTitle(ArticleType.MENU_BOUND);
+	}
+	
+	public void save(Article article, User user) {
+		setDefaultAlias(article);
+				
+		article.setUpdatedTime(new Date());
+		article.setUser(user);
+		
+		repo.save(article);
+	}
+	
+	private void setDefaultAlias(Article article) {
+		if (article.getAlias() == null || article.getAlias().isEmpty()) {
+			article.setAlias(article.getTitle().replaceAll(" ", "-"));
+		}		
+	}
+	
+	public Article get(Integer id) throws ArticleNotFoundException {
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new ArticleNotFoundException("Could not find any article with ID " + id);
+		}
+	}	
+	
+	public void updatePublishStatus(Integer id, boolean published) throws ArticleNotFoundException {
+		if (!repo.existsById(id)) {
+			throw new ArticleNotFoundException("Could not find any article with ID " + id);
+		}
+		repo.updatePublishStatus(id, published);
+	}
+	
+	public void delete(Integer id) throws ArticleNotFoundException {
+		if (!repo.existsById(id)) {
+			throw new ArticleNotFoundException("Could not find any article with ID " + id);			
+		}
+		repo.deleteById(id);
+	}	
 }
+

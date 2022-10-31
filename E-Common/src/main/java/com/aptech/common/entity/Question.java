@@ -3,6 +3,7 @@ package com.aptech.common.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -10,6 +11,7 @@ import javax.persistence.Transient;
 
 import com.aptech.common.entity.product.Product;
 
+@Entity
 @Table(name = "questions")
 public class Question extends IdBasedEntity {
 
@@ -181,4 +183,3 @@ public class Question extends IdBasedEntity {
 	@Transient	
 	private boolean downvotedByCurrentCustomer;	
 }
-
