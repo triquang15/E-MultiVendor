@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Orders - Book Store Admin', 'none')" />
+<head th:replace="fragments :: page_head('Orders - Revel Admin', 'none')" />
 <body>
     <div id="app">
        <span th:replace="sidebar :: sidebar"></span>
@@ -18,7 +18,7 @@
             </div>
 			
             
-           <div th:replace="fragments :: search_form_and_message('/orders/page/1')"></div>
+           <div th:replace="fragments :: search_form_and_message"></div>
            <div>
 		<th:block th:each="order : ${listOrders}">
 		<div class="row m-1">
@@ -72,7 +72,7 @@
                 
             
            
-			<div th:replace="fragments :: pagination('/orders', 'orders')"></div>
+			<div th:replace="fragments :: pagination('orders')"></div>
             
             <div class="modal fade text-center" id="confirmModal">
 		<div class="modal-dialog">

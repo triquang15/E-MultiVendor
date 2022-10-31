@@ -6,14 +6,14 @@
  <section class="section">
 	<div>
 	
-		<form th:action="@{/orders/search_book}" method="post" 
+		<form th:action="@{/orders/search_product}" method="post" 
 				class="form-inline m-3">
 			<div class="row">         					
 					   <div class="col-lg-3 mb-1">
 						   <div class="input-group mb-3">
 							
 							   <span class="input-group-text">Search</span>
-							   <input type="search" name="keyword" th:value="${keyword}" placeholder="More in Books..." class="form-control" required >
+							   <input type="search" name="keyword" th:value="${keyword}" placeholder="More in Products..." class="form-control" required >
 							   &nbsp;&nbsp;
 							   <button type="submit" class="btn btn-primary">
 								   <i class="fas fa-search"></i>
@@ -26,39 +26,40 @@
 	</div>
 	
 	<div class="row">
-		<th:block th:each="book : ${listBooks}">
+		<th:block th:each="product : ${listProducts}">
 		<div class="col">
 			<div>
-				<a href="" class="linkBook" th:pid="${book.id}">
-					<img th:src="@{${book.mainImagePath}}" height="150">
+				<a href="" class="linkProduct" th:pid="${product.id}">
+					<img th:src="@{${product.mainImagePath}}" height="150">
 					<br/>
-					<b th:id="'pname' + ${book.id}">[[${book.shortName}]]</b>
+					<b th:id="'pname' + ${product.id}">[[${product.shortName}]]</b>
 				</a>
 			</div>
 		</div>
 		</th:block>
 	</div>
-	<div th:replace="modal_fragments :: confirm_modal" /></div>
-	<div th:replace="fragments :: pagination('/books', 'books')"></div>
+	<div th:replace="modal_fragments :: modal_dialog"></div>
+	<div th:replace="fragments :: pagination('products')"></div>
 	</section>
 </div>
 <script th:src="@{/js/common_form.js}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		handleLinkBook();
+		handleLinkProduct();
 	});
 	
-	function handleLinkBook() {
-		$(".linkBook").on("click", function(e) {
+	function handleLinkProduct() {
+		$(".linkProduct").on("click", function(e) {
 			e.preventDefault();
-			bookId = $(this).attr("pid");
-			bookName = $("#pname" + bookId).text();
+			productId = $(this).attr("pid");
+			productName = $("#pname" + productId).text();
 			
-			if (window.parent.isBookAlreadyAdded(bookId)) {
-				showWarningModal("The book '" + bookName + "' was already added.");
+			if (window.parent.isProductAlreadyAdded(productId)) {
+				showWarningModal("The product '" + productName + "' was already added.");
 			} else {				
-				window.parent.addBook(bookId, bookName);
+				window.parent.addProduct(productId, productName);
 			}
+			
 		});
 	}
 </script>

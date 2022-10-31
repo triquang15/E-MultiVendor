@@ -18,31 +18,29 @@
             </div>
 			
             <div class="card-body">
-           <div th:replace="fragments :: search_form_and_message('/articles/page/1')"></div>
+           <div th:replace="fragments :: search_form_and_message"></div>
           
                  <table class="table table-hover mb-0">
             <thead>
               <tr>
-               		 <th th:replace="fragments :: column_link('/articles', 'id', 'ID', 'none')" />
-					<th th:replace="fragments :: column_link('/articles', 'title', 'Title', 'none')" />	
-									
+               		<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
+					<th th:replace="fragments :: column_link('title', 'Title', 'none')" />
+					
 					<th class="hideable-column">						
-						<th th:replace="fragments :: column_link('/articles','type', 'Type', 'tag')" />
-					</th>
-										
-					<th th:replace="fragments :: column_link('/articles', 'user', 'Created by', 'none')" />					
-						
-					<th class="hideable-column">		
-						<th th:replace="fragments :: column_link('/articles', 'updatedTime', 'Updated Time', 'tag')" />
-					</th>
-										
-					<th th:replace="fragments :: column_link('/articles', 'published', 'Published', 'none')" />
+						<th th:replace="fragments :: column_link('type', 'Type', 'tag')" />
+					
+					<th th:replace="fragments :: column_link('user', 'Created by', 'none')" />
+					
+					<th class="hideable-column">
+						<th th:replace="fragments :: column_link('updatedTime', 'Updated Time', 'tag')" />
+					
+					<th th:replace="fragments :: column_link('published', 'Published', 'none')" />
 					
 					<th>Action</th>
               </tr>
             </thead>
             <tbody>
-           <tr th:each="article : ${listArticles}">
+          	 <tr th:each="article : ${listArticles}">
 					<td>[[${article.id}]]</td>
 					<td>[[${article.title}]]</td>
 					<td class="hideable-column">[[${article.type}]]</td>
@@ -51,7 +49,6 @@
 					<td>
 						<div th:replace="fragments :: status(${article.published}, 'article', '/articles/' + ${article.id})" />
 					</td>
-					
 					<td>
 						<a class="fas fa-file-alt icon-green link-detail" 
 							th:href="@{'/articles/detail/' + ${article.id}}" title="View details of this article"></a>
@@ -59,8 +56,7 @@
 						<div th:replace="fragments :: edit('article', '/articles/edit/' + ${article.id})" />
 						&nbsp;&nbsp;  
 						<div th:replace="fragments :: delete('article', ${article.id}, '/articles/delete/' + ${article.id}, true)" />						
-					</td>		
-							
+					</td>					
 				</tr>
             </tbody>
           </table>
@@ -68,11 +64,11 @@
             </div>
             
            
-			<div th:replace="fragments :: pagination('/articles', 'articles')"></div>
+			<div th:replace="fragments :: pagination('articles')"></div>
             
             <div th:replace="modal_fragments :: confirm_modal" /></div>
             
-            <div class="modal fade" id="detailModal">
+           <div class="modal fade" id="detailModal">
 	  <div class="modal-dialog modal-xl">
 	    <div class="modal-content">
 	    </div>
@@ -92,7 +88,6 @@
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
 	moduleURL = "[[@{/articles}]]";
-
 	entityName = "article";
 	
 	$(document).ready(function(){

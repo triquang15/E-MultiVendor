@@ -16,7 +16,7 @@
             </div>
            
                 
-                  <form th:action="@{/sections/save/author}" th:object="${section}" method="post" onsubmit="processBeforeSubmit()">
+                 <form th:action="@{/sections/save/brand}" th:object="${section}" method="post" onsubmit="processBeforeSubmit()">
 					<input type="hidden" th:field="*{id}" />
 					<input type="hidden" th:field="*{type}" />
 					<input type="hidden" th:field="*{sectionOrder}" />
@@ -26,32 +26,32 @@
                         
                         	 <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="email-id-column">Authors</label>
-                                 <select id="authors" multiple class="form-control" style="resize: vertical; height: 200px">
-									<option th:each="author : ${listAuthors}" th:value="${author.id}" th:text="${author.name}" />
+                                    <label for="email-id-column">Brands</label>
+                                <select id="brands" multiple class="form-control" style="resize: vertical; height: 200px">
+									<option th:each="brand : ${listBrands}" th:value="${brand.id}" th:text="${brand.name}" />
 								</select>
                                 </div>
 	                                <div>
-										<input type="button" class="btn btn-secondary m-3" id="buttonAddAuthor" value="Choose Author" />
+										<input type="button" class="btn btn-secondary m-3" id="buttonAddBrand" value="Choose Brand" />
 									</div>	
                             </div>
                             
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="first-name-column">Chosen Authors</label>
-                                  <select multiple="multiple" id="chosenAuthors" name="chosenAuthors" class="form-control" style="resize: vertical; height: 150px">
-						<th:block th:each="authorSection : ${section.authorSections}">
-						<option th:value="${authorSection.author.id} + '-' + ${authorSection.id}" th:text="${authorSection.author.name}" />
+                                    <label for="first-name-column">Chosen Brands</label>
+                                 <select multiple="multiple" id="chosenBrands" name="chosenBrands" class="form-control" style="resize: vertical; height: 150px">
+						<th:block th:each="brandSection : ${section.brandSections}">
+						<option th:value="${brandSection.brand.id} + '-' + ${brandSection.id}" th:text="${brandSection.brand.name}" />
 						</th:block>
 					</select>
                                 </div>
                             </div>
                             <div class="m-2">
-					<a class="fas fa-trash icon-dark" id="linkRemoveAuthor" href="" title="Remove this author" ></a>
+					<a class="fas fa-trash icon-dark" id="linkRemoveBrand" href="" title="Remove this brand" ></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="fas fa-chevron-up icon-dark" id="linkMoveAuthorUp" href="" title="Move this author up"></a>
+					<a class="fas fa-chevron-up icon-dark" id="linkMoveBrandUp" href="" title="Move this brand up"></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="fas fa-chevron-down icon-dark" id="linkMoveAuthorDown" href="" title="Move this author down"></a>					
+					<a class="fas fa-chevron-down icon-dark" id="linkMoveBrandDown" href="" title="Move this brand down"></a>					
 				</div>	
                            
                           
@@ -66,7 +66,6 @@
                          </div>
                     </form>
                     
-                   <div th:replace="modal_fragments :: modal_dialog"></div>   
            
         </div>
 
@@ -83,7 +82,7 @@
 			
 </script>
 	<script th:src="@{/js/common_form.js}"></script>
-	<script th:src="@{/js/author_section_form.js}"></script>
+	<script th:src="@{/js/brand_section_form.js}"></script>
     <script th:src="@{/js/feather-icons/feather.min.js}"></script>
     <script th:src="@{/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
     <script th:src="@{/js/app.js}"></script>  
