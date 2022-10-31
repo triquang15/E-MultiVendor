@@ -14,8 +14,7 @@
             <div class="card-header">
                 <h3>Manage Orders | [[${pageTitle}]]</h3>
             </div>
-           
-                
+                   
                    <form th:action="@{/order/save}" th:object="${order}" method="post" onsubmit="return processFormBeforeSubmit();">
 	<input type="hidden" th:field="*{id}" />
 	<div>
@@ -24,9 +23,7 @@
 		    <a class="nav-link active" id="overview-tab" data-bs-toggle="tab" href="#overview" role="tab">Overview</a>
 		  </li>
 		  <li class="nav-item">
-
-		    <a class="nav-link" id="books-tab" data-bs-toggle="tab" href="#books" role="tab">Books</a>
-
+		    <a class="nav-link" id="products-tab" data-bs-toggle="tab" href="#products" role="tab">Products</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" id="shipping-tab" data-bs-toggle="tab" href="#shipping" role="tab">Shipping</a>
@@ -40,9 +37,8 @@
 			<div th:replace="orders/order_form_overview :: content"></div>  
 		  </div>
 		  
-		  <div class="tab-pane fade p-3" id="books" role="tabpanel">
-			<div th:replace="orders/order_form_books :: content"></div>   
-
+		  <div class="tab-pane fade p-3" id="products" role="tabpanel">
+			<div th:replace="orders/order_form_products :: content"></div>  
 		  </div>
 		  
 		  <div class="tab-pane fade p-3" id="shipping" role="tabpanel">
@@ -61,8 +57,8 @@
 		</p>	
 	</div>			
 	</form>                   
-            <div th:replace="modal_fragments :: modal_dialog"></div>   
-            <div th:replace="orders/add_book_modal :: content"></div> 
+           <div th:replace="modal_fragments :: modal_dialog"></div>
+		   <div th:replace="orders/add_product_modal :: content"></div>
            
         </div>
 
@@ -75,9 +71,8 @@
     
 <script type="text/javascript">
 	contextPath = "[[@{/}]]";
-	
 	var csrfHeaderName = "[[${_csrf.headerName}]]";
-	var csrfValue = "[[${_csrf.token}]]";
+	var csrfValue = "[[${_csrf.token}]]";	
 	
 	$(document).ready(function() {
 		$('#buttonCancel').click(function() { 
