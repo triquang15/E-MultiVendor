@@ -16,7 +16,7 @@
             </div>
            
                 
-	           <form th:action="@{/sections/save/book}" th:object="${section}" method="post">
+	           <form th:action="@{/sections/save/product}" th:object="${section}" method="post">
 		<input type="hidden" th:field="*{id}" />
 		<input type="hidden" th:field="*{type}" />
 		<input type="hidden" th:field="*{sectionOrder}" />
@@ -26,27 +26,27 @@
                         
                         	 <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="email-id-column">Books</label>
-				                     <a th:href="@{'/orders/search_book'}" id="addBook" class="btn btn-success">Add a Book</a>
+                                    <label for="email-id-column">Products</label>
+				                    <a th:href="@{'/orders/search_product'}" id="addProduct" class="btn btn-success">Add a Product</a>
                                 </div>
 	                               
                             </div>
                             
-                            <div class="row" id="bookList">
-		  	<th:block th:each="bookSection, status : ${section.bookSections}">
-			<div class="col-sm-2" th:id="'col' + ${status.count}" draggable="true" ondragstart="dragBook(event)" th:with="book = ${bookSection.book}">
-				<input type="hidden" name="bookId" th:value="${book.id}" class="book-id-hidden" />
-				<input type="hidden" name="bookSectionId" th:value="${bookSection.id}" />
+                            <div class="row" id="productList">
+		  	<th:block th:each="productSection, status : ${section.productSections}">
+			<div class="col-sm-2" th:id="'col' + ${status.count}" draggable="true" ondragstart="dragProduct(event)" th:with="product = ${productSection.product}">
+				<input type="hidden" name="productId" th:value="${product.id}" class="product-id-hidden" />
+				<input type="hidden" name="productSectionId" th:value="${productSection.id}" />
 				<div class="mt-1">
 					<a class="fas fa-trash icon-dark link-remove" href="" th:colNumber="${status.count}"></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="fas fa-chevron-left icon-dark link-move-left" href="" title="Move this book to the left" th:colNumber="${status.count}"></a>
+					<a class="fas fa-chevron-left icon-dark link-move-left" href="" title="Move this product to the left" th:colNumber="${status.count}"></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="fas fa-chevron-right icon-dark link-move-right" href="" title="Move this book to the right" th:colNumber="${status.count}"></a>
+					<a class="fas fa-chevron-right icon-dark link-move-right" href="" title="Move this product to the right" th:colNumber="${status.count}"></a>
 				</div>
-				<div><img th:src="@{${book.mainImagePath}}" height="100px" /></div>
+				<div><img th:src="@{${product.mainImagePath}}" height="100px" /></div>
 				<div>
-					<b>[[${book.name}]]</b>
+					<b>[[${product.name}]]</b>
 				</div>
 			</div>		  	
 		  	</th:block>
@@ -63,12 +63,12 @@
                          </div>
                     </form>
                     
-                    <div class="modal fade text-center" id="addBookModal">
+                    <div class="modal fade text-center" id="addProductModal">
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	
 	      <div class="modal-header">
-	        <h4 class="modal-title" id="modalTitle">Add Book</h4>
+	        <h4 class="modal-title" id="modalTitle">Add Product</h4>
 	        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
 	      </div>
 	
@@ -101,7 +101,7 @@
 			
 </script>
 	<script th:src="@{/js/common_form.js}"></script>
-<script th:src="@{/js/book_section_form.js}"></script>
+	<script th:src="@{/js/product_section_form.js}"></script>
     <script th:src="@{/js/feather-icons/feather.min.js}"></script>
     <script th:src="@{/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
     <script th:src="@{/js/app.js}"></script>  

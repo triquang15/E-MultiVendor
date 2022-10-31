@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Questions - Book Store Admin', 'none')" />
+<head th:replace="fragments :: page_head('Questions - Revel Admin', 'none')" />
 <body>
     <div id="app">
        <span th:replace="sidebar :: sidebar"></span>
@@ -17,20 +17,17 @@
             </div>
 			
             <div class="card-body">
-           <div th:replace="fragments :: search_form_and_message('/questions/page/1')"></div>
+           <div th:replace="fragments :: search_form_and_message"></div>
           
                  <table class="table table-hover mb-0">
             <thead>
               <tr>
-               		 <th th:replace="fragments :: column_link('/questions', 'id', 'ID', 'none')" />
-					<th th:replace="fragments :: column_link('/questions', 'book', 'Book', 'none')" />					
-					<th th:replace="fragments :: column_link('/questions', 'questionContent', 'Question', 'none')" />
-										
-					<th th:replace="fragments :: column_link('/questions', 'asker', 'Asker', 'none')" />					
-								
-					<th th:replace="fragments :: column_link('/questions', 'askTime', 'Ask Time', 'none')" />
-										
-					<th th:replace="fragments :: column_link('/questions', 'approved', 'Approved', 'none')" />
+               		<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
+					<th th:replace="fragments :: column_link('product', 'Product', 'none')" />
+					<th th:replace="fragments :: column_link('questionContent', 'Question', 'none')" />
+					<th th:replace="fragments :: column_link('asker', 'Asker', 'none')" />
+					<th th:replace="fragments :: column_link('askTime', 'Ask Time', 'none')" />
+					<th th:replace="fragments :: column_link('approved', 'Approved', 'none')" />
 					<th class="hideable-column">Answered</th>	
 					<th>Action</th>
               </tr>
@@ -39,13 +36,14 @@
            <tr th:each="question : ${listQuestions}">
 					<td th:text="${question.id}">ID</td>
 					<td>
-						<a th:href="@{'/books/detail/' + ${question.book.id}}" class="link-detail" th:title="${question.book.shortName}">[[${question.book.shortName}]]</a>
+						<a th:href="@{'/products/detail/' + ${question.product.id}}" class="link-product-detail" th:title="${question.product.shortName}">[[${question.product.shortName}]]</a>
 					</td>
 					<td th:text="${question.questionContent}">Question</td>
 					<td>
-						<a th:href="@{'/customers/detail/' + ${question.asker.id}}" class="link-detail">[[${question.asker.fullName}]]</a>
+						<a th:href="@{'/customers/detail/' + ${question.asker.id}}" class="link-customer-detail">[[${question.asker.fullName}]]</a>
 					</td>
 					<td><div th:replace="fragments :: format_time(${question.askTime})"></div></td>
+					
 					
 					<td>
 						<a th:if="${question.approved == true}" class="fas fa-check-circle icon-green"
@@ -58,7 +56,7 @@
 							title="Approve this question"
 							>
 						</a>
-					</td>		
+					</td>
 					
 					<td class="hideable-column">
 						<span class="fas"	th:classappend="${question.answered ? 'fa-check-circle icon-green' : 'fa-circle icon-dark'}"></span>
@@ -71,7 +69,6 @@
 						&nbsp; 
 						<div th:replace="fragments :: delete('question', ${question.id}, '/questions/delete/' + ${question.id}, true)" />						
 					</td>
-							
 				</tr>
             </tbody>
           </table>
@@ -79,7 +76,7 @@
             </div>
             
            
-			<div th:replace="fragments :: pagination('/questions', 'questions')"></div>
+			<div th:replace="fragments :: pagination('questions')"></div>
             
             <div th:replace="modal_fragments :: confirm_modal" /></div>
             
@@ -103,19 +100,21 @@
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
 	moduleURL = "[[@{/questions}]]";
-
-	$(document).ready(function() {
-		$(".link-delete").on("click", function(e) {
-			e.preventDefault();
-			showDeleteConfirmModal($(this), 'customer');
-		});
-		
-		$(".link-detail").on("click", function(e) {
-			e.preventDefault();
-			linkDetailURL = $(this).attr("href");
-			$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
-		});		
+	entityName = "question";
+	
+	$(document).ready(function(){
+		handleViewProductDetailLink();
+		handleDefaultDetailLinkClick();
+		handleViewCustomerDetailLink();
 	});
+	
+	function handleViewProductDetailLink() {
+		handleDetailLinkClick(".link-product-detail", "#detailModal");
+	}
+	
+	function handleViewCustomerDetailLink() {
+		handleDetailLinkClick(".link-customer-detail", "#smallModal");
+	}	
 </script>
     <script th:src="@{/js/feather-icons/feather.min.js}"></script>
     <script th:src="@{/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>

@@ -8,7 +8,7 @@ $(document).ready(function() {
 		    $(this).find('iframe').attr('src', url)
 		});
 		
-		$('#addProductModal').modal();		
+		$('#addProductModal').modal('show');		
 	});
 	
 	$("#productList").on("click", ".link-remove", function(e) {
