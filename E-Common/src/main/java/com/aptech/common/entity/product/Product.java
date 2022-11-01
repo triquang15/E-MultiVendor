@@ -30,7 +30,7 @@ public class Product extends IdBasedEntity {
 	@Column(unique = true, length = 255, nullable = false)
 	private String alias;
 	
-	@Column(length = 512, nullable = false, name = "short_description")
+	@Column(length = 4096, nullable = false, name = "short_description")
 	private String shortDescription;
 	
 	@Column(length = 4096, nullable = false, name = "full_description")
