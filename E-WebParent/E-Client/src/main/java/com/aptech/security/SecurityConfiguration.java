@@ -67,7 +67,7 @@ public class SecurityConfiguration {
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().antMatchers("/images/**", "/css/**", "/js/**", "/webjars/**");
+		return (web) -> web.ignoring().antMatchers("/images/**", "/css/**", "/vendor/**", "/js/**", "/webjars/**");
 	}
 	
 	@Bean

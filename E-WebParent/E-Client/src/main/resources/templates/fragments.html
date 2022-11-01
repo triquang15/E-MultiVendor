@@ -4,20 +4,62 @@
 	 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revel eCommerce-Multi vendor Ecommerce HTML Template</title>
+    <title> [[${title}]] - [[${SITE_NAME}]]</title>
 
-    <link rel="icon" type="image/x-icon" th:href="favicon.png" />
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}" />
     <link rel="stylesheet" th:href="@{/vendor/css/all.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
     <link rel="stylesheet" th:href="@{/vendor/flaticon/flaticon.css}">
     <link rel="stylesheet" th:href="@{/vendor/css/nice-select.css}">
     <link rel="stylesheet" th:href="@{/vendor/css/flags.css}">
     <link rel="stylesheet" th:href="@{/vendor/css/slick.css}">
     <link rel="stylesheet" th:href="@{/vendor/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/css/modal-video.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/css/nouislider.min.css}">
     <link rel="stylesheet" th:href="@{/vendor/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 <body>
 
+<!-- Show Modal Dialog Start -->
+<div th:fragment="modal_dialog" class="modal fade text-center" id="modalDialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="modalTitle" style="color: red;">Warning</h4>
+				<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+			</div>
+			
+			<div class="modal-body">
+				<span id="modalBody"></span>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:fragment="confirm_modal" class="modal fade text-center" id="confirmModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" style="color: red;" >Delete Confirmation</h4>
+				<button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+			</div>
+			
+			<div class="modal-body">
+				<span id="confirmText"></span>
+			</div>
+			
+			<div class="modal-footer">
+				<a class="btn btn-success" href="" id="yesButton">Yes</a>
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Show Modal Dialog End -->
 </body>
 </html>
