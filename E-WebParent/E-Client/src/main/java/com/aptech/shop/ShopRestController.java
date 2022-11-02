@@ -9,12 +9,8 @@ public class ShopRestController {
 	@Autowired
 	private ShopService service;
 	
-	@PostMapping("/shops/check_email")
-	public String checkDuplicateName(Integer id, String name) {
-		if (service.isNameUnique(id, name)) {
-			return "OK";
-		} else {
-			return "Duplicated";
-		}
+	@PostMapping("/shops/check_name")
+	public String checkDuplicateName(String name) {
+		return service.isNameUnique(name) ? "OK" : "Duplicated";
 	}
 }

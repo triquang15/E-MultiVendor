@@ -2,9 +2,11 @@ package com.aptech.shop;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.util.Streamable;
 
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Shop;
@@ -23,4 +25,7 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
 
 	@Query("SELECT s FROM Shop s WHERE s.name = ?1")
 	public Shop findByName(String name);
+
+	public Long countById(Integer id);
+
 }
