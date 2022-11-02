@@ -157,7 +157,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                             </li>
                              <th:block sec:authorize="isAuthenticated()">
                             <li>
-                                <a href="#">Sell On Revel </a>
+                                <a th:href="@{/shops}">Sell On Revel </a>
                             </li>
                             </th:block>
                         </ul>
