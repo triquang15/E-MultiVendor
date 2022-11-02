@@ -1,6 +1,8 @@
 package com.aptech.shop;
 
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.transaction.Transactional;
 
@@ -13,13 +15,14 @@ import org.springframework.stereotype.Service;
 
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Shop;
+import com.aptech.common.exception.ShopNotFoundException;
 
 @Service
 public class ShopService {
 	public static final int SHOPS_PER_PAGE = 5;
 	
 	@Autowired private ShopRepository shopRepository;
-	
+
 	
 	public Page<Shop> listForCustomerByPage(Customer customer, int pageNum, String sortField, String sortDir,
 			String keyword) {
@@ -35,8 +38,49 @@ public class ShopService {
 		return shopRepository.findAll(customer.getId(), pageable);
 	}
 
-	public boolean isNameUnique(Integer id, String name) {
+	public boolean isNameUnique(String name) {
 		Shop shop = shopRepository.findByName(name);
 		return shop == null;
+	}
+
+	public void createShop(Shop shop, Customer customer) {	
+		
+		shop.setCreatedTime(new Date());
+		shop.setEnabled(true);
+		shop.setCustomer(customer);
+		
+	    shopRepository.save(shop);
+	}
+
+	public Shop get(Integer id) throws ShopNotFoundException {
+		try {
+			return shopRepository.findById(id).get();
+		} catch (NoSuchElementException ex) {
+			throw new ShopNotFoundException("Could not find any shop with ID " + id);
+		}
+	}
+
+	public void updateShop(Shop shopInForm, Customer customer) throws ShopNotFoundException {
+		Shop shopInDB = shopRepository.findByIdAndCustomer(shopInForm.getId(), customer);
+		
+		if (shopInDB == null) {
+			throw new ShopNotFoundException("Order ID " + shopInForm.getId() + " not found");
+		}
+		shopInDB.setName(shopInForm.getName());
+		shopInDB.setAlias(shopInForm.getAlias());
+		shopInDB.setCreatedTime(new Date());
+		shopInDB.setDeliveryAddress(shopInForm.getDeliveryAddress());
+		shopInDB.setCustomer(customer);
+		
+		shopRepository.save(shopInDB);
+	}
+
+	public void delete(Integer id) throws ShopNotFoundException {
+		Long count = shopRepository.countById(id);
+		if (count == null || count == 0) {
+			throw new ShopNotFoundException("Could not find shop with ID " + id);
+			
+		}
+		shopRepository.deleteById(id);
 	}
 }

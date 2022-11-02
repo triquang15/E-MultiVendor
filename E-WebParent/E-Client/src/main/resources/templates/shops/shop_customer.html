@@ -1097,8 +1097,24 @@
                 <div class="col-xl-9 col-lg-8">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab" tabindex="0">
-                            <h2 class="account-title">Manage Shops</h2>                          
+                            <h2 class="account-title">Manage Shops</h2>     
+                             <div th:if="${message != null}" class="alert alert-success text-center">
+									[[${message}]]
+								</div>	                     
                             <div class="table-wrap">
+                            <div class="table-top">
+                                            
+                                            <form class="search-box" th:action="@{${moduleURL} + '/page/1'}">
+	                                            <input type="hidden" name="sortField" th:value="${sortField}" />
+												<input type="hidden" name="sortDir" th:value="${sortDir}" />
+                                                <input type="search" placeholder="Search" name="keyword" th:value="${keyword}" required="required">
+                                                <button type="submit"><i class="fa-regular fa-magnifying-glass"></i></button>
+                                                &nbsp;&nbsp;
+												<button type="button"  onclick="clearFilter()">
+													<i class="fa-regular fa-eraser"></i>
+												</button>
+                                            </form>
+                                        </div>
                                 <div class="table-responsive">
                               
                                     <table class="table">
@@ -1118,11 +1134,13 @@
                                                 <td><span class="name">[[${shop.name}]]</span></td>
                                                 <td><span class="name">[[${shop.deliveryAddress}]]</span></td>
                                                 <td><span class="date">[[${shop.createdTime}]]</span></td>
-                                               <td><span class="date">[[${shop.enabled}]]</span></td>
-                                                
-                                               
+                                               <td><span class="date" th:replace="fragments :: status(${shop.enabled}, 'shop', '/shops/' + ${shop.id})"></span></td>
+                                                                    
                                                 <td>
-												Edit					
+												<div th:replace="fragments :: edit('shop', '/shops/edit/' + ${shop.id})"></div>
+												&nbsp; 
+												<div th:replace="fragments :: delete('shop', ${shop.id}, '/shops/delete/' + ${shop.id}, true)"></div>	
+															
 											</td>	
                                             </tr>
                                             
@@ -1130,186 +1148,44 @@
                                     </table>
                                 </div>
                                <div th:replace="fragments :: pagination('/shops', 'shops')"></div>
+                               	<div th:replace="fragments :: confirm_modal" />
                               
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-purchase" role="tabpanel" aria-labelledby="v-pills-purchase-tab" tabindex="0">
                             <h2 class="account-title">Add New Shop</h2>
-                            <div class="table-wrap">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Date</th>
-                                                <th>Details</th>
-                                                <th>Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><span class="invoice-id">INV-012-345</span></td>
-                                                <td><span class="date">Mar 15, 2022</span></td>
-                                                <td>
-                                                    <div class="details">
-                                                        <a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a>
-                                                        <span class="invoice">Invoice: <button type="button" data-bs-toggle="modal" data-bs-target="#invoiceModal">48452022</button></span>
-                                                    </div>
-                                                </td>
-                                                <td><span class="amount">$256</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="invoice-id">INV-012-345</span></td>
-                                                <td><span class="date">Mar 15, 2022</span></td>
-                                                <td>
-                                                    <div class="details">
-                                                        <a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a>
-                                                        <span class="invoice">Invoice: <button type="button" data-bs-toggle="modal" data-bs-target="#invoiceModal">48452022</button></span>
-                                                    </div>
-                                                </td>
-                                                <td><span class="amount">$256</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="invoice-id">INV-012-345</span></td>
-                                                <td><span class="date">Mar 15, 2022</span></td>
-                                                <td>
-                                                    <div class="details">
-                                                        <a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a>
-                                                        <span class="invoice">Invoice: <button type="button" data-bs-toggle="modal" data-bs-target="#invoiceModal">48452022</button></span>
-                                                    </div>
-                                                </td>
-                                                <td><span class="amount">$256</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="invoice-id">INV-012-345</span></td>
-                                                <td><span class="date">Mar 15, 2022</span></td>
-                                                <td>
-                                                    <div class="details">
-                                                        <a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a>
-                                                        <span class="invoice">Invoice: <button type="button" data-bs-toggle="modal" data-bs-target="#invoiceModal">48452022</button></span>
-                                                    </div>
-                                                </td>
-                                                <td><span class="amount">$256</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="invoice-id">INV-012-345</span></td>
-                                                <td><span class="date">Mar 15, 2022</span></td>
-                                                <td>
-                                                    <div class="details">
-                                                        <a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a>
-                                                        <span class="invoice">Invoice: <button type="button" data-bs-toggle="modal" data-bs-target="#invoiceModal">48452022</button></span>
-                                                    </div>
-                                                </td>
-                                                <td><span class="amount">$256</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <div class="profile-panel">
+                                <div class="profile-top">
+                                    <div class="user">
+                                   
                                 </div>
-                                <div class="table-bottom">
-                                    <div class="part-txt">
-                                        <p>Showing 05 from 30 data</p>
-                                    </div>
-                                    <div class="pagination">
-                                        <button disabled><i class="fa-solid fa-chevron-left"></i></button>
-                                        <button class="active">1</button>
-                                        <button>2</button>
-                                        <button>3</button>
-                                        <button><i class="fa-solid fa-chevron-right"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-conversation" role="tabpanel" aria-labelledby="v-pills-conversation-tab" tabindex="0">
-                            <h2 class="account-title">Conversations</h2>
-                            <div class="conversation-panel">
-                                <div class="row g-0">
-                                    <div class="col-md-8 chat-col">
-                                        <div class="chat-area">
-                                            <div class="single-msg">
-                                                <div class="part-img">
-                                                    <div class="img">
-                                                        <img th:src="@{/images/avatar.png}" alt="image">
-                                                    </div>
-                                                    <span>13:57</span>
-                                                </div>
-                                                <div class="part-txt">
-                                                    <span>Flag messages where the</span>
-                                                </div>
-                                            </div>
-                                            <div class="single-msg msg-out">
-                                                <div class="part-txt">
-                                                    <span>Bot selected the wrong action</span>
-                                                </div>
-                                                <div class="part-img">
-                                                    <div class="img">
-                                                        <img th:src="@{/images/user.jpg}" alt="image">
-                                                    </div>
-                                                    <span>13:57</span>
-                                                </div>
-                                            </div>
-                                            <div class="single-msg">
-                                                <div class="part-img">
-                                                    <div class="img">
-                                                        <img th:src="@{/images/avatar.png}" alt="image">
-                                                    </div>
-                                                    <span>13:57</span>
-                                                </div>
-                                                <div class="part-txt">
-                                                    <span>Sometimes instead of fla</span>
-                                                </div>
-                                            </div>
-                                            <div class="single-msg msg-out">
-                                                <div class="part-txt">
-                                                    <span>message to come back to</span>
-                                                </div>
-                                                <div class="part-img">
-                                                    <div class="img">
-                                                        <img th:src="@{/images/user.jpg}" alt="image">
-                                                    </div>
-                                                    <span>13:57</span>
-                                                </div>
-                                            </div>
-                                            <div class="single-msg">
-                                                <div class="part-img">
-                                                    <div class="img">
-                                                        <img th:src="@{/images/avatar.png}" alt="image">
-                                                    </div>
-                                                    <span>13:57</span>
-                                                </div>
-                                                <div class="part-txt">
-                                                    <span>What can I do for you?</span>
-                                                </div>
+                                <form th:action="@{/shops/save}" method="post" th:object="${shop}" onsubmit="return checkNameUnique(this);">
+                                <input type="hidden" th:field="*{id}" />
+                               
+                                    <div class="row g-lg-4 g-3">
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="Name:" th:field="*{name}" required="required" minlength="3" maxlength="256">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="Alias:" th:field="*{alias}" required="required" minlength="3" maxlength="256">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" placeholder="Delivery Address:" th:field="*{deliveryAddress}" required="required" minlength="3" maxlength="256">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="btn-box">
+                                                <input type="submit" value="Save Change" class="def-btn"/>
+                                                 <input type="button" value="Cancel" class="def-btn" id="buttonCancel" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="info-area">
-                                            <div class="chat-between">
-                                                <div class="part-img">
-                                                    <div class="img">
-                                                        <img th:src="@{/images/avatar.png}" alt="image">
-                                                    </div>
-                                                    <div class="img">
-                                                        <img th:src="@{/images/user.jpg}" alt="image">
-                                                    </div>
-                                                </div>
-                                                <div class="part-txt">
-                                                    <span>Conversations</span>
-                                                </div>
-                                            </div>
-                                            <div class="action">
-                                                <h4 class="title">Actions</h4>
-                                                <ul>
-                                                    <li><button>Mark as Reviewed<span><i class="fa-light fa-badge-check"></i></span></button></li>
-                                                    <li><button>Seve fo Later<span><i class="fa-light fa-bookmark"></i></span></button></li>
-                                                    <li><button>Delete<span><i class="fa-light fa-trash-can"></i></span></button></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
+                                
+                              
                             </div>
                         </div>
+                       
                         <div class="tab-pane fade" id="v-pills-wallet" role="tabpanel" aria-labelledby="v-pills-wallet-tab" tabindex="0">
                             <h2 class="account-title">My Wallet</h2>
                             <div class="row g-4">
@@ -1575,160 +1451,45 @@
     </div>
     <!--------------------------------- FEATURES SECTION END --------------------------------->
 
-
+<div th:replace="fragments :: modal_dialog"></div>
 
     <!--------------------------------- FOOTER SECTION START --------------------------------->
-    <div class="footer">
-        <div class="main-footer">
-            <div class="container">
-                <div class="custom-row">
-                    <div class="custom-col-2">
-                        <div class="footer-about">
-                            <div class="footer-logo">
-                                <img th:src="@{/images/Logo-2.png}" alt="Logo">
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
-                            <ul>
-                                <li>
-                                    <div class="icon">
-                                        <span><i class="flaticon-map"></i></span>
-                                    </div>
-                                    <div class="txt">
-                                        <span>4920 Trails End Road Ft United States, FL 33311</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <span><i class="flaticon-email"></i></span>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="#">info@example.com</a>
-                                        <a href="#">test@example.com</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <span><i class="flaticon-telephone"></i></span>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="#">+123 456 679 123</a>
-                                        <a href="#">+123 456 789</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="custom-col-2">
-                        <div class="link-wrap">
-                            <div class="footer-link">
-                                <h3 class="footer-title">Information</h3>
-                                <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="blog.html">Blogs</a></li>
-                                    <li><a href="#">Terms Of Use</a></li>
-                                    <li><a href="#">Privacy Policies</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer-link">
-                                <h3 class="footer-title">Information</h3>
-                                <ul>
-                                    <li><a href="cart.html">My Order</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="account.html">My Credit</a></li>
-                                    <li><a href="register.html">Login</a></li>
-                                    <li><a href="account.html">Personal Info</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="custom-col">
-                        <div class="footer-gallery">
-                            <h3 class="footer-title">Instagram</h3>
-                            <ul>
-                                <li>
-                                    <a href="https://instagram.com" target="_blank">
-                                        <img th:src="@{/images/gl-1.png}" alt="image">
-                                        <span><i class="fa-brands fa-instagram"></i></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://instagram.com" target="_blank">
-                                        <img th:src="@{/images/gl-2.png}" alt="image">
-                                        <span><i class="fa-brands fa-instagram"></i></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://instagram.com" target="_blank">
-                                        <img th:src="@{/images/gl-3.png}" alt="image">
-                                        <span><i class="fa-brands fa-instagram"></i></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://instagram.com" target="_blank">
-                                        <img th:src="@{/images/gl-4.png}" alt="image">
-                                        <span><i class="fa-brands fa-instagram"></i></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://instagram.com" target="_blank">
-                                        <img th:src="@{/images/gl-5.png}" alt="image">
-                                        <span><i class="fa-brands fa-instagram"></i></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://instagram.com" target="_blank">
-                                        <img th:src="@{/images/gl-6.png}" alt="image">
-                                        <span><i class="fa-brands fa-instagram"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="custom-col">
-                        <div class="footer-subscribe">
-                            <h3 class="footer-title">Subscribe</h3>
-                            <p>Lorem ipsum dolor si consectetur adipisicing elit, sed eiusmotempor incididunt ut labore et
-                            </p>
-                            <form>
-                                <input type="email" name="email" placeholder="Your Email">
-                                <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                            </form>
-                            <div class="btn-box">
-                                <a href="#"><img th:src="@{/images/play-store.png}" alt="Play Store"></a>
-                                <a href="#"><img th:src="@{/images/app-store.png}" alt="App Store"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <p>&copy; Copyright Revel All Right Reserved</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="part-img d-flex justify-content-md-end justify-content-center">
-                            <img th:src="@{/images/payment-gateway.png}" alt="Image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+     <span th:replace="footer:: footer"></span>
     <!--------------------------------- FOOTER SECTION END --------------------------------->
-<script th:src="@{/js/common_list.js}"></script>
+
 <script type="text/javascript">
-	moduleURL = "[[@{/shops}]]";
-	contextPath = "[[@{/}]]";
-	var csrfHeaderName = "[[${_csrf.headerName}]]";
+    moduleURL = "[[@{/shops}]]";
+	entityName = "shop";
+	
+	/* var csrfHeaderName = "[[${_csrf.headerName}]]";
 	var csrfValue = "[[${_csrf.token}]]";
 
 	$(document).ready(function(){
 		handleDefaultDetailLinkClick();
-	});
+	});  */
+	
+	contextPath = "[[@{/}]]";
+	function checkNameUnique(form) {
+		url = contextPath + "shops/check_name";
+		shopName = $("#name").val();
+		csrfValue = $("input[name='_csrf']").val();
+		
+		params = {name: shopName, _csrf: csrfValue};
+		
+		$.post(url, params, function(response) {
+			if (response == "OK") {
+				form.submit();
+			} else if (response == "Duplicated") {
+				showWarningModal("There is another shop having the name " + shopName);
+			} else {
+				showErrorModal("Unknown response from server");
+			}
+		}).fail(function() {
+			showErrorModal("Could not connect to the server");
+		});
+		
+		return false;
+	}	
 </script>
     <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
@@ -1741,6 +1502,9 @@
     <script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/account.js}"></script>
+    <script th:src="@{/js/common_form.js}"></script>
+    <script th:src="@{/js/common_list.js}"></script>
+    <script th:src="@{/js/common_modal.js}"></script>
     
 </body>
 
