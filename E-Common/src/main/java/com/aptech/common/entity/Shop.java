@@ -14,7 +14,7 @@ public class Shop extends IdBasedEntity {
 	@Column(unique = true, length = 255, nullable = false)
 	private String name;
 
-	@Column(unique = true, length = 255, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String alias;
 
 	@Column(name = "created_time")
@@ -79,6 +79,11 @@ public class Shop extends IdBasedEntity {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+		
 	}
+
+	
+	
+	
 
 }
