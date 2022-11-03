@@ -117,6 +117,14 @@ public class ShopController {
 		try {
 			Shop shop = shopService.get(id);
 			
+			List<Section> listSections = sectionService.listEnabledSections();
+			model.addAttribute("listSections", listSections);
+			
+			if (hasAllCategoriesSection(listSections)) {
+				List<Category> listCategories = categoryService.listNoChildrenCategories();
+				model.addAttribute("listCategories", listCategories);
+			}
+			
 			model.addAttribute("shop", shop);
 			model.addAttribute("pageTitle", "Edit Shop (ID: " + id + ")");
 			
