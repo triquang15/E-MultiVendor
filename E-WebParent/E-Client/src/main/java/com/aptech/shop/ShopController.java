@@ -18,16 +18,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aptech.ControllerHelper;
 import com.aptech.Utility;
+import com.aptech.category.CategoryService;
+import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Shop;
+import com.aptech.common.entity.section.Section;
+import com.aptech.common.entity.section.SectionType;
 import com.aptech.common.exception.ShopNotFoundException;
 import com.aptech.customer.CustomerService;
+import com.aptech.section.SectionService;
 
 
 @Controller
 public class ShopController {
 	@Autowired private ShopService shopService;
 	@Autowired private ControllerHelper controllerHelper;
+	@Autowired private CategoryService categoryService;
+	@Autowired private SectionService sectionService;
 	
 	@GetMapping("/shops")
 	public String listFirstPage(Model model, HttpServletRequest request) {
@@ -46,6 +53,14 @@ public class ShopController {
 						@PathVariable(name = "pageNum") int pageNum,
 						String sortField, String sortDir, String keyword
 			) {
+		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		
 		Page<Shop> page = shopService.listForCustomerByPage(customer, pageNum, sortField, sortDir, keyword);
@@ -75,6 +90,16 @@ public class ShopController {
 		return "shops/shop_customer";		
 	}
 	
+	private boolean hasAllCategoriesSection(List<Section> listSections) {
+		for (Section section : listSections) {
+			if (section.getType().equals(SectionType.ALL_CATEGORIES)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	@PostMapping("/shops/save")
 	public String createShop(RedirectAttributes redirectAttributes, HttpServletRequest request, Shop shop) {	
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
