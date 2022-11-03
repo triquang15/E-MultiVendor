@@ -92,16 +92,27 @@ public class CustomerController {
 		return "register/" + (verified ? "verify_success" : "verify_fail");
 	}
 	
-	@GetMapping("/account_details")
-	public String viewAccountDetails(Model model, HttpServletRequest request) {
+//	@GetMapping("/account_details")
+//	public String viewAccountDetails(Model model, HttpServletRequest request) {
+//		String email = getEmailOfAuthenticatedCustomer(request);
+//		Customer customer = customerService.getCustomerByEmail(email);
+//		List<Country> listCountries = customerService.listAllCountries();
+//		
+//		model.addAttribute("customer", customer);
+//		model.addAttribute("listCountries", listCountries);
+//		
+//		return "customer/account_form";
+//	}
+	
+	@GetMapping("/dashboards")
+	public String viewDashboard(Model model, HttpServletRequest request) {
 		String email = getEmailOfAuthenticatedCustomer(request);
 		Customer customer = customerService.getCustomerByEmail(email);
 		List<Country> listCountries = customerService.listAllCountries();
 		
 		model.addAttribute("customer", customer);
 		model.addAttribute("listCountries", listCountries);
-		
-		return "customer/account_form";
+		return "customer/dashboard";
 	}
 	
 	private String getEmailOfAuthenticatedCustomer(HttpServletRequest request) {
@@ -129,7 +140,7 @@ public class CustomerController {
 		updateNameForAuthenticatedCustomer(customer, request);
 		
 		String redirectOption = request.getParameter("redirect");
-		String redirectURL = "redirect:/account_details";
+		String redirectURL = "redirect:/dashboards";
 		
 		if ("address_book".equals(redirectOption)) {
 			redirectURL = "redirect:/address_book";
