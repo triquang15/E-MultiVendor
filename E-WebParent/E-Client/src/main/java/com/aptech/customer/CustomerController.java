@@ -21,8 +21,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aptech.Utility;
+import com.aptech.category.CategoryService;
+import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Country;
 import com.aptech.common.entity.Customer;
+import com.aptech.common.entity.section.Section;
+import com.aptech.common.entity.section.SectionType;
+import com.aptech.section.SectionService;
 import com.aptech.security.CustomerUserDetails;
 import com.aptech.security.oauth.CustomerOAuth2User;
 import com.aptech.setting.EmailSettingBag;
@@ -32,6 +37,8 @@ import com.aptech.setting.SettingService;
 public class CustomerController {
 	@Autowired private CustomerService customerService;
 	@Autowired private SettingService settingService;
+	@Autowired private CategoryService categoryService;
+	@Autowired private SectionService sectionService;
 	
 	@GetMapping("/register")
 	public String showRegisterForm(Model model) {
@@ -92,20 +99,17 @@ public class CustomerController {
 		return "register/" + (verified ? "verify_success" : "verify_fail");
 	}
 	
-//	@GetMapping("/account_details")
-//	public String viewAccountDetails(Model model, HttpServletRequest request) {
-//		String email = getEmailOfAuthenticatedCustomer(request);
-//		Customer customer = customerService.getCustomerByEmail(email);
-//		List<Country> listCountries = customerService.listAllCountries();
-//		
-//		model.addAttribute("customer", customer);
-//		model.addAttribute("listCountries", listCountries);
-//		
-//		return "customer/account_form";
-//	}
 	
 	@GetMapping("/dashboards")
 	public String viewDashboard(Model model, HttpServletRequest request) {
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
+		
 		String email = getEmailOfAuthenticatedCustomer(request);
 		Customer customer = customerService.getCustomerByEmail(email);
 		List<Country> listCountries = customerService.listAllCountries();
@@ -115,6 +119,16 @@ public class CustomerController {
 		return "customer/dashboard";
 	}
 	
+	private boolean hasAllCategoriesSection(List<Section> listSections) {
+		for (Section section : listSections) {
+			if (section.getType().equals(SectionType.ALL_CATEGORIES)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	private String getEmailOfAuthenticatedCustomer(HttpServletRequest request) {
 		Object principal = request.getUserPrincipal();
 		String customerEmail = null;

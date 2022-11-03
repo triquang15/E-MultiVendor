@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Category;
 import com.aptech.common.entity.IdBasedEntity;
+import com.aptech.common.entity.Shop;
 
 @Entity
 @Table(name = "products")
@@ -65,6 +66,10 @@ public class Product extends IdBasedEntity {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(name = "shop_id")
+	private Shop shop;
 
 	@ManyToOne
 	@JoinColumn(name = "brand_id")	

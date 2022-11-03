@@ -124,7 +124,7 @@ CREATE TABLE `brands` (
   `logo` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_oce3937d2f4mpfqrycbr0l93m` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,7 @@ CREATE TABLE `brands` (
 
 LOCK TABLES `brands` WRITE;
 /*!40000 ALTER TABLE `brands` DISABLE KEYS */;
-INSERT INTO `brands` VALUES (1,'Simple','11.jpg'),(2,'Apple','9833088fd62135c66eac59ef0f3be192.jpg'),(3,'Sam Sung','samsung.jpg'),(4,' LG','LG.jpg'),(5,'Sony','sony.jpg');
+INSERT INTO `brands` VALUES (6,'REDROCK','brand-1.png'),(7,'PEGASUS','brand-2.png'),(8,'QUICKEN','brand-3.png'),(9,'ROCKER','brand-4.png'),(10,'MAGENTA','brand-5.png'),(11,'EXTEND','brand-6.png'),(12,'SECRET','brand-7.png'),(13,'EMATIC','brand-8.png'),(14,'VAERON','brand-9.png'),(15,'AVANCE','brand-10.png'),(16,'SABECAMP','brand-11.png'),(17,'CORE','brand-12.png');
 /*!40000 ALTER TABLE `brands` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `brands_categories` (
 
 LOCK TABLES `brands_categories` WRITE;
 /*!40000 ALTER TABLE `brands_categories` DISABLE KEYS */;
-INSERT INTO `brands_categories` VALUES (1,1),(2,2),(3,2),(4,3),(5,3),(2,4),(3,4),(4,4),(5,4),(5,5),(1,27),(1,28);
+INSERT INTO `brands_categories` VALUES (16,1),(8,2),(14,3),(13,4),(12,5),(6,6),(15,8),(7,9),(9,10),(16,11),(7,12),(17,12),(7,13),(6,14),(7,15),(17,15),(15,16),(10,17),(15,18),(6,19),(6,20),(14,21),(15,22),(17,22),(11,23),(16,24),(17,24),(15,25),(16,25),(7,26),(17,26),(16,27),(16,28),(8,29),(9,30),(9,31),(9,32),(10,33),(11,34),(11,35),(11,36),(12,37),(12,38),(12,39),(13,40),(13,41),(13,42),(14,43);
 /*!40000 ALTER TABLE `brands_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,7 @@ CREATE TABLE `categories` (
   UNIQUE KEY `UK_t8o6pivur7nn124jehx7cygw5` (`name`),
   KEY `FKsaok720gsu4u2wrgbk10b5n8d` (`parent_id`),
   CONSTRAINT `FKsaok720gsu4u2wrgbk10b5n8d` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Men Clothes',' Women\'s Fashion','1.png',_binary '',NULL,NULL),(2,'Mobile & Gadgets','Mobile & Gadgets','2.png',_binary '',NULL,NULL),(3,'Consumer Electronics','Consumer Electronics','3.png',_binary '',NULL,NULL),(4,'Computer & Accessories','Computer & Accessories','4.png',_binary '',NULL,NULL),(5,'Cameras','Cameras','5.png',_binary '',NULL,NULL),(6,'Watches','Watches','6.png',_binary '',NULL,NULL),(7,'Men Shoes','Men Shoes','7.png',_binary '',NULL,NULL),(8,'Home Appliances','Home Appliances','8.png',_binary '',NULL,NULL),(9,'Sport & Outdoor','Sport & Outdoor','9.png',_binary '',NULL,NULL),(10,'Automotive','Automotive','10.png',_binary '',NULL,NULL),(11,'Men Bags','Men Bags','11.png',_binary '',NULL,NULL),(12,'Toys','Toys','12.png',_binary '',NULL,NULL),(13,'Pets','Pets','13.png',_binary '',NULL,NULL),(14,'Women Clothes','Women Clothes','14.png',_binary '',NULL,NULL),(15,'Moms, Kids & Babies','Moms, Kids & Babies','15.png',_binary '',NULL,NULL),(16,'Home & Living','Home & Living','16.png',_binary '',NULL,NULL),(17,'Beauty','Beauty','17.png',_binary '',NULL,NULL),(18,'Health','Health','18.png',_binary '',NULL,NULL),(19,'Women Shoes','Women Shoes','19.png',_binary '',NULL,NULL),(20,'Women Bags','Women Bags','20.png',_binary '',NULL,NULL),(21,'Fashion Accessories','Fashion Accessories','21.png',_binary '',NULL,NULL),(22,'Grocery','Grocery','23.png',_binary '',NULL,NULL),(23,'Books & Stationery','Books & Stationery','24.png',_binary '',NULL,NULL),(24,'Kid Fashion','Kid Fashion','25.png',_binary '',NULL,NULL),(25,'Home care','Home care','26.png',_binary '',NULL,NULL),(26,'Tickets, Vouchers & Services','Tickets, Vouchers & Services','27.png',_binary '',NULL,NULL),(27,'Jackets, Coats & Vests','Jackets, Coats & Vests','1.png',_binary '',1,'-1-'),(28,'Suit Jackets & Blazers','Suit Jackets & Blazers','feat-product-11.jpg',_binary '',1,'-1-'),(29,'Mobile Phones','Mobile Phones','mb.jpg',_binary '',2,'-2-');
+INSERT INTO `categories` VALUES (1,'Men Clothes',' Women\'s Fashion','1.png',_binary '',NULL,NULL),(2,'Mobile & Gadgets','Mobile & Gadgets','2.png',_binary '',NULL,NULL),(3,'Consumer Electronics','Consumer Electronics','3.png',_binary '',NULL,NULL),(4,'Computer & Accessories','Computer & Accessories','4.png',_binary '',NULL,NULL),(5,'Cameras','Cameras','5.png',_binary '',NULL,NULL),(6,'Watches','Watches','6.png',_binary '',NULL,NULL),(7,'Men Shoes','Men Shoes','7.png',_binary '',NULL,NULL),(8,'Home Appliances','Home Appliances','8.png',_binary '',NULL,NULL),(9,'Sport & Outdoor','Sport & Outdoor','9.png',_binary '',NULL,NULL),(10,'Automotive','Automotive','10.png',_binary '',NULL,NULL),(11,'Men Bags','Men Bags','11.png',_binary '',NULL,NULL),(12,'Toys','Toys','12.png',_binary '',NULL,NULL),(13,'Pets','Pets','13.png',_binary '',NULL,NULL),(14,'Women Clothes','Women Clothes','14.png',_binary '',NULL,NULL),(15,'Moms, Kids & Babies','Moms, Kids & Babies','15.png',_binary '',NULL,NULL),(16,'Home & Living','Home & Living','16.png',_binary '',NULL,NULL),(17,'Beauty','Beauty','17.png',_binary '',NULL,NULL),(18,'Health','Health','18.png',_binary '\0',NULL,NULL),(19,'Women Shoes','Women Shoes','19.png',_binary '',NULL,NULL),(20,'Women Bags','Women Bags','20.png',_binary '',NULL,NULL),(21,'Fashion Accessories','Fashion Accessories','21.png',_binary '',NULL,NULL),(22,'Grocery','Grocery','23.png',_binary '',NULL,NULL),(23,'Books & Stationery','Books & Stationery','24.png',_binary '',NULL,NULL),(24,'Kid Fashion','Kid Fashion','25.png',_binary '',NULL,NULL),(25,'Home care','Home care','26.png',_binary '',NULL,NULL),(26,'Tickets, Vouchers & Services','Tickets, Vouchers & Services','27.png',_binary '',NULL,NULL),(27,'Jackets, Coats & Vests','Jackets, Coats & Vests','1.png',_binary '\0',1,'-1-'),(28,'Suit Jackets & Blazers','Suit Jackets & Blazers','feat-product-11.jpg',_binary '',1,'-1-'),(29,'Mobile Phones','Mobile Phones','7a23bb82197be858affc76168ee91637.jpg',_binary '',2,'-2-'),(30,'Bike, E-bike','Bike, E-bike','a2be913bbe1f521a4854bbc09e03b58b_tn.jpg',_binary '\0',10,'-10-'),(31,'Motorbike','Motorbike','cc416f288b22a9888b24c1d59896c767_tn.jpg',_binary '',10,'-10-'),(32,'Car','Car','cb3006fd4ff79e9ba811265b1a2f1f11_tn.jpg',_binary '\0',10,'-10-'),(33,'Skincare','Skincare','9e72ea128b312d6511da97d7a7a9f7c3_tn.jpg',_binary '',17,'-17-'),(34,'Domestic Books','Domestic Books','5a95eb77ff019fa302c03f6fdbcec59d_tn.jpg',_binary '\0',23,'-23-'),(35,'Foreign Books','Foreign Books','sg-11134201-22090-i9xd1it0uxhv57_tn.jpg',_binary '\0',23,'-23-'),(36,'Gift & Wrapping','Gift & Wrapping','181063df8d932814c4a7c02b52b5ef6d_tn.jpg',_binary '\0',23,'-23-'),(37,'Security Cameras & Systems','Security Cameras & Systems','sg-11134201-22100-h2p8ml50fjiv50_tn.jpg',_binary '',5,'-5-'),(38,'Memory Cards','Memory Cards','20a11f8920777bd81460605e330a3b4d_tn.jpg',_binary '\0',5,'-5-'),(39,'Lenses','Lenses','df7930bd3e086839f84a70243ec68150_tn.jpg',_binary '',5,'-5-'),(40,'Desktop Computers','Desktop Computers','sg-11134201-22100-xxt1i5c6vsiv75_tn.jpg',_binary '',4,'-4-'),(41,'Data Storage','Data Storage','a380742770f849017cf5d1fd153c68c4_tn.jpg',_binary '\0',4,'-4-'),(42,'Network Components','Network Components','8e18eb2e6ffdf78742ec6e84fc9968bf_tn.jpg',_binary '\0',4,'-4-'),(43,'Wearable Devices','Wearable Devices','d11d015530c2a9e4b882b6e44b7c5740_tn.jpg',_binary '',3,'-3-');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +306,7 @@ CREATE TABLE `customers` (
   UNIQUE KEY `UK_rfbvkrffamfql7cjmen8v976v` (`email`),
   KEY `FK7b7p2myt0y31l4nyj1p7sk0b1` (`country_id`),
   CONSTRAINT `FK7b7p2myt0y31l4nyj1p7sk0b1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -315,6 +315,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,'triquang.15qt@gmail.com','','Quang','Trí','','',NULL,'','',234,'','2022-11-01 17:15:34.908000',_binary '',NULL,'GOOGLE',NULL),(2,'triquang.95qt@gmail.com','','Quang','Trí','','',NULL,'','',234,'','2022-11-01 17:18:01.098000',_binary '',NULL,'GOOGLE',NULL),(3,'triquang.74qt@gmail.com','$2a$10$mkN/Jh4dOUx9eTll/xWKGuF.Q5E5bwnEpCJcH50lldX5EvQufKl8a','Trí','Quang','','',NULL,'','',234,'','2022-11-01 17:19:06.656000',_binary '',NULL,'FACEBOOK',NULL),(4,'quangtri.nguyen@dxc.com','$2a$10$yjimF2bcjg1VWdj8sMFKhuigJVDL0qfMN./H9M90eDEMI4648DhpK','Tri','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Cambridge',10,'122425678','2022-11-01 18:12:37.539000',_binary '',NULL,'DATABASE',NULL);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,7 +471,7 @@ CREATE TABLE `product_details` (
   PRIMARY KEY (`id`),
   KEY `FKnfvvq3meg4ha3u1bju9k4is3r` (`product_id`),
   CONSTRAINT `FKnfvvq3meg4ha3u1bju9k4is3r` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -479,7 +480,7 @@ CREATE TABLE `product_details` (
 
 LOCK TABLES `product_details` WRITE;
 /*!40000 ALTER TABLE `product_details` DISABLE KEYS */;
-INSERT INTO `product_details` VALUES (1,'Screen','OLED6.1\"Super Retina XDR',1),(2,'Camera','48MP Main camera with an advanced quad-pixel sensor for up to 4x the resolution',1),(3,'Chip','A16 Bionic chip — superfast and superefficient for amazing all-day battery life',1);
+INSERT INTO `product_details` VALUES (4,'Vocalism Principle','Dynamic',2),(5,'Style','Over the Ear',2),(6,'Control Button','Yes',2),(7,'Material','Fabric',2),(8,'Certification','CE',2),(9,'Waterproof','Dynamic',3),(10,'Print length','464 pages',3),(11,'Vocalism Principle','Over the Ear',3),(12,'Origin','Mainland China',4),(13,'Codecs','AAC',4),(14,'Vocalism Principle','Over the Ear',4),(15,'Style','Dynamic',4);
 /*!40000 ALTER TABLE `product_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,7 +498,7 @@ CREATE TABLE `product_images` (
   PRIMARY KEY (`id`),
   KEY `FKqnq71xsohugpqwf3c9gxmsuy` (`product_id`),
   CONSTRAINT `FKqnq71xsohugpqwf3c9gxmsuy` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -506,7 +507,7 @@ CREATE TABLE `product_images` (
 
 LOCK TABLES `product_images` WRITE;
 /*!40000 ALTER TABLE `product_images` DISABLE KEYS */;
-INSERT INTO `product_images` VALUES (1,'2.jpg',1),(2,'4.jpg',1),(3,'5.jpg',1),(4,'3.jpg',1);
+INSERT INTO `product_images` VALUES (5,'top-product-1.png',2),(6,'top-product-2.png',3),(7,'top-product-3.png',4);
 /*!40000 ALTER TABLE `product_images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -547,7 +548,7 @@ CREATE TABLE `products` (
   FULLTEXT KEY `products_FTS` (`name`,`short_description`,`full_description`),
   CONSTRAINT `FKa3a4mpsfdf4d2y6r8ra3sc8mv` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
   CONSTRAINT `FKog2rp4qthbtt2lfyhfo32lsw9` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -556,7 +557,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'iPhone 14 Pro','iPhone-14-Pro','<span class=\"rc-prices-currentprice\" style=\"font-size: 14px; line-height: 1.28577; letter-spacing: -0.224px; font-family: &quot;SF Pro Text&quot;, &quot;SF Pro Icons&quot;, &quot;AOS Icons&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(29, 29, 31);\">From&nbsp;<span class=\"nowrap\" style=\"display: inline-block; text-decoration: inherit; white-space: nowrap;\">$999</span></span><span class=\"rc-prices-installmentsseparator\" style=\"color: rgb(29, 29, 31); font-family: &quot;SF Pro Text&quot;, &quot;SF Pro Icons&quot;, &quot;AOS Icons&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; letter-spacing: -0.224px;\"></span><span class=\"rc-monthly-price\" style=\"color: rgb(29, 29, 31); font-family: &quot;SF Pro Text&quot;, &quot;SF Pro Icons&quot;, &quot;AOS Icons&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; letter-spacing: -0.224px;\"><span class=\"rc-prices-currentprice\" style=\"line-height: 1.28577; letter-spacing: -0.016em; font-family: &quot;SF Pro Text&quot;, &quot;SF Pro Icons&quot;, &quot;AOS Icons&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;\">or&nbsp;<span class=\"nowrap\" style=\"display: inline-block; text-decoration: inherit; white-space: nowrap;\">$41.62<span aria-hidden=\"true\">/mo.</span><span class=\"visuallyhidden\" style=\"position: absolute; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(0px 0px 99.9% 99.9%); overflow: hidden; height: 1px; width: 1px; padding: 0px; border: 0px;\">per month</span></span>&nbsp;<span class=\"nowrap acinstallment-term-length\" style=\"display: inline-block; text-decoration: inherit; white-space: nowrap;\">for 24&nbsp;<span aria-hidden=\"true\">mo.</span><span class=\"visuallyhidden\" style=\"position: absolute; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(0px 0px 99.9% 99.9%); overflow: hidden; height: 1px; width: 1px; padding: 0px; border: 0px;\">months</span></span>&nbsp;before trade‑in<span class=\"visuallyhidden\" style=\"position: absolute; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(0px 0px 99.9% 99.9%); overflow: hidden; height: 1px; width: 1px; padding: 0px; border: 0px;\">Footnote</span>*</span></span><br>','<div>* Available to qualified customers and requires 24-month installment loan when you select Citizens One or Apple Card Monthly Installments (ACMI) as payment type at checkout at Apple. iPhone activation required with AT&amp;T, T-Mobile, Sprint, or Verizon for purchases made with ACMI at an Apple Store. Subject to credit approval and credit limit. Taxes and shipping are not included in ACMI and are subject to your card’s variable APR. Additional Apple Card Monthly Installments terms are in the&nbsp;<a href=\"https://www.goldmansachs.com/terms-and-conditions/Apple-Card-Customer-Agreement.pdf\" data-feature-name=\"Astro Link\" data-display-name=\"AOS: www.goldmansachs.com/terms-and-conditions/Apple-Card-Customer-Agreement.pdf\" target=\"_blank\" style=\"color: rgb(41, 151, 255); letter-spacing: inherit;\">Apple Card Customer Agreement<span class=\"visuallyhidden\" style=\"position: absolute; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(0px 0px 99.9% 99.9%); overflow: hidden; height: 1px; width: 1px; padding: 0px; border: 0px;\">(Opens in a new window)</span></a>. Additional iPhone Payments terms are&nbsp;<a href=\"https://www.apple.com/legal/sales-support/iphoneinstallments_us\" data-feature-name=\"Astro Link\" data-display-name=\"AOS: legal/sales-support/iphoneinstallments_us\" target=\"_blank\" style=\"color: rgb(41, 151, 255); letter-spacing: inherit;\">here<span class=\"visuallyhidden\" style=\"position: absolute; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(0px 0px 99.9% 99.9%); overflow: hidden; height: 1px; width: 1px; padding: 0px; border: 0px;\">(Opens in a new window)</span></a>. ACMI is not available for purchases made online at special storefronts. The last month’s payment for each product will be the product’s purchase price, less all other payments at the monthly payment amount.</div><ol style=\"margin: 0.8em 0px 0px 1.17647em; padding: 0px; color: rgb(255, 255, 255); font-family: &quot;SF Pro Text&quot;, &quot;SF Pro Icons&quot;, &quot;AOS Icons&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 12px; letter-spacing: -0.12px; background-color: rgba(0, 0, 0, 0.85);\"><li style=\"margin: 0px; padding: 0px;\">The display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 5.42 inches (iPhone 13 mini), 6.06 inches (iPhone 14, iPhone 13, iPhone 12), 6.12 inches (iPhone 14 Pro), 6.68 inches (iPhone 14 Plus), or 6.69 inches (iPhone 14 Pro Max) diagonally. Actual viewable area is less.</li><li style=\"margin: 0px; padding: 0px;\">Available in November 2022. Service is included for free for two years with the activation of any iPhone 14 model. Connection and response times vary based on location, site conditions, and other factors. See&nbsp;<a href=\"external-sec:apple.com/iphone-14\" style=\"color: rgb(41, 151, 255); letter-spacing: inherit;\">apple.com/iphone-14</a>&nbsp;or&nbsp;<a href=\"external-sec:apple.com/iphone-14-pro\" style=\"color: rgb(41, 151, 255); letter-spacing: inherit;\">apple.com/iphone-14-pro</a>&nbsp;for more information.</li><li style=\"margin: 0px; padding: 0px;\">Emergency SOS uses a cellular connection or Wi-Fi Calling.</li></ol>','1.jpg','2022-11-01 11:46:35.046000','2022-11-01 11:49:40.310000',_binary '',_binary '',2,999,2,2,1,2,3,2,2,0,0);
+INSERT INTO `products` VALUES (2,'Sale Up To 25% Off Bosch Home','Sale-Up-To-25%-Off-Bosch-Home','<h2 class=\"main-product-title\" style=\"margin-top: -5px; margin-bottom: 29px; font-weight: 600; line-height: 1.3; color: rgb(34, 34, 34); font-size: 20px; font-family: Poppins, sans-serif;\"><span style=\"color: rgb(96, 96, 96); font-family: Poppins, sans-serif; font-size: 16px; font-weight: 400;\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae rerum eveniet esse modi nemo mollitia. Vitae adipisci ab nulla sequi fuga saepe harum placeat voluptatibus ea quam, assumenda illum natus.</span><br></h2>','<div><div>Shank porchetta anim ham in esse. Duis swine mollit incididunt, quis pork belly rump ut ball tip venison strip steak pancetta proident. Ground roun duis beef, eu sunt non dolor esse capicola shoulder strip steak. Ut fatback chuck minim exercitation kielbasa. Cupidatat nostrud prosciutto corned beefdgf meatball sausage lorem.Ground round jowl pig, short ribs turducken cillum labore aliqua bacon ea doner anim esse. Jerky laboris id, fatback ut gfjb Filet mignon corned beef laboris ipsum porchetta beef irure dolor fatback. Pariatur cupim occaecat short ribs</div><div>consectetur, venison ipsum flank hamburger bacon tri-tip. Eu duis est cupidatat prosciutto alcatra, consectetur aute velit shoulder shankle ham ho Cillum deserunt velit dolor, beef ribs excepteur hamburger flank occaecat. Qui dolor flank picanha t-bone lorem</div><div class=\"row\" style=\"--bs-gutter-x:1.5rem; --bs-gutter-y:0; margin-top: calc(-1 * var(--bs-gutter-y)); margin-right: calc(-0.5 * var(--bs-gutter-x)); margin-left: calc(-0.5 * var(--bs-gutter-x)); color: rgb(33, 37, 41); font-family: Poppins, sans-serif; font-size: 16px;\"><div class=\"col-lg-4 col-md-6\" style=\"width: 399.99px; padding-right: calc(var(--bs-gutter-x) * 0.5); padding-left: calc(var(--bs-gutter-x) * 0.5); margin-top: var(--bs-gutter-y);\"><div class=\"part-img\" style=\"padding-top: 6px; padding-bottom: 24px;\"><img src=\"https://revelecommerce.codebasket.net/assets/images/product-dscr-img.jpg\" alt=\"Image\" style=\"max-width: 100%; height: auto;\"></div></div><div class=\"col-lg-8 col-md-6\" style=\"width: 799.99px; padding-right: calc(var(--bs-gutter-x) * 0.5); padding-left: calc(var(--bs-gutter-x) * 0.5); margin-top: var(--bs-gutter-y);\"><div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodt tempor incididunt ut labore et dolore magna aliqua. Quis ipsum vcdisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus Lorem ipsum dolor sit amet, consectetur adipiscing elit,</div><div>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</div></div></div><div>Shank porchetta anim ham in esse. Duis swine mollit incididunt, quis pork belly rump ut ball tip venison strip steak pancetta proident. Ground roun duis beef, eu sunt non dolor esse capicola shoulder strip steak. Ut fatback chuck minim exercitation kielbasa. Cupidatat nostrud prosciutto corned beefdgf meatball sausage lorem.Ground round jowl pig, short ribs turducken cillum labore aliqua bacon ea doner anim esse. Jerky laboris id, fatback ut gfjb Filet mignon corned beef laboris ipsum porchetta beef irure dolor fatback. Pariatur cupim occaecat short ribs</div></div>','top-product-1.png','2022-11-03 11:46:43.422000','2022-11-03 11:54:52.702000',_binary '',_binary '\0',2,99,25,1,2,2,3,15,25,0,0),(3,'Beatae vitae 20% Off Bosch Home','Beatae-vitae-20%-Off-Bosch-Home','<div><span style=\"color: rgb(96, 96, 96); font-family: Poppins, sans-serif; font-size: 16px;\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae rerum eveniet esse modi nemo mollitia. Vitae adipisci ab nulla sequi fuga saepe harum placeat voluptatibus ea quam, assumenda illum natus.</span><br></div>','<div><div>Shank porchetta anim ham in esse. Duis swine mollit incididunt, quis pork belly rump ut ball tip venison strip steak pancetta proident. Ground roun duis beef, eu sunt non dolor esse capicola shoulder strip steak. Ut fatback chuck minim exercitation kielbasa. Cupidatat nostrud prosciutto corned beefdgf meatball sausage lorem.Ground round jowl pig, short ribs turducken cillum labore aliqua bacon ea doner anim esse. Jerky laboris id, fatback ut gfjb Filet mignon corned beef laboris ipsum porchetta beef irure dolor fatback. Pariatur cupim occaecat short ribs</div><div>consectetur, venison ipsum flank hamburger bacon tri-tip. Eu duis est cupidatat prosciutto alcatra, consectetur aute velit shoulder shankle ham ho Cillum deserunt velit dolor, beef ribs excepteur hamburger flank occaecat. Qui dolor flank picanha t-bone lorem</div><div class=\"row\" style=\"--bs-gutter-x:1.5rem; --bs-gutter-y:0; margin-top: calc(-1 * var(--bs-gutter-y)); margin-right: calc(-0.5 * var(--bs-gutter-x)); margin-left: calc(-0.5 * var(--bs-gutter-x)); color: rgb(33, 37, 41); font-family: Poppins, sans-serif; font-size: 16px;\"><div class=\"col-lg-4 col-md-6\" style=\"width: 399.99px; padding-right: calc(var(--bs-gutter-x) * 0.5); padding-left: calc(var(--bs-gutter-x) * 0.5); margin-top: var(--bs-gutter-y);\"><div class=\"part-img\" style=\"padding-top: 6px; padding-bottom: 24px;\"><img src=\"https://revelecommerce.codebasket.net/assets/images/product-dscr-img.jpg\" alt=\"Image\" style=\"max-width: 100%; height: auto;\"></div></div><div class=\"col-lg-8 col-md-6\" style=\"width: 799.99px; padding-right: calc(var(--bs-gutter-x) * 0.5); padding-left: calc(var(--bs-gutter-x) * 0.5); margin-top: var(--bs-gutter-y);\"><div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodt tempor incididunt ut labore et dolore magna aliqua. Quis ipsum vcdisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus Lorem ipsum dolor sit amet, consectetur adipiscing elit,</div><div>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</div></div></div><div>Shank porchetta anim ham in esse. Duis swine mollit incididunt, quis pork belly rump ut ball tip venison strip steak pancetta proident. Ground roun duis beef, eu sunt non dolor esse capicola shoulder strip steak. Ut fatback chuck minim exercitation kielbasa. Cupidatat nostrud prosciutto corned beefdgf meatball sausage lorem.Ground round jowl pig, short ribs turducken cillum labore aliqua bacon ea doner anim esse. Jerky laboris id, fatback ut gfjb Filet mignon corned beef laboris ipsum porchetta beef irure dolor fatback. Pariatur cupim occaecat short ribs</div></div>','top-product-2.png','2022-11-03 11:51:26.485000','2022-11-03 11:54:37.670000',_binary '',_binary '',5,450,20,3,2,3,2,17,24,0,0),(4,'Natur aut 15% Off Bosch Home','Natur-aut-15%-Off-Bosch-Home','<div><span style=\"color: rgb(96, 96, 96); font-family: Poppins, sans-serif; font-size: 16px;\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae rerum eveniet esse modi nemo mollitia. Vitae adipisci ab nulla sequi fuga saepe harum placeat voluptatibus ea quam, assumenda illum natus.</span><br></div>','<div><div>Shank porchetta anim ham in esse. Duis swine mollit incididunt, quis pork belly rump ut ball tip venison strip steak pancetta proident. Ground roun duis beef, eu sunt non dolor esse capicola shoulder strip steak. Ut fatback chuck minim exercitation kielbasa. Cupidatat nostrud prosciutto corned beefdgf meatball sausage lorem.Ground round jowl pig, short ribs turducken cillum labore aliqua bacon ea doner anim esse. Jerky laboris id, fatback ut gfjb Filet mignon corned beef laboris ipsum porchetta beef irure dolor fatback. Pariatur cupim occaecat short ribs</div><div>consectetur, venison ipsum flank hamburger bacon tri-tip. Eu duis est cupidatat prosciutto alcatra, consectetur aute velit shoulder shankle ham ho Cillum deserunt velit dolor, beef ribs excepteur hamburger flank occaecat. Qui dolor flank picanha t-bone lorem</div><div class=\"row\" style=\"--bs-gutter-x:1.5rem; --bs-gutter-y:0; margin-top: calc(-1 * var(--bs-gutter-y)); margin-right: calc(-0.5 * var(--bs-gutter-x)); margin-left: calc(-0.5 * var(--bs-gutter-x)); color: rgb(33, 37, 41); font-family: Poppins, sans-serif; font-size: 16px;\"><div class=\"col-lg-4 col-md-6\" style=\"width: 399.99px; padding-right: calc(var(--bs-gutter-x) * 0.5); padding-left: calc(var(--bs-gutter-x) * 0.5); margin-top: var(--bs-gutter-y);\"><div class=\"part-img\" style=\"padding-top: 6px; padding-bottom: 24px;\"><img src=\"https://revelecommerce.codebasket.net/assets/images/product-dscr-img.jpg\" alt=\"Image\" style=\"max-width: 100%; height: auto;\"></div></div><div class=\"col-lg-8 col-md-6\" style=\"width: 799.99px; padding-right: calc(var(--bs-gutter-x) * 0.5); padding-left: calc(var(--bs-gutter-x) * 0.5); margin-top: var(--bs-gutter-y);\"><div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodt tempor incididunt ut labore et dolore magna aliqua. Quis ipsum vcdisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus Lorem ipsum dolor sit amet, consectetur adipiscing elit,</div><div>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</div></div></div><div>Shank porchetta anim ham in esse. Duis swine mollit incididunt, quis pork belly rump ut ball tip venison strip steak pancetta proident. Ground roun duis beef, eu sunt non dolor esse capicola shoulder strip steak. Ut fatback chuck minim exercitation kielbasa. Cupidatat nostrud prosciutto corned beefdgf meatball sausage lorem.Ground round jowl pig, short ribs turducken cillum labore aliqua bacon ea doner anim esse. Jerky laboris id, fatback ut gfjb Filet mignon corned beef laboris ipsum porchetta beef irure dolor fatback. Pariatur cupim occaecat short ribs</div></div>','top-product-3.png','2022-11-03 11:54:24.158000','2022-11-03 11:54:24.158000',_binary '',_binary '',3,125,15,2,1,1,2,15,25,0,0);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -730,7 +731,7 @@ CREATE TABLE `sections` (
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_i816mxaoddmtveofp1qjbnngf` (`heading`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -739,6 +740,7 @@ CREATE TABLE `sections` (
 
 LOCK TABLES `sections` WRITE;
 /*!40000 ALTER TABLE `sections` DISABLE KEYS */;
+INSERT INTO `sections` VALUES (1,'Explore Popular Categories',_binary '','Explore Popular Categories',2,'ALL_CATEGORIES'),(2,'Top Brands',_binary '','Top Brands',3,'BRAND'),(3,'Sales Up Products',_binary '','TOP PRODUCT',1,'PRODUCT');
 /*!40000 ALTER TABLE `sections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -788,7 +790,7 @@ CREATE TABLE `sections_brands` (
   KEY `FK68eeev3m314v82j0st116ftm9` (`section_id`),
   CONSTRAINT `FK63hur81l4do6ck6x015gp3cuu` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
   CONSTRAINT `FK68eeev3m314v82j0st116ftm9` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -797,6 +799,7 @@ CREATE TABLE `sections_brands` (
 
 LOCK TABLES `sections_brands` WRITE;
 /*!40000 ALTER TABLE `sections_brands` DISABLE KEYS */;
+INSERT INTO `sections_brands` VALUES (1,0,15,2),(2,1,17,2),(3,2,13,2),(4,3,11,2),(5,4,10,2),(6,5,7,2),(7,6,8,2),(8,7,6,2),(9,8,9,2),(10,9,16,2),(11,10,12,2),(12,11,14,2);
 /*!40000 ALTER TABLE `sections_brands` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -846,7 +849,7 @@ CREATE TABLE `sections_products` (
   KEY `FKjmh450o9k6x0hrmrumemucg1b` (`section_id`),
   CONSTRAINT `FKjmh450o9k6x0hrmrumemucg1b` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`),
   CONSTRAINT `FKl5lf8i896cqdnc9shitywps2l` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -855,6 +858,7 @@ CREATE TABLE `sections_products` (
 
 LOCK TABLES `sections_products` WRITE;
 /*!40000 ALTER TABLE `sections_products` DISABLE KEYS */;
+INSERT INTO `sections_products` VALUES (1,0,3,3),(2,1,4,3),(3,2,2,3);
 /*!40000 ALTER TABLE `sections_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -911,6 +915,39 @@ LOCK TABLES `shipping_rates` WRITE;
 /*!40000 ALTER TABLE `shipping_rates` DISABLE KEYS */;
 INSERT INTO `shipping_rates` VALUES (2,234,'New York',10,7,_binary ''),(3,234,'Florida',12,6,_binary '\0'),(5,242,'Hanoi',3.98,2,_binary ''),(6,234,'California',11.56,6,_binary '\0'),(7,242,'Hai Phong',3.93,2,_binary '\0'),(8,242,'Bac Giang',4.12,2,_binary '\0'),(9,242,'Phu Tho',4.21,3,_binary '\0'),(10,242,'Thanh Hoa',3.52,1,_binary ''),(11,106,'Karnataka',8.22,5,_binary '\0'),(12,106,'Maharashtra',8.69,5,_binary ''),(13,106,'Meghalaya',8.1,4,_binary '\0'),(14,106,'Punjab',7.89,3,_binary ''),(15,106,'Tamil Nadu',8.25,4,_binary '\0'),(16,106,'Telangana',7.72,4,_binary '\0'),(17,242,'Da Nang',0.5,1,_binary ''),(18,234,'Ohio',11.5,8,_binary ''),(19,78,'London',9.88,6,_binary ''),(20,106,'Delhi',8.45,5,_binary ''),(21,106,'West Bengal',8.88,5,_binary ''),(22,78,'Barton',7.78,6,_binary ''),(23,106,'Andhra Pradesh',8.12,6,_binary ''),(24,234,'Tennessee',12,8,_binary ''),(25,234,'Massachusetts',11.85,7,_binary ''),(26,14,'Queensland',4.99,5,_binary ''),(27,199,'Singapore',3.33,3,_binary ''),(28,39,'British Columbia',9.88,7,_binary ''),(29,14,'New South Wales',4.57,6,_binary ''),(30,234,'Illinois',13,9,_binary '');
 /*!40000 ALTER TABLE `shipping_rates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shops`
+--
+
+DROP TABLE IF EXISTS `shops`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shops` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `alias` varchar(255) NOT NULL,
+  `created_time` datetime(6) DEFAULT NULL,
+  `delivery_address` varchar(64) NOT NULL,
+  `enabled` bit(1) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `customer_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_pobtrvddsmr7wnjxlh1xganbg` (`alias`),
+  UNIQUE KEY `UK_ar5yyuartm46e1brh920fpfiv` (`name`),
+  KEY `FKrw9f7c3cun0p6x4qauhd8ihxw` (`customer_id`),
+  CONSTRAINT `FKrw9f7c3cun0p6x4qauhd8ihxw` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shops`
+--
+
+LOCK TABLES `shops` WRITE;
+/*!40000 ALTER TABLE `shops` DISABLE KEYS */;
+INSERT INTO `shops` VALUES (7,'Thegioididong.com','2022-11-02 18:44:47.640000','Viet Nam',_binary '','Thegioididong.com',3),(8,'LAZADA','2022-11-02 18:41:52.970000','Ho Chi Minh - Viet Nam',_binary '','LAZADA',3),(11,'FPT Shop','2022-11-02 18:44:57.752000','Lon Don',_binary '','FPT Shop',3);
+/*!40000 ALTER TABLE `shops` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1006,4 +1043,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-01 12:35:30
+-- Dump completed on 2022-11-03 13:48:12
