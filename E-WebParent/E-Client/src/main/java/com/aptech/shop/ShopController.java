@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +28,17 @@ import com.aptech.customer.CustomerService;
 public class ShopController {
 	@Autowired private ShopService shopService;
 	@Autowired private ControllerHelper controllerHelper;
-	@Autowired private CustomerService customerService;
 	
 	@GetMapping("/shops")
 	public String listFirstPage(Model model, HttpServletRequest request) {
-		return listShopsByPage(model, request, 1, "createdTime", "desc", null);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+			
+			return "login";
+		}
+		
+		return listShopsByPage(model, request, 1, "createdTime", "desc", null);	
+		
 	}
 
 	@GetMapping("/shops/page/{pageNum}")
