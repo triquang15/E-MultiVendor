@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+	  
+   <div class="header-cart-wrap" id="headerWishWrap" th:fragment="header_wish">
+        <div class="cart-list">
+            <div class="title">
+                <h3>Wish List</h3>
+                <button class="wish-close"><i class="fa-regular fa-xmark"></i></button>
+            </div>
+            <ul>
+                <li>
+                    <a href="shop-details.html">
+                        <div class="part-img">
+                            <img th:src="@{/images/feat-product-3.jpg}" alt="Image">
+                        </div>
+                        <div class="part-txt">
+                            <span class="name">Diamond wedding ring</span>
+                            <span>1 <i class="fa-regular fa-xmark"></i> $5.00</span>
+                        </div>
+                    </a>
+                    <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                </li>
+                <li>
+                    <a href="shop-details.html">
+                        <div class="part-img">
+                            <img th:src="@{/images/feat-product-2.jpg}" alt="Image">
+                        </div>
+                        <div class="part-txt">
+                            <span class="name">Living Summer Chair</span>
+                            <span>1 <i class="fa-regular fa-xmark"></i> $5.00</span>
+                        </div>
+                    </a>
+                    <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                </li>
+                <li>
+                    <a href="shop-details.html">
+                        <div class="part-img">
+                            <img th:src="@{/images/feat-product-10.jpg}" alt="Image">
+                        </div>
+                        <div class="part-txt">
+                            <span class="name">Wireless Headphone</span>
+                            <span>1 <i class="fa-regular fa-xmark"></i> $5.00</span>
+                        </div>
+                    </a>
+                    <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+                </li>
+            </ul>
+            <div class="total">
+                <p>Subtotal: <span>$15:00</span></p>
+            </div>
+            <div class="btn-box">
+                <a href="#" class="def-btn">View Wish List</a>
+                <a href="#" class="def-btn">Add All To Cart</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

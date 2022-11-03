@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments :: page_head('Shop', 'none')" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Your Shop Details', 'none')" />
 
 <body class="inner">
     <!-- preloader begin -->
@@ -9,8 +8,6 @@
         <img th:src="@{/images/loader.gif}" alt="Gif">
     </div>
     <!-- preloader end -->
-
-
 
     <!--------------------------------- HEADER CART LIST START --------------------------------->
     <div class="header-cart-wrap" id="headerCartWrap">
@@ -541,7 +538,7 @@
                     <div class="col-xxl-2 col-lg-3 col-6">
                         <div class="logo-wrap">
                             <div class="logo">
-                                <a href="index.html">
+                                <a th:href="@{/}">
                                     <img th:src="@{/images/logo.png}" alt="logo">
                                 </a>
                             </div>
@@ -557,13 +554,10 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link" th:href="@{/}">
                                                 Home
                                             </a>
-                                            <ul class="dropdown-menu" aria-labelledby="homeDropdown">
-                                                <li><a class="dropdown-item" href="index.html">Home 01</a></li>
-                                                <li><a class="dropdown-item" href="index-2.html">Home 02</a></li>
-                                            </ul>
+                                           
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="about.html">About</a>
@@ -1006,11 +1000,8 @@
                     <img th:src="@{/images/Logo.png}" alt="Logo">
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html" class="dropdown-item">Home Page 01</a></li>
-                        <li><a href="index-2.html" class="dropdown-item">Home Page 02</a></li>
-                    </ul>
+                    <a th:href="@{/}" class="nav-link">Home</a>
+                   
                 </li>
                 <li class="nav-item">
                     <a href="account.html" class="nav-link">Account</a>
@@ -1063,338 +1054,63 @@
     </div>
     <!--------------------------------- MOBILE MENU END --------------------------------->
 
-		<th:block sec:authorize="isAuthenticated()">	
-			<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-				<input type="submit" value="Logout" />
-			</form>
-		</th:block>
 
-    <!--------------------------------- ACCOUNT START --------------------------------->
-    <div class="account py-120">
+
+    <!--------------------------------- BANNER SECTION START --------------------------------->
+    <div class="banner banner-inner">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-3 col-lg-4">
-                    <div class="account-sidebar">
-                        <div class="user">
-                            <div class="part-img">
-                                <img th:src="@{/images/user.jpg}" alt="Image">
-                            </div>
-                            <div class="part-txt">
-                                <h3><b sec:authentication="principal.fullName"></b></h3>
-                            </div>
-                      
-                        </div>
-                        <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true"><span class="icon"><i class="fa-duotone fa-objects-column"></i></span> <span class="txt">Dashboard</span></button>
-                            <button class="nav-link" id="v-pills-purchase-tab" data-bs-toggle="pill" data-bs-target="#v-pills-purchase" type="button" role="tab" aria-controls="v-pills-purchase" aria-selected="false"><span class="icon"><i class="fa-duotone fa-file-invoice"></i></span> <span class="txt">Add New Shop</span></button>
-                            <button class="nav-link" id="v-pills-conversation-tab" data-bs-toggle="pill" data-bs-target="#v-pills-conversation" type="button" role="tab" aria-controls="v-pills-conversation" aria-selected="false"><span class="icon"><i class="fa-duotone fa-messages"></i></span> <span class="txt">Add New Product</span></button>
-                            <button class="nav-link" id="v-pills-wallet-tab" data-bs-toggle="pill" data-bs-target="#v-pills-wallet" type="button" role="tab" aria-controls="v-pills-wallet" aria-selected="false"><span class="icon"><i class="fa-duotone fa-wallet"></i></span> <span class="txt">My Wallet</span></button>
-                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="icon"><i class="fa-duotone fa-user-vneck"></i></span> <span class="txt">Manage Profile</span></button>
-                            <a href="javascript: document.logoutForm.submit()" class="nav-link"><span class="icon"><i class="fa-duotone fa-power-off"></i></span> <span class="txt">Log out</span></a>
-                        </div>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-6 col-md-9 col-8">
+                    <div class="breadcrumb-txt">
+                        <h1>Update Shop</h1>
+                        
                     </div>
                 </div>
-                <div class="col-xl-9 col-lg-8">
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab" tabindex="0">
-                            <h2 class="account-title">Manage Shops</h2>     
-                             <div th:if="${message != null}" class="alert alert-success text-center">
-									[[${message}]]
-								</div>	                     
-                            <div class="table-wrap">
-                            <div class="table-top">
-                                            
-                                            <form class="search-box" th:action="@{${moduleURL} + '/page/1'}">
-	                                            <input type="hidden" name="sortField" th:value="${sortField}" />
-												<input type="hidden" name="sortDir" th:value="${sortDir}" />
-                                                <input type="search" placeholder="Search" name="keyword" th:value="${keyword}" required="required">
-                                                <button type="submit"><i class="fa-regular fa-magnifying-glass"></i></button>
-                                                &nbsp;&nbsp;
-												<button type="button"  onclick="clearFilter()">
-													<i class="fa-regular fa-eraser"></i>
-												</button>
-                                            </form>
-                                        </div>
-                                <div class="table-responsive">
-                              
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-												<th>ID</th>
-												<th>Name</th>
-												<th>Delivery Address</th>
-												<th>Created Time</th>
-												<th>Status</th>
-												<th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="shop : ${listShops}">
-                                                <td><span class="invoice-id">[[${shop.id}]]</span></td>
-                                                <td><span class="name">[[${shop.name}]]</span></td>
-                                                <td><span class="name">[[${shop.deliveryAddress}]]</span></td>
-                                                <td><span class="date">[[${shop.createdTime}]]</span></td>
-                                               <td><span class="date" th:replace="fragments :: status(${shop.enabled}, 'shop', '/shops/' + ${shop.id})"></span></td>
-                                                                    
-                                                <td>
-												<div th:replace="fragments :: edit('shop', '/shops/edit/' + ${shop.id})"></div>
-												&nbsp; 
-												<div th:replace="fragments :: delete('shop', ${shop.id}, '/shops/delete/' + ${shop.id}, true)"></div>	
-															
-											</td>	
-                                            </tr>
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                               <div th:replace="fragments :: pagination('/shops', 'shops')"></div>
-                               	<div th:replace="fragments :: confirm_modal" />
-                              
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-purchase" role="tabpanel" aria-labelledby="v-pills-purchase-tab" tabindex="0">
-                            <h2 class="account-title">Add New Shop</h2>
-                            <div class="profile-panel">
-                                <div class="profile-top">
-                                    <div class="user">
-                                   
-                                </div>
-                                <form th:action="@{/shops/save}" method="post" th:object="${shop}" onsubmit="return checkNameUnique(this);">
-                                <input type="hidden" th:field="*{id}" />
-                               
-                                    <div class="row g-lg-4 g-3">
-                                        <div class="col-sm-6">
-                                            <input type="text" placeholder="Name:" th:field="*{name}" required="required" minlength="3" maxlength="256">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" placeholder="Alias:" th:field="*{alias}" required="required" minlength="3" maxlength="256">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" placeholder="Delivery Address:" th:field="*{deliveryAddress}" required="required" minlength="3" maxlength="256">
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="btn-box">
-                                                <input type="submit" value="Save Change" class="def-btn"/>
-                                                 <input type="button" value="Cancel" class="def-btn" id="buttonCancel" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                
-                              
-                            </div>
-                        </div>
-                       
-                        <div class="tab-pane fade" id="v-pills-wallet" role="tabpanel" aria-labelledby="v-pills-wallet-tab" tabindex="0">
-                            <h2 class="account-title">My Wallet</h2>
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <div class="total-balance">
-                                        <div class="top">
-                                            <h4>Total Balance</h4>
-                                            <div class="tags">
-                                                <span class="tag tag-up"><i class="fa-light fa-arrow-up-right"></i> $600.99</span>
-                                                <span class="tag tag-down"><i class="fa-light fa-arrow-down-left"></i> $700.99</span>
-                                            </div>
-                                        </div>
-                                        <div class="middle">
-                                            <h3>$ 7,950.96</h3>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="#" class="def-btn">Deposit</a>
-                                            <a href="#" class="def-btn">Withdraw</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="chart-panel">
-                                        <div class="custom-legend">
-                                            <div class="single-legend">income</div>
-                                            <div class="single-legend">withdrawals</div>
-                                        </div>
-                                        <div id="overviewChart"></div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="table-wrap">
-                                        <div class="table-top">
-                                            <h4 class="title">Transfer History</h4>
-                                            <form class="search-box">
-                                                <input type="search" placeholder="Search">
-                                                <button type="submit"><i class="fa-regular fa-magnifying-glass"></i></button>
-                                            </form>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Date</th>
-                                                        <th>Transfer type</th>
-                                                        <th>Amount</th>
-                                                        <th>User</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>INV-012-345</td>
-                                                        <td>Jun 21, 2022</td>
-                                                        <td><div class="details"><a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a></div></td>
-                                                        <td>$256</td>
-                                                        <td>Steven Smith</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>INV-012-346</td>
-                                                        <td>Apr 09, 2022</td>
-                                                        <td><div class="details"><a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a></div></td>
-                                                        <td>$123</td>
-                                                        <td>Steven Smith</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>INV-012-347</td>
-                                                        <td>Mar 15, 2022</td>
-                                                        <td><div class="details"><a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a></div></td>
-                                                        <td>$174</td>
-                                                        <td>Steven Smith</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="table-bottom">
-                                            <div class="part-txt">
-                                                <p>Showing 03 from 50 data</p>
-                                            </div>
-                                            <div class="pagination">
-                                                <button disabled><i class="fa-solid fa-chevron-left"></i></button>
-                                                <button class="active">1</button>
-                                                <button>2</button>
-                                                <button>3</button>
-                                                <button><i class="fa-solid fa-chevron-right"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-                            <h2 class="account-title">Manage Profile</h2>
-                            <div class="profile-panel">
-                               
-                                ---------
-                            </div>
-                        </div>
+                <div class="col-lg-6 col-md-3 col-4">
+                    <div class="part-img">
+                        <img th:src="@{/images/breadcrumb-img.png}" alt="Image">
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-        <!--------------------------------- INVOICE MODAL START --------------------------------->
-        <div class="invoice-modal modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="account-title mb-0" id="invoiceModalLabel">Invoice</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="invoice-wrap">
-                            <div class="invoice-top d-flex justify-content-between align-items-center">
-                                <div class="left">
-                                    <div class="logo"><img th:src="@{/images/Logo.png}" alt="LOGO"></div>
-                                    <p>Invoice</p>
-                                </div>
-                                <div class="right">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Date:</th>
-                                                <td>17 Aug 2022</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Invoice No:</th>
-                                                <td>IVIP48452022</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Order No:</th>
-                                                <td>166779322</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="invoice-body">
-                                <div class="details">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <h3>Bill to</h3>
-                                            <p>
-                                                <span>Jetimpex Inc</span>
-                                                <span>915 SE 2 Court,</span>
-                                                <span>Ft. Lauderdale,</span>
-                                                <span>FL 33301</span>
-                                                <span>EIN: 42-1774657</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h3>Supplier</h3>
-                                            <p>
-                                                <span>Khorshed Alam</span>
-                                                <span>Ruhul amin Complex, Mokimabad,</span>
-                                                <span>590573362138</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="items">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item ID</th>
-                                                    <th class="text-center">Qty</th>
-                                                    <th>Description</th>
-                                                    <th class="text-end">Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>35130092</td>
-                                                    <td class="text-center">1</td>
-                                                    <td>Revel eCommerce-Multi vendor Ecommerce PSD Template</td>
-                                                    <td class="text-end"><span class="price">$8.00</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="total ms-auto">
-                                        <h5>Invoice Total: <span>USD $8.00</span></h5>
-                                        <p>Paid via Skrill</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invoice-footer">
-                                <span>THANK YOU FOR YOUR BUSINESS!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="def-btn">Print <i class="fa-regular fa-print"></i></button>
-                        <button type="button" class="def-btn">Download <i class="fa-regular fa-download"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--------------------------------- INVOICE MODAL END --------------------------------->
-
-
-
     </div>
-    <!--------------------------------- ACCOUNT END --------------------------------->
+    <!--------------------------------- BANNER SECTION END --------------------------------->
 
 
+
+    <!--------------------------------- REGISTER SECTION START --------------------------------->
+    <div class="register py-120">
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-xl-5 col-md-6">
+                    <div class="author-area">
+                        <h2>Your Shop Details</h2>
+                        <p>There are no enrollment fees or shipping quotas. Simp vide your contact information, create a user ID and word.</p>
+                        <form th:action="@{/update_shop}" method="post" class="login-form" th:object="${shop}"
+                        onsubmit="return checkNameUnique(this);">
+                        <input type="hidden" th:field="*{id}">
+                       <div th:if="${message != null}" class="alert alert-success text-center">
+						[[${message}]]
+						</div>
+							<label>Shop Name</label>
+                            <input type="text"th:field="*{name}" required minlength="5" maxlength="128" >
+                            <label>Description</label>
+                            <input type="text"th:field="*{alias}" required minlength="5" maxlength="256">
+                            <label>Delivery Address</label>
+                            <input type="text"th:field="*{deliveryAddress}" required minlength="5" maxlength="256">
+                           
+                            <input type="submit" value="Update" class="def-btn btn-border"/>
+                        </form>
+                       
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    
+        <div th:replace="fragments :: modal_dialog"></div>
+    <!--------------------------------- REGISTER SECTION END --------------------------------->
 
     <!--------------------------------- FEATURES SECTION START --------------------------------->
     <div class="features" id="feature">
@@ -1450,25 +1166,13 @@
         </div>
     </div>
     <!--------------------------------- FEATURES SECTION END --------------------------------->
-
-<div th:replace="fragments :: modal_dialog"></div>
-
+       
     <!--------------------------------- FOOTER SECTION START --------------------------------->
-     <span th:replace="footer:: footer"></span>
+   <span th:replace="footer:: footer"></span>
     <!--------------------------------- FOOTER SECTION END --------------------------------->
-
 <script type="text/javascript">
-    moduleURL = "[[@{/shops}]]";
-	entityName = "shop";
-	
-	/* var csrfHeaderName = "[[${_csrf.headerName}]]";
-	var csrfValue = "[[${_csrf.token}]]";
-
-	$(document).ready(function(){
-		handleDefaultDetailLinkClick();
-	});  */
-	
 	contextPath = "[[@{/}]]";
+	
 	function checkNameUnique(form) {
 		url = contextPath + "shops/check_name";
 		shopName = $("#name").val();
@@ -1490,6 +1194,7 @@
 		
 		return false;
 	}	
+	
 </script>
     <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
@@ -1498,14 +1203,12 @@
     <script th:src="@{/vendor/js/owl.carousel.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.syotimer.min.js}"></script>
     <script th:src="@{/vendor/js/jquery-modal-video.min.js}"></script>
-    <script th:src="@{/vendor/js/apexcharts.js}"></script>
+    <script th:src="@{/vendor/js/nouislider.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/vendor/js/MonthPicker.min.js}"></script>
     <script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/account.js}"></script>
-    <script th:src="@{/js/common_form.js}"></script>
-    <script th:src="@{/js/common_list.js}"></script>
     <script th:src="@{/js/common_modal.js}"></script>
-    
-</body>
 
+</body>
 </html>
