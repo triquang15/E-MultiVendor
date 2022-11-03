@@ -68,7 +68,7 @@
                     <div class="col-xxl-2 col-lg-3 col-6">
                         <div class="logo-wrap">
                             <div class="logo">
-                                <a href="index.html">
+                                <a th:href="@{/}">
                                     <img th:src="@{/images/logo.png}" alt="logo">
                                 </a>
                             </div>
@@ -84,7 +84,7 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link">
+                                            <a class="nav-link" th:href="@{/}">
                                                 Home
                                             </a>
                                             
@@ -108,6 +108,12 @@
                         </div>
                     </div>
                     </th:block>
+                    
+                    <th:block sec:authorize="isAuthenticated()">	
+					<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+						<input type="submit" value="Logout" />
+					</form>
+				</th:block>
                     
                     <div class="col-xxl-1 col-lg-2 col-6">
                         <ul class="bottom-header-right d-flex align-items-center justify-content-end">

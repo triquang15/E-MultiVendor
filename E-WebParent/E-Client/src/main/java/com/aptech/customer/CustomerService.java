@@ -39,6 +39,10 @@ public class CustomerService {
 		customer.setEnabled(false);
 		customer.setCreatedTime(new Date());
 		customer.setAuthenticationType(AuthenticationType.DATABASE);
+		customer.setAddressLine1(" ");
+		customer.setAddressLine2(" ");
+		customer.setCity(" ");
+		customer.setPostalCode(" ");
 		
 		String randomCode = RandomString.make(64);
 		customer.setVerificationCode(randomCode);
