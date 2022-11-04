@@ -30,6 +30,8 @@ import com.aptech.common.entity.Question;
 import com.aptech.common.entity.Review;
 import com.aptech.common.entity.Shop;
 import com.aptech.common.entity.product.Product;
+import com.aptech.common.entity.section.Section;
+import com.aptech.common.entity.section.SectionType;
 import com.aptech.common.exception.CategoryNotFoundException;
 import com.aptech.common.exception.ProductNotFoundException;
 import com.aptech.paging.PagingAndSortingHelper;
@@ -38,6 +40,7 @@ import com.aptech.question.QuestionService;
 import com.aptech.question.vote.QuestionVoteService;
 import com.aptech.review.ReviewService;
 import com.aptech.review.vote.ReviewVoteService;
+import com.aptech.section.SectionService;
 import com.aptech.shop.ShopService;
 
 @Controller
@@ -61,6 +64,8 @@ public class ProductController {
 	private BrandService brandService;
 	@Autowired
 	private ShopService shopService;
+	@Autowired SectionService sectionService;
+
 
 	/* FRONT END START */
 	@GetMapping("/c/{category_alias}")
@@ -72,6 +77,15 @@ public class ProductController {
 	public String viewCategoryByPage(@PathVariable("category_alias") String alias, @PathVariable("pageNum") int pageNum,
 			Model model) {
 		try {
+			
+			List<Section> listSections = sectionService.listEnabledSections();
+			model.addAttribute("listSections", listSections);	
+			
+			if (hasAllCategoriesSection(listSections)) {
+				List<Category> listCategories = categoryService.listNoChildrenCategories();
+				model.addAttribute("listCategories", listCategories);
+			}
+			
 			Category category = categoryService.getCategory(alias);
 			List<Category> listCategoryParents = categoryService.getCategoryParents(category);
 
@@ -98,6 +112,16 @@ public class ProductController {
 		} catch (CategoryNotFoundException ex) {
 			return "error/404";
 		}
+	}
+
+	private boolean hasAllCategoriesSection(List<Section> listSections) {
+		for (Section section : listSections) {
+			if (section.getType().equals(SectionType.ALL_CATEGORIES)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	@GetMapping("/p/{product_alias}")
