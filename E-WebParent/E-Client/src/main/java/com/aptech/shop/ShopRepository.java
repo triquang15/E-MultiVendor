@@ -1,5 +1,7 @@
 package com.aptech.shop;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Order;
@@ -27,5 +29,8 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
 	public Shop findByName(String name);
 
 	public Long countById(Integer id);
+
+	@Query("SELECT s FROM Shop s WHERE s.customer.id = ?1 AND s.enabled = true")
+	public List<Shop> listShopByCustomer(Integer customerId );
 
 }

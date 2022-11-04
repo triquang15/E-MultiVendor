@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Shop;
 import com.aptech.common.exception.ShopNotFoundException;
@@ -82,5 +83,10 @@ public class ShopService {
 			
 		}
 		shopRepository.deleteById(id);
+	}
+
+	public List<Shop> listShopByCustomer(Customer customer) {
+		return shopRepository.listShopByCustomer(customer.getId());
+		
 	}
 }
