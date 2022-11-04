@@ -25,7 +25,6 @@ import com.aptech.common.entity.Shop;
 import com.aptech.common.entity.section.Section;
 import com.aptech.common.entity.section.SectionType;
 import com.aptech.common.exception.ShopNotFoundException;
-import com.aptech.customer.CustomerService;
 import com.aptech.section.SectionService;
 
 

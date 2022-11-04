@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import com.aptech.common.entity.Shop;
 import com.aptech.common.entity.product.Product;
 
 public interface ProductRepository extends PagingAndSortingRepository<Product, Integer> {
@@ -65,6 +66,11 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 	
 	@Query("SELECT p FROM Product p WHERE p.name LIKE %?1%")
 	public Page<Product> searchProductsByName(String keyword, Pageable pageable);
-	
 
+	@Query("SELECT p FROM Product p WHERE p.customer.id = ?2 "
+			+ "AND (p.name LIKE %?1%)")
+	public Page<Product> findAll(String keyword, Integer customerId, Pageable pageable);
+	
+	@Query("SELECT p FROM Product p WHERE p.customer.id = ?1")
+	public Page<Product> findAll(Integer customerId, Pageable pageable);
 }

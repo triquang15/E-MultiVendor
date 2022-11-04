@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.aptech.admin.paging.PagingAndSortingHelper;
 import com.aptech.common.entity.Brand;
+import com.aptech.common.exception.BrandNotFoundException;
 
 @Service
 public class BrandService {

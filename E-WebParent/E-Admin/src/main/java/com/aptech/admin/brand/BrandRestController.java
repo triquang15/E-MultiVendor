@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Category;
+import com.aptech.common.entity.CategoryDTO;
+import com.aptech.common.exception.BrandNotFoundException;
 
 @RestController
 public class BrandRestController {
