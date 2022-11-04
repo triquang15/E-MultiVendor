@@ -24,13 +24,16 @@ public class MainController {
 	
 	@GetMapping("")
 	public String viewHomePage(Model model) {
+		List<Category> listCategories = categoryService.listNoChildrenCategories();
+		model.addAttribute("listCategories", listCategories);
+		
 		List<Section> listSections = sectionService.listEnabledSections();
 		model.addAttribute("listSections", listSections);
 		
-		if (hasAllCategoriesSection(listSections)) {
-			List<Category> listCategories = categoryService.listNoChildrenCategories();
-			model.addAttribute("listCategories", listCategories);
-		}
+//		if (hasAllCategoriesSection(listSections)) {
+//			List<Category> listCategories = categoryService.listNoChildrenCategories();
+//			model.addAttribute("listCategories", listCategories);
+//		}
 		
 		return "index";
 	}
