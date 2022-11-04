@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aptech.common.entity.product.Product;
+import com.aptech.common.entity.product.ProductDTO;
 import com.aptech.common.exception.ProductNotFoundException;
 
 @RestController
