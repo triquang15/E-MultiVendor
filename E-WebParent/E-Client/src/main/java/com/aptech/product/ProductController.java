@@ -25,6 +25,7 @@ import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Question;
 import com.aptech.common.entity.Review;
+import com.aptech.common.entity.Shop;
 import com.aptech.common.entity.product.Product;
 import com.aptech.common.exception.CategoryNotFoundException;
 import com.aptech.common.exception.ProductNotFoundException;
@@ -34,6 +35,7 @@ import com.aptech.question.QuestionService;
 import com.aptech.question.vote.QuestionVoteService;
 import com.aptech.review.ReviewService;
 import com.aptech.review.vote.ReviewVoteService;
+import com.aptech.shop.ShopService;
 
 @Controller
 public class ProductController {
@@ -46,6 +48,7 @@ public class ProductController {
 	@Autowired private ControllerHelper controllerHelper;
 	@Autowired private QuestionService questionService;
 	@Autowired private BrandService brandService;
+	@Autowired private ShopService shopService;
 
 	/* FRONT END START */
 	@GetMapping("/c/{category_alias}")
@@ -189,21 +192,24 @@ public class ProductController {
 //		return "shops/shop_product";		
 //	}
 //	
-//	@GetMapping("/products/new")
-//	public String newProduct(Model model) {
-//		List<Brand> listBrands = brandService.listAll();
-//		
-//		Product product = new Product();
-//		product.setEnabled(true);
-//		product.setInStock(true);
-//		
-//		model.addAttribute("product", product);
-//		model.addAttribute("listBrands", listBrands);
-//		model.addAttribute("pageTitle", "Create New Product");
-//		model.addAttribute("numberOfExistingExtraImages", 0);
-//		
-//		return "shops/shop_product_form";
-//	}
+	@GetMapping("/products/new")
+	public String newProduct(Model model, HttpServletRequest request) {
+		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		List<Brand> listBrands = brandService.listAll();
+		List<Shop> listShops = shopService.listShopByCustomer(customer);
+		
+		Product product = new Product();
+		product.setEnabled(true);
+		product.setInStock(true);
+		
+		model.addAttribute("product", product);
+		model.addAttribute("listBrands", listBrands);
+		model.addAttribute("listShops", listShops);
+		model.addAttribute("pageTitle", "Create New Product");
+		model.addAttribute("numberOfExistingExtraImages", 0);
+		
+		return "shops/shop_product_form";
+	}
 //	
 //	@PostMapping("/products/save")
 //	public String saveProduct(Product product, RedirectAttributes ra,
