@@ -49,7 +49,7 @@
                             <button class="nav-link" id="v-pills-conversation-tab" data-bs-toggle="pill" data-bs-target="#v-pills-conversation" type="button" role="tab" aria-controls="v-pills-conversation" aria-selected="false"><span class="icon"><i class="fa-duotone fa-messages"></i></span> <span class="txt">Add New Product</span></button>
                             <button class="nav-link" id="v-pills-wallet-tab" data-bs-toggle="pill" data-bs-target="#v-pills-wallet" type="button" role="tab" aria-controls="v-pills-wallet" aria-selected="false"><span class="icon"><i class="fa-duotone fa-wallet"></i></span> <span class="txt">My Wallet</span></button>
                             <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="icon"><i class="fa-duotone fa-user-vneck"></i></span> <span class="txt">Manage Profile</span></button>
-                            <a href="javascript: document.logoutForm.submit()" class="nav-link"><span class="icon"><i class="fa-duotone fa-power-off"></i></span> <span class="txt">Log out</span></a>
+                            <a th:href="@{/products}" class="nav-link"><span class="icon"><i class="fa-duotone fa-power-off"></i></span> <span class="txt">Manage Products</span></a>
                         </div>
                     </div>
                 </div>
@@ -115,9 +115,7 @@
                             <h2 class="account-title">Add New Shop</h2>
                             <div class="profile-panel">
                                 <div class="profile-top">
-                                    <div class="user">
-                                   
-                                </div>
+                                  
                                 <form th:action="@{/shops/save}" method="post" th:object="${shop}" onsubmit="return checkNameUnique(this);">
                                 <input type="hidden" th:field="*{id}" />
                                

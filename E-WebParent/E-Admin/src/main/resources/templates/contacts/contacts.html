@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head
-	th:replace="fragments :: page_head('Books - Book Store Admin', 'none')" />
+	th:replace="fragments :: page_head('Contact - Revel Admin', 'none')" />
 <body>
 	<div id="app">
 		<span th:replace="sidebar :: sidebar"></span>
@@ -14,6 +14,7 @@
 				 <span th:replace="locale :: locate"></span>
 				<section class="section">
 					<div class="card">
+						<div th:replace="fragments :: search_form_and_message"></div>
 						<div class="card-header">
 							<h3>Contact Us</h3>			
 						</div>
@@ -40,7 +41,7 @@
 
 										<td>									
 											&nbsp;
-											<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+											<th:block sec:authorize="hasAnyAuthority('Admin')">
 											<div th:replace="fragments :: delete('contact', ${contact.id}, '/contacts/delete/' + ${contact.id}, true)"></div>		
 											</th:block>			
 										</td>
@@ -51,7 +52,7 @@
 
 						</div>
 
-						<div th:replace="fragments :: pagination('/contacts', 'contacts')"></div>
+						<div th:replace="fragments :: pagination('contacts')"></div>
 						<div th:replace="modal_fragments :: confirm_modal" /></div>
 						<div class="modal fade" id="detailModal">
 							<div class="modal-dialog modal-xl">
@@ -65,7 +66,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		moduleURL = "[[@{/books}]]";
+		moduleURL = "[[@{/contacts}]]";
 
 		$(document).ready(function() {
 			$(".link-delete").on("click", function(e) {

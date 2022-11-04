@@ -27,9 +27,9 @@ public class MainController {
 		List<Category> listCategories = categoryService.listNoChildrenCategories();
 		model.addAttribute("listCategories", listCategories);
 		
-//		List<Section> listSections = sectionService.listEnabledSections();
-//		model.addAttribute("listSections", listSections);
-//		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);
+		
 //		if (hasAllCategoriesSection(listSections)) {
 //			List<Category> listCategories = categoryService.listNoChildrenCategories();
 //			model.addAttribute("listCategories", listCategories);

@@ -71,6 +71,14 @@ public class Product extends IdBasedEntity {
 	@JoinColumn(name = "shop_id")
 	private Shop shop;
 
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "brand_id")	
 	private Brand brand;
