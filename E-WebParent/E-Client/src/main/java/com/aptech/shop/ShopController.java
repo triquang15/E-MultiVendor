@@ -57,6 +57,8 @@ public class ShopController {
 		List<Section> listSections = sectionService.listEnabledSections();
 		model.addAttribute("listSections", listSections);
 		
+		
+		
 		if (hasAllCategoriesSection(listSections)) {
 			List<Category> listCategories = categoryService.listNoChildrenCategories();
 			model.addAttribute("listCategories", listCategories);
@@ -99,7 +101,8 @@ public class ShopController {
 		
 		return false;
 	}
-
+	
+	
 	@PostMapping("/shops/save")
 	public String createShop(RedirectAttributes redirectAttributes, HttpServletRequest request, Shop shop) {	
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
