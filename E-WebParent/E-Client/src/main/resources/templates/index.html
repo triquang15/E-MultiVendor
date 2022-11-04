@@ -204,13 +204,13 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     <div class="sidebar-area">
                         <div class="best-selling-panel">
                             <div class="panel-header">
-                                <h4>Best Selling</h4>
+                                <h4>Daily Discover</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="product-slider-1">
-                                    <div class="single-product-slider">
+                                    <div class="single-product-slider" th:each="product : ${listProducts}">
                                         <div class="part-img">
-                                            <img th:src="@{/images/best-selling-1.png}" alt="Product">
+                                            <img  th:src="@{${product.mainImagePath}}" alt="Product">
                                         </div>
                                         <div class="part-txt">
                                             <div class="star">
@@ -220,74 +220,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                 <i class="fa-solid fa-star-sharp rated"></i>
                                                 <i class="fa-solid fa-star-sharp"></i>
                                             </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Cuisinart Barrel</a></h4>
+                                            <h4 class="product-name"><a th:href="@{${product.URI}}">[[${product.shortName}]]</a></h4>
                                             <p class="price">$75.00 <span>$94.00</span></p>
                                         </div>
                                     </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-2.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Ut enim ad minima</a></h4>
-                                            <p class="price">$25.00</p>
-                                        </div>
-                                    </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-3.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Aut odit aut fugit</a></h4>
-                                            <p class="price">$98.00</p>
-                                        </div>
-                                    </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-4.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Aut odit aut fugit</a></h4>
-                                            <p class="price">$98.00</p>
-                                        </div>
-                                    </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-1.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Cuisinart Barrel</a></h4>
-                                            <p class="price">$75.00 <span>$94.00</span></p>
-                                        </div>
-                                    </div>
+                                   
+                                
+                                 
+                                   
                                 </div>
                             </div>
                         </div>
@@ -543,6 +483,55 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         </div>
     </div>
     <!--------------------------------- FLASH DEAL SECTION END --------------------------------->
+    
+      <!--------------------------------- BEST SELLER SECTION START --------------------------------->
+    <div class="best-seller py-25">
+        <div class="container">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <h2 class="title">Daily Discover</h2>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-end">
+                                <a th:href="@{/}" class="explore-section">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row g-3">
+                        <div class="col-xl-3 col-lg-4 col-6" th:each="product : ${listProducts}">
+                            <div class="single-box">
+                                <div class="part-img">
+                                    <a href="#"><img th:src="@{${product.mainImagePath}}" alt="Image"></a>
+                                </div>
+                                <div class="part-txt">
+                                    <a href="#" class="title">[[${product.shortName}]]</a>
+                                    <div class="star">
+                                        <i class="fa-solid fa-star-sharp rated"></i>
+                                        <i class="fa-solid fa-star-sharp rated"></i>
+                                        <i class="fa-solid fa-star-sharp rated"></i>
+                                        <i class="fa-solid fa-star-sharp rated"></i>
+                                        <i class="fa-solid fa-star-sharp"></i>
+                                        <span>$[[${product.price}]]</span>
+                                    </div>
+                                    <a th:href="@{${product.URI}}" class="part-btn">Visit Store</a>
+                                </div>
+                            </div>
+                        </div>
+                   
+                       
+                      
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------- BEST SELLER SECTION END --------------------------------->
+	
 
 
 
@@ -558,7 +547,8 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<span th:replace="homepage/brand_section :: content">Brand Section</span>
 	</div>
     <!--------------------------------- TOP BRANDS SECTION END --------------------------------->
-	
+    
+   
 </th:block>	
    
     <!--------------------------------- FEATURES SECTION START --------------------------------->
