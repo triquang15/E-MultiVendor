@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.product.Product;
 import com.aptech.common.exception.ProductNotFoundException;
 import com.aptech.paging.PagingAndSortingHelper;
@@ -60,7 +62,7 @@ public class ProductService {
 		helper.updateModelAttributes(pageNum, page);
 	}
 	
-	public Product save(Product product) {
+	public Product save(Product product, Customer customer) {
 		if (product.getId() == null) {
 			product.setCreatedTime(new Date());
 		}
@@ -71,7 +73,7 @@ public class ProductService {
 		} else {
 			product.setAlias(product.getAlias().replaceAll(" ", "-"));
 		}
-		
+		product.setCustomer(customer);
 		product.setUpdatedTime(new Date());
 		
 		Product updatedProduct = repo.save(product);
@@ -165,4 +167,19 @@ public class ProductService {
 		
 	}
 	/* Display Data End */
+
+	public Page<Product> listForProductByPage(Customer customer, int pageNum, String sortField, String sortDir,
+			String keyword) {
+		Sort sort = Sort.by(sortField);
+		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+		
+		Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE, sort);
+		
+		if (keyword != null) {
+			return repo.findAll(keyword, customer.getId(), pageable);
+		}
+		
+		return repo.findAll(customer.getId(), pageable);
+	
+	}
 }

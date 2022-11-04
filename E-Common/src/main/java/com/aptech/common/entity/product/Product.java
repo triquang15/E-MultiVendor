@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 
 import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Category;
+import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.IdBasedEntity;
 import com.aptech.common.entity.Shop;
 
@@ -48,6 +49,14 @@ public class Product extends IdBasedEntity {
 	@Column(name = "in_stock")
 	private boolean inStock;
 	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	private float cost;
 	
 	private float price;
@@ -70,6 +79,10 @@ public class Product extends IdBasedEntity {
 	@ManyToOne
 	@JoinColumn(name = "shop_id")
 	private Shop shop;
+	
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 
 	public Shop getShop() {
 		return shop;

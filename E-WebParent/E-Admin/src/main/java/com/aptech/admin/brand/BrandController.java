@@ -20,6 +20,7 @@ import com.aptech.admin.paging.PagingAndSortingHelper;
 import com.aptech.admin.paging.PagingAndSortingParam;
 import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Category;
+import com.aptech.common.exception.BrandNotFoundException;
 
 @Controller
 public class BrandController {
