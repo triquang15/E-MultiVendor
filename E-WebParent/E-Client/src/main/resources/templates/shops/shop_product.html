@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Products - Revel eCommerce', 'none')" />
+</head>
+
+<body class="inner">
+    <!-- preloader begin -->
+    <div class="preloader">
+        <img th:src="@{/images/loader.gif}" alt="Gif">
+    </div>
+    <!-- preloader end -->
+ 
+    <!--------------------------------- HEADER SECTION START --------------------------------->
+    <span th:replace="top_header2:: top_header2"></span>
+    <!--------------------------------- HEADER SECTION END --------------------------------->
+
+    <!--------------------------------- BANNER SECTION START --------------------------------->
+     <!--------------------------------- ACCOUNT START --------------------------------->
+    <div class="account py-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4">
+                    <div class="account-sidebar">
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-8">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active">
+                          
+                          <div class="card-header">
+							<h3 class="text-center">Manage Products</h3>						
+							 	<a th:href="@{/products/new}" class="fa-solid fa-folder-plus">&nbsp;Add Product</a>
+						</div>
+						<br>
+                            <div class="table-wrap">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Invoice ID</th>
+                                                <th>Recipient</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="invoice-id">INV-012-345</span></td>
+                                                <td><span class="name">John Doe</span></td>
+                                                <td><span class="date">Mar 15, 2022</span></td>
+                                                <td><span class="amount">$256</span></td>
+                                                <td><span class="status"><span class="paid">Paid</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="invoice-id">INV-012-345</span></td>
+                                                <td><span class="name">John Doe</span></td>
+                                                <td><span class="date">Mar 15, 2022</span></td>
+                                                <td><span class="amount">$256</span></td>
+                                                <td><span class="status"><span class="unpaid">Unpaid</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="invoice-id">INV-012-345</span></td>
+                                                <td><span class="name">John Doe</span></td>
+                                                <td><span class="date">Mar 15, 2022</span></td>
+                                                <td><span class="amount">$256</span></td>
+                                                <td><span class="status"><span class="paid">Paid</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="invoice-id">INV-012-345</span></td>
+                                                <td><span class="name">John Doe</span></td>
+                                                <td><span class="date">Mar 15, 2022</span></td>
+                                                <td><span class="amount">$256</span></td>
+                                                <td><span class="status"><span class="unpaid">Unpaid</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="invoice-id">INV-012-345</span></td>
+                                                <td><span class="name">John Doe</span></td>
+                                                <td><span class="date">Mar 15, 2022</span></td>
+                                                <td><span class="amount">$256</span></td>
+                                                <td><span class="status"><span class="paid">Paid</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="invoice-id">INV-012-345</span></td>
+                                                <td><span class="name">John Doe</span></td>
+                                                <td><span class="date">Mar 15, 2022</span></td>
+                                                <td><span class="amount">$256</span></td>
+                                                <td><span class="status"><span class="unpaid">Unpaid</span></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-bottom">
+                                    <div class="part-txt">
+                                        <p>Showing 06 from 50 data</p>
+                                    </div>
+                                    <div class="pagination">
+                                        <button disabled><i class="fa-solid fa-chevron-left"></i></button>
+                                        <button class="active">1</button>
+                                        <button>2</button>
+                                        <button>3</button>
+                                        <button><i class="fa-solid fa-chevron-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--------------------------------- ACCOUNT END --------------------------------->
+    <!--------------------------------- BANNER SECTION END --------------------------------->
+
+    <!--------------------------------- FEATURES SECTION START --------------------------------->
+   <span th:replace="homepage/feature_section :: content">Feature Section</span>
+    <!--------------------------------- FEATURES SECTION END --------------------------------->
+
+
+    <!--------------------------------- FOOTER SECTION START --------------------------------->
+   <span th:replace="footer:: footer"></span>
+    <!--------------------------------- FOOTER SECTION END --------------------------------->
+	
+    <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery.flagstrap.min.js}"></script>
+    <script th:src="@{/vendor/js/slick.min.js}"></script>
+    <script th:src="@{/vendor/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery.syotimer.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery-modal-video.min.js}"></script>
+    <script th:src="@{/vendor/js/nouislider.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/vendor/js/MonthPicker.min.js}"></script>
+    <script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script>
+    </script>
+</body>
+
+</html>
