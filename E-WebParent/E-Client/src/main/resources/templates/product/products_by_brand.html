@@ -70,23 +70,7 @@
                                </th:block>
                             </ul>
                         </div>
-                      
-                        <div class="sidebar-box">
-                            <h3 class="sidebar-title">Categories</h3>
-                            <ul class="brand-filter color-filter"  id="colorFilter">
-                            <th:block th:each="parent : ${listCategoryParents}">
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="Black">
-                                        <label class="form-check-label" for="Black"><a style="color: red;" th:href="@{'/c/' + ${parent.alias}}">[[${parent.name}]]</a></label>
-                                    </div>
-                                </li>
-                                </th:block>
-                              
-                            </ul>
-                        </div>
-             
-                       
+                    
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-8">
@@ -111,9 +95,10 @@
                             </div>
                         </div>
                     </div>
-                    <th:block th:each="product : ${listProducts}">
+                   
+                   <div th:each="product : ${products}">
                   		<div th:replace="product/product_fragment :: content"></div>
-                    </th:block>
+                   </div>
                   <div th:replace="fragments :: pagination('/brand/' + ${brand.id}, 'product')"></div>
                 </div>
             </div>
@@ -138,7 +123,7 @@
 			theme: 'krajee-svg'
 		});
 	</script>
-    <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script>
+   <!--  <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script> -->
     <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.flagstrap.min.js}"></script>
     <script th:src="@{/vendor/js/slick.min.js}"></script>
@@ -148,7 +133,7 @@
     <script th:src="@{/vendor/js/apexcharts.js}"></script>
     <script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/shop-page.js}"></script>
+   <!--  <script th:src="@{/js/shop-page.js}"></script> -->
 
     
 </body>

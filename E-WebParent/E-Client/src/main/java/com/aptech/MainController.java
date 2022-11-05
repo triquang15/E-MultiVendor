@@ -30,9 +30,13 @@ public class MainController {
 		List<Section> listSections = sectionService.listEnabledSections();
 		
 		List<Product> listProducts = (List<Product>) productRepository.findAll();
+		List<Product> listBestSeller = (List<Product>) productRepository.findProductBestSeller();
+		List<Product> listFlashDeal = (List<Product>) productRepository.findFlashDeal();
 		
 		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("listBestSeller", listBestSeller);
 		model.addAttribute("listSections", listSections);
+		model.addAttribute("listFlashDeal", listFlashDeal);
 		
 		if (hasAllCategoriesSection(listSections)) {
 			List<Category> listCategories = categoryService.listNoChildrenCategories();

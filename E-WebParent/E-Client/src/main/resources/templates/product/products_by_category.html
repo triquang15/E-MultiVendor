@@ -111,9 +111,9 @@
                             </div>
                         </div>
                     </div>
-                    <th:block th:each="product : ${listProducts}">
-                  
-                    </th:block>
+                  <th:block th:each="product : ${listProducts}">
+						<div th:replace="product/product_fragment :: content"></div>
+				</th:block>
                    <div th:replace="fragments :: pagination('/c/' + ${category.alias}, 'product')"></div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
 			theme: 'krajee-svg'
 		});
 	</script>
-    <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script>
+  <!--   <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script> -->
     <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.flagstrap.min.js}"></script>
     <script th:src="@{/vendor/js/slick.min.js}"></script>
@@ -148,7 +148,7 @@
     <script th:src="@{/vendor/js/apexcharts.js}"></script>
     <script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/shop-page.js}"></script>
+    <!-- <script th:src="@{/js/shop-page.js}"></script> -->
 
     
 </body>
