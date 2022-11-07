@@ -268,16 +268,15 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                     <span class="off-tag">[[${product.discountPercent}]]</span>
                                     <img th:src="@{${product.mainImagePath}}" alt="Product">
                                 </div>
+                                 <div class="text-center">
+							<input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
+										th:value="${product.averageRating}"/>
+                                    <span style="color: red;">&nbsp;&nbsp;&nbsp;[[${product.reviewCount}]] rating(s)</span>
+							</div>
                                 <div class="part-txt">
                                     <h4 class="product-name"><a th:href="@{${product.URI}}">[[${product.shortName}]]</a></h4>
-                                    <p class="price"><span>$96.00</span>$75.00</p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp"></i>
-                                    </div>
+                                    <div th:replace="product/product_fragment :: product_price"></div>
+                                    
                                 </div>
                                 <div class="cart-option">
                                     <ul>
@@ -336,16 +335,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <div class="part-img">
                                     <a href="#"><img th:src="@{${product.mainImagePath}}" alt="Image" width="150px;"></a>
                                 </div>
+                                 <div class="text-center">
+							<input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
+										th:value="${product.averageRating}"/>
+                                    <span style="color: red;">&nbsp;&nbsp;&nbsp;[[${product.reviewCount}]] rating(s)</span>
+							</div>
                                 <div class="part-txt">
                                     <a th:href="@{${product.URI}}" class="title">[[${product.shortName}]]</a>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp"></i>
-                                        <span>$[[${product.price}]]</span>
-                                    </div>
+                                   
                                     <a th:href="@{${product.URI}}" class="part-btn">[[${product.shop.name}]]</a>
                                 </div>
                             </div>
@@ -371,6 +368,9 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<span th:replace="homepage/all_categories_section :: content">All Categories Section</span>
 	</div>
 	
+	<div th:unless="${#lists.isEmpty(section.productSections)}">
+			<div th:replace="homepage/product_section :: content">Product Section</div>	
+		</div>		
 	 <!--------------------------------- TOP BRANDS SECTION START --------------------------------->
 	<div th:unless="${#lists.isEmpty(section.brandSections)}">
 		<span th:replace="homepage/brand_section :: content">Brand Section</span>
@@ -387,8 +387,15 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <!--------------------------------- FOOTER SECTION START --------------------------------->
    <span th:replace="footer:: footer"></span>
     <!--------------------------------- FOOTER SECTION END --------------------------------->
-
-    <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script>
+<script type="text/javascript">	
+	$(".product-detail-rating-star").rating({
+		displayOnly: true,
+		hoverOnClera: false,
+		showCaption: false,
+		theme: 'krajee-svg'
+	});
+</script>
+   <!--  <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script> -->
     <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.flagstrap.min.js}"></script>
     <script th:src="@{/vendor/js/slick.min.js}"></script>

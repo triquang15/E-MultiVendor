@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<head th:replace="fragments :: page_head(${pageTitle}, 'tag')" />
+	<link th:href="@{/star-rating/css/star-rating.css}" media="all" rel="stylesheet" type="text/css" />
+	<script th:src="@{/star-rating/js/star-rating.js}" type="text/javascript"></script>
+	<link th:href="@{/star-rating/themes/krajee-svg/theme.css}" media="all" rel="stylesheet" type="text/css" />
+	<script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
+</head>
+
+<body class="inner">
+    <!-- preloader begin -->
+    <div class="preloader">
+        <img th:src="@{/images/loader.gif}" alt="Gif">
+    </div>
+    <!-- preloader end -->
+
+    <!--------------------------------- HEADER CART LIST START --------------------------------->
+    <span th:replace="header_cart:: header_cart"></span>
+    <!--------------------------------- HEADER CART LIST END --------------------------------->
+
+    <!--------------------------------- HEADER WISH LIST START --------------------------------->
+  	<span th:replace="header_wish:: header_wish"></span>
+    <!--------------------------------- HEADER WISH LIST END --------------------------------->
+
+    <!--------------------------------- HEADER SECTION START --------------------------------->
+    <span th:replace="header_section2:: content"></span>
+    <!--------------------------------- HEADER SECTION END --------------------------------->
+	
+	<!--------------------------------- SHOP SECTION START --------------------------------->
+    <div class="shop-details py-120">
+        <div class="container">
+            <div class="product-view-area">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-5 col-md-6">
+                        <div class="part-img">
+                            <div class="img-box">
+                                <img id="bigImage" th:src="@{${product.mainImagePath}}" alt="Image" index="0" width="500px;">
+                               
+                            </div>
+                            <div class="btn-box">
+                            <th:block th:each="extraImage, status : ${product.images}">
+                                <button class="small-thumb active">
+                                    <img class="image-thumbnail" th:src="@{${extraImage.imagePath}}" th:index="${status.count}" alt="image">
+                                </button>
+                               </th:block>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-7 col-md-6">
+                        <div class="part-txt">
+                            <h2 class="main-product-title">[[${product.name}]]</h2>
+                            <div class="row">
+				<div class="col-xs">
+					<span><input type="text" class="product-detail-rating-star" dir="ltr" data-size="md"
+						th:value="${product.averageRating}"/></span>
+						<span class="rating-amount"><a th:href="@{${product.URI} + '#review'}">[[${product.reviewCount}]] rating(s)</a></span> &nbsp;
+                                <span class="rating-amount"><a th:href="@{${product.URI} + '#qa'}">[[${numberOfAnsweredQuestions}]] answered questions</a></span>
+				</div>
+				
+			</div>
+                            <br>
+                            <div>
+				<b style="color: Chocolate;">Digital List Price:</b> 
+				<span th:if="${product.discountPercent <= 0}"><div th:replace="product/product_fragment :: price_fragment(${product.price})"></div></span>
+				<del class="price" th:if="${product.discountPercent > 0}"><span><div th:replace="product/product_fragment :: price_fragment(${product.price})"></div></span></del>
+			</div>
+			<div th:if="${product.discountPercent > 0}">
+				<b style="color: IndianRed;">Kindle Price:</b>
+				<span style="font-size: larger; color: darkred"><div th:replace="product/product_fragment :: price_fragment(${product.discountPrice})"></div></span>
+				([[${#numbers.formatDecimal(product.discountPercent, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % off includes free international wireless delivery via Amazon)
+			</div>
+                            <ul class="short-details">
+                                <li>Availability: <span th:if="${product.inStock}" class="text-success">In stock</span>
+                                				  <span th:unless="${product.inStock}" class="text-danger">Out of Stock</span>
+                                </li>
+                                <li>Shop: <span>[[${product.shop.name}]]</span></li>
+                                <li>Brands: <span>[[${product.brand.name}]]</span></li>
+                            </ul>
+                            <p th:utext="${product.shortDescription}" class="dscr"></p>
+                            <form>
+                                <div class="row g-xl-4 g-3">
+                                        
+                                    <div class="col-lg-4 col-md-12 col-sm-4">
+                                        <div class="quantity-wrap">
+                                            <label>QTY</label>
+                                            <div class="product-count">
+                                                <div class="quantity rapper-quantity">
+                                                    <input type="number" min="1" max="100" step="1" value="1" readonly>
+                                                    <div class="quantity-nav">
+                                                        <div class="quantity-button quantity-down">
+                                                            <i class="fa-solid fa-minus"></i>
+                                                        </div>
+                                                        <div class="quantity-button quantity-up">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="btn-box">
+                                <button id="addToCart"><span><i class="fa-light fa-cart-shopping"></i></span> add to cart</button>
+                                <button id="addToWishList"><span><i class="fa-light fa-heart"></i></span> add to wishlist</button>
+                            </div>
+                            <div class="product-share">
+                                <span>Share Link:</span>
+                                <div class="social">
+                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                    <a href="#"><i class="fa-brands fa-google-plus-g"></i></a>
+                                    <a href="#"><i class="fa-solid fa-rss"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="details-area">
+                <nav>
+                    <div class="nav" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-dscr-tab" data-bs-toggle="tab" data-bs-target="#nav-dscr" type="button" role="tab" aria-controls="nav-dscr" aria-selected="true">Description</button>
+                        <button class="nav-link" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="false">Information</button>
+                        <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Reviews</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-dscr" role="tabpanel" aria-labelledby="nav-dscr-tab" tabindex="0">
+                        <div class="product-dscr">
+                            <div th:utext="${product.fullDescription}"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab" tabindex="0">
+                        <div class="product-information">
+                            <ul>
+                            <th:block th:each="detail : ${product.details}">
+                                <li><span>[[${detail.name}]]</span>[[${detail.value}]]</li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab" tabindex="0">
+                        <div class="product-review">
+                            <div class="review-overview">
+                                <div class="left">
+                                    <h2>4.2 <span>/5</span></h2>
+                                    <p>251 Ratings</p>
+                                </div>
+                                <div class="right">
+                                    <ul>
+                                        <li>
+                                            <div class="stars">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                            </div>
+                                            <div class="review-line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 41%" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="percentage">
+                                                <span>103</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="stars">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                            </div>
+                                            <div class="review-line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 29%" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="percentage">
+                                                <span>73</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="stars">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                            </div>
+                                            <div class="review-line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 16%" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="percentage">
+                                                <span>39</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="stars">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                            </div>
+                                            <div class="review-line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 11%" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="percentage">
+                                                <span>27</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="stars">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                            </div>
+                                            <div class="review-line">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 3%" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="percentage">
+                                                <span>09</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="review-title">
+                                <h3>Reviews</h3>
+                            </div>
+                            <div class="review-wrap">
+                                <div class="single-review">
+                                    <div class="user">
+                                        <div class="part-img">
+                                            <img th:src="@{/images/avatar.png}" alt="User">
+                                        </div>
+                                        <div class="txt">
+                                            <span class="name">Shaikh Dardah</span>
+                                            <span class="date">17/08/2022</span>
+                                            <span class="star">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="comment-area">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur eos veniam aperiam autem sint beatae eveniet minima impedit, deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident.</p>
+                                        <div class="bottom-wrap">
+                                            <div class="gallery-wrap">
+                                                <div class="img-gallery">
+                                                    <button class="client-img"><img th:src="@{/images/review-img-1.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-2.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-3.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-4.jpg}" alt="image"></button>
+                                                </div>
+                                                <div class="view-panel">
+                                                    <img class="client-product" th:src="@{/images/}" alt="image">
+                                                    <button class="clt-view-panel-close"><i class="fa-light fa-circle-xmark"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="reaction">
+                                                <div class="like">
+                                                    <button><i class="fa-duotone fa-thumbs-up"></i></button>
+                                                    <span>(2)</span>
+                                                </div>
+                                                <div class="dislike">
+                                                    <button><i class="fa-duotone fa-thumbs-down"></i></button>
+                                                    <span>(0)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-review">
+                                    <div class="user">
+                                        <div class="part-img">
+                                            <img th:src="@{/images/avatar.png}" alt="User">
+                                        </div>
+                                        <div class="txt">
+                                            <span class="name">Shaikh Dardah</span>
+                                            <span class="date">17/08/2022</span>
+                                            <span class="star">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="comment-area">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur eos veniam aperiam autem sint beatae eveniet minima impedit, deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident.</p>
+                                        <div class="bottom-wrap">
+                                            <div class="gallery-wrap">
+                                                <div class="img-gallery">
+                                                    <button class="client-img"><img th:src="@{/images/review-img-1.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-2.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-3.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-4.jpg}" alt="image"></button>
+                                                </div>
+                                                <div class="view-panel">
+                                                    <img class="client-product" th:src="@{/images/}" alt="image">
+                                                    <button class="clt-view-panel-close"><i class="fa-light fa-circle-xmark"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="reaction">
+                                                <div class="like">
+                                                    <button><i class="fa-duotone fa-thumbs-up"></i></button>
+                                                    <span>(2)</span>
+                                                </div>
+                                                <div class="dislike">
+                                                    <button><i class="fa-duotone fa-thumbs-down"></i></button>
+                                                    <span>(0)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-review">
+                                    <div class="user">
+                                        <div class="part-img">
+                                            <img th:src="@{/images/avatar.png}" alt="User">
+                                        </div>
+                                        <div class="txt">
+                                            <span class="name">Shaikh Dardah</span>
+                                            <span class="date">17/08/2022</span>
+                                            <span class="star">
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp rated"></i>
+                                                <i class="fa-solid fa-star-sharp"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="comment-area">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur eos veniam aperiam autem sint beatae eveniet minima impedit, deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident deserunt magni harum aut ducimus explicabo, consectetur natus nulla repellendus quos provident.</p>
+                                        <div class="bottom-wrap">
+                                            <div class="gallery-wrap">
+                                                <div class="img-gallery">
+                                                    <button class="client-img"><img th:src="@{/images/review-img-1.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-2.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-3.jpg}" alt="image"></button>
+                                                    <button class="client-img"><img th:src="@{/images/review-img-4.jpg}" alt="image"></button>
+                                                </div>
+                                                <div class="view-panel">
+                                                    <img class="client-product" th:src="@{/images/}" alt="image">
+                                                    <button class="clt-view-panel-close"><i class="fa-light fa-circle-xmark"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="reaction">
+                                                <div class="like">
+                                                    <button><i class="fa-duotone fa-thumbs-up"></i></button>
+                                                    <span>(2)</span>
+                                                </div>
+                                                <div class="dislike">
+                                                    <button><i class="fa-duotone fa-thumbs-down"></i></button>
+                                                    <span>(0)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------- SHOP SECTION END --------------------------------->
+	<div th:replace="fragments :: modal_dialog"></div>	
+
+    <!--------------------------------- FOOTER SECTION START --------------------------------->
+     <span th:replace="footer:: footer"></span>
+    <!--------------------------------- FOOTER SECTION END --------------------------------->
+    <script type="text/javascript">
+	contextPath = "[[@{/}]]";
+	productId = "[[${product.id}]]";
+	var csrfHeaderName = "[[${_csrf.headerName}]]";
+	var csrfValue = "[[${_csrf.token}]]";	
+	
+	decimalSeparator = "[[${DECIMAL_POINT_TYPE == 'COMMA' ? ',' : '.'}]]";
+	thousandSeparator = "[[${THOUSANDS_POINT_TYPE == 'COMMA' ? ',' : '.'}]]";
+	
+	$(document).ready(function() {
+		bigImage = $("#bigImage");
+		
+		$(".image-thumbnail").mouseover(function() {
+			currentImageSource = $(this).attr("src");
+			currentImageIndex = $(this).attr("index");
+			
+			bigImage.attr("src", currentImageSource);
+			bigImage.attr("index", currentImageIndex);
+		});
+		
+		bigImage.on("click", function() {
+			$("#carouselModal").modal("show");
+			imageIndex = parseInt(bigImage.attr("index"));
+			$("#carouselExampleIndicators").carousel(imageIndex);
+		});
+		
+		$(".linkVoteReview").on("click", function(e) {
+			e.preventDefault();
+			doVote($(this), "review");
+		});
+		
+		$(".linkVoteQuestion").on("click", function(e) {
+			e.preventDefault();
+			doVote($(this), "question");
+		});			
+	});
+	
+</script>
+   <!--  <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script> -->
+<script type="text/javascript" th:src="@{/js/jquery.number.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/common_rating.js}"></script>
+<script type="text/javascript" th:src="@{/js/common_modal.js}"></script>
+<script type="text/javascript" th:src="@{/js/quantity_control.js}"></script>
+<script type="text/javascript" th:src="@{/js/add_to_cart.js}"></script>
+<script type="text/javascript" th:src="@{/js/common_vote.js}"></script>
+<script type="text/javascript" th:src="@{/js/question_post.js}"></script>
+    <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery.flagstrap.min.js}"></script>
+    <script th:src="@{/vendor/js/slick.min.js}"></script>
+    <script th:src="@{/vendor/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery.syotimer.min.js}"></script>
+    <script th:src="@{/vendor/js/jquery-modal-video.min.js}"></script>
+    <script th:src="@{/vendor/js/nouislider.min.js}"></script>
+    <script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+</body>
+
+</html>

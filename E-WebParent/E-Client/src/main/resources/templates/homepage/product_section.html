@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-	  <div class="row g-lg-4 g-3" th:fragment="content">
-                        <div class="product-col col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-6">
+	 <!--------------------------------- FEATURED PRODUCT SECTION START --------------------------------->
+    <div class="featured-product py-25" th:fragment="content">
+        <div class="container">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <h2 class="title">Featured products</h2>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-end">
+                                <a th:href="@{/}" class="explore-section">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="product-custom-row">
+                        <div class="custom-col" th:each="productSection : ${section.productSections}" th:with="product = ${productSection.product}">
                             <div class="single-product-card">
                                 <div class="part-img">
                                     <img th:src="@{${product.mainImagePath}}" alt="Product">
                                 </div>
+                                
+                         <div class="text-center">
+							<input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
+										th:value="${product.averageRating}"/>
+                                    <span style="color: red;">&nbsp;&nbsp;&nbsp;[[${product.reviewCount}]] rating(s)</span>
+							</div>
+							
                                 <div class="part-txt">
-                                    <h4 class="product-name"><a th:href="@{${product.URI}}">[[${product.shortName}]]</a></h4>
-                                    <div th:replace="product/product_fragment :: product_price"></div>
-                                 
-                                    <button class="add-to-cart-btn">Add to Cart</button>
+                                    <h4 class="product-name"><a th:href="@{${product.URI}}" th:title="${product.name}">[[${product.shortName}]]</a></h4>
+                                  <div th:replace="product/product_fragment :: product_price"></div>
+
                                 </div>
                                 <div class="cart-option">
                                     <ul>
@@ -39,21 +62,14 @@
                                 </div>
                             </div>
                         </div>
+                
+               
                     </div>
-  
-<div th:fragment="product_price" th:remove="tag">
-		<th:block th:if="${product.discountPercent &lt;= 0}">
-			<div th:replace="product/product_fragment :: price_fragment(${product.price})"></div>
-		</th:block>
-		<th:block th:if="${product.discountPercent > 0}">
-			
-			 <p class="price"><span><div th:replace="product/product_fragment :: price_fragment(${product.price})"></div></span>
-			<b style="font-size: small; color: darkred"> <div th:replace="product/product_fragment :: price_fragment(${product.discountPrice})"></div></b></p>
-		</th:block>
-	</div>			
-
-<div th:fragment="price_fragment(productPrice)" th:remove="tag">
-	<span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(productPrice, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------- FEATURED PRODUCT SECTION END --------------------------------->
+	
 </body>
 </html>
