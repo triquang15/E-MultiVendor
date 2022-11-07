@@ -465,7 +465,7 @@
 
         /*---------------------------
         Product Quantity
-        ---------------------------*/
+      
         $('.quantity').each(function () {
             var spinner = jQuery(this),
                 input = spinner.find('input[type="number"]'),
@@ -497,7 +497,7 @@
             });
 
         });
-
+  ---------------------------*/
 
         /*---------------------------
         Review Image Popup

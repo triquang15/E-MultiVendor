@@ -2,50 +2,50 @@ decimalSeparator = decimalPointType == 'COMMA' ? ',' : '.';
 thousandsSeparator = thousandsPointType == 'COMMA' ? ',' : '.'; 
 
 $(document).ready(function() {
-	$(".linkMinus").on("click", function(evt) {
+	$(".quantity-down").on("click", function(evt) {
 		evt.preventDefault();
 		decreaseQuantity($(this));
 	});
 	
-	$(".linkPlus").on("click", function(evt) {
+	$(".quantity-up").on("click", function(evt) {
 		evt.preventDefault();
 		increaseQuantity($(this));
 	});
 	
 	$(".linkRemove").on("click", function(evt) {
 		evt.preventDefault();
-		removeBook($(this));
+		removeProduct($(this));
 	});		
 });
 
 function decreaseQuantity(link) {
-	bookId = link.attr("pid");
-	quantityInput = $("#quantity" + bookId);
+	productId = link.attr("pid");
+	quantityInput = $("#quantity" + productId);
 	newQuantity = parseInt(quantityInput.val()) - 1;
 	
 	if (newQuantity > 0) {
 		quantityInput.val(newQuantity);
-		updateQuantity(bookId, newQuantity);
+		updateQuantity(productId, newQuantity);
 	} else {
 		showWarningModal('Minimum quantity is 1');
 	}	
 }
 
 function increaseQuantity(link) {
-		bookId = link.attr("pid");
-		quantityInput = $("#quantity" + bookId);
+		productId = link.attr("pid");
+		quantityInput = $("#quantity" + productId);
 		newQuantity = parseInt(quantityInput.val()) + 1;
 		
 		if (newQuantity <= 5) {
 			quantityInput.val(newQuantity);
-			updateQuantity(bookId, newQuantity);
+			updateQuantity(productId, newQuantity);
 		} else {
 			showWarningModal('Maximum quantity is 5');
 		}	
 }
 
-function updateQuantity(bookId, quantity) {
-	url = contextPath + "cart/update/" + bookId + "/" + quantity;
+function updateQuantity(productId, quantity) {
+	url = contextPath + "cart/update/" + productId + "/" + quantity;
 	
 	$.ajax({
 		type: "POST",
@@ -54,30 +54,30 @@ function updateQuantity(bookId, quantity) {
 			xhr.setRequestHeader(csrfHeaderName, csrfValue);
 		}
 	}).done(function(updatedSubtotal) {
-		updateSubtotal(updatedSubtotal, bookId);
+		updateSubtotal(updatedSubtotal, productId);
 		updateTotal();
 	}).fail(function() {
-		showErrorModal("Error while updating book quantity.");
+		showErrorModal("Error while updating product quantity.");
 	});	
 }
 
-function updateSubtotal(updatedSubtotal, bookId) {
-	$("#subtotal" + bookId).text(formatCurrency(updatedSubtotal));
+function updateSubtotal(updatedSubtotal, productId) {
+	$("#subtotal" + productId).text(formatCurrency(updatedSubtotal));
 }
 
 function updateTotal() {
 	total = 0.0;
-	bookCount = 0;
+	productCount = 0;
 	
 	$(".subtotal").each(function(index, element) {
-		bookCount++;
+		productCount++;
 		total += parseFloat(clearCurrencyFormat(element.innerHTML));
 	});
 	
-	if (bookCount < 1) {
+	if (productCount < 1) {
 		showEmptyShoppingCart();
 	} else {
-		$("#total").text(formatCurrency(total));	
+		$("#total").text(formatCurrency(total));		
 	}
 	
 }
@@ -87,7 +87,7 @@ function showEmptyShoppingCart() {
 	$("#sectionEmptyCartMessage").removeClass("d-none");
 }
 
-function removeBook(link) {
+function removeProduct(link) {
 	url = link.attr("href");
 
 	$.ajax({
@@ -98,18 +98,18 @@ function removeBook(link) {
 		}
 	}).done(function(response) {
 		rowNumber = link.attr("rowNumber");
-		removeBookHTML(rowNumber);
+		removeProductHTML(rowNumber);
 		updateTotal();
 		updateCountNumbers();
 		
 		showModalDialog("Shopping Cart", response);
 		
 	}).fail(function() {
-		showErrorModal("Error while removing book.");
+		showErrorModal("Error while removing product.");
 	});				
 }
 
-function removeBookHTML(rowNumber) {
+function removeProductHTML(rowNumber) {
 	$("#row" + rowNumber).remove();
 	$("#blankLine" + rowNumber).remove();
 }
@@ -119,6 +119,7 @@ function updateCountNumbers() {
 		element.innerHTML = "" + (index + 1);
 	}); 
 }
+
 
 function formatCurrency(amount) {
 	return $.number(amount, decimalDigits, decimalSeparator, thousandsSeparator);
