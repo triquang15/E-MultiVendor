@@ -177,7 +177,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <h1>New Women</h1>
                                 <p>The 10 Best Fashion Collection 2022</p>
                                 <div class="price"><span>$320.00</span> <span>$295.00</span></div>
-                                <a href="shop-details.html" class="def-btn">buy now</a>
+                                <a th:href="@{/}" class="def-btn">buy now</a>
                             </div>
                         </div>
                         <div class="slide-2">
@@ -186,7 +186,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <h1>New Women</h1>
                                 <p>The 10 Best Fashion Collection 2022</p>
                                 <div class="price"><span>$320.00</span> <span>$295.00</span></div>
-                                <a href="shop-details.html" class="def-btn">buy now</a>
+                                <a th:href="@{/}" class="def-btn">buy now</a>
                             </div>
                         </div>
                         <div class="slide-3">
@@ -195,7 +195,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <h1>New Women</h1>
                                 <p>The 10 Best Fashion Collection 2022</p>
                                 <div class="price"><span>$320.00</span> <span>$295.00</span></div>
-                                <a href="shop-details.html" class="def-btn">buy now</a>
+                                <a th:href="@{/}" class="def-btn">buy now</a>
                             </div>
                         </div>
                     </div>
@@ -204,13 +204,13 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     <div class="sidebar-area">
                         <div class="best-selling-panel">
                             <div class="panel-header">
-                                <h4>Best Selling</h4>
+                                <h4>Best Sellers</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="product-slider-1">
-                                    <div class="single-product-slider">
+                                    <div class="single-product-slider" th:each="product : ${listBestSeller}">
                                         <div class="part-img">
-                                            <img th:src="@{/images/best-selling-1.png}" alt="Product">
+                                            <img  th:src="@{${product.mainImagePath}}" alt="Product">
                                         </div>
                                         <div class="part-txt">
                                             <div class="star">
@@ -220,74 +220,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                                 <i class="fa-solid fa-star-sharp rated"></i>
                                                 <i class="fa-solid fa-star-sharp"></i>
                                             </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Cuisinart Barrel</a></h4>
+                                            <h4 class="product-name"><a th:href="@{${product.URI}}">[[${product.shortName}]]</a></h4>
                                             <p class="price">$75.00 <span>$94.00</span></p>
                                         </div>
                                     </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-2.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Ut enim ad minima</a></h4>
-                                            <p class="price">$25.00</p>
-                                        </div>
-                                    </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-3.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Aut odit aut fugit</a></h4>
-                                            <p class="price">$98.00</p>
-                                        </div>
-                                    </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-4.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Aut odit aut fugit</a></h4>
-                                            <p class="price">$98.00</p>
-                                        </div>
-                                    </div>
-                                    <div class="single-product-slider">
-                                        <div class="part-img">
-                                            <img th:src="@{/images/best-selling-1.png}" alt="Product">
-                                        </div>
-                                        <div class="part-txt">
-                                            <div class="star">
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp rated"></i>
-                                                <i class="fa-solid fa-star-sharp"></i>
-                                            </div>
-                                            <h4 class="product-name"><a href="shop-details.html">Cuisinart Barrel</a></h4>
-                                            <p class="price">$75.00 <span>$94.00</span></p>
-                                        </div>
-                                    </div>
+                                   
+                                
+                                 
+                                   
                                 </div>
                             </div>
                         </div>
@@ -315,29 +255,28 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                         </div>
                         <div class="col-lg-2 col-md-2 col-6">
                             <div class="text-end">
-                                <a href="shop.html" class="explore-section">View more</a>
+                                <a th:href="@{/}" class="explore-section">View more</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="product-custom-row">
-                        <div class="custom-col">
+                        <div class="custom-col" th:each="product : ${listFlashDeal}">
                             <div class="single-product-card">
                                 <div class="part-img">
-                                    <span class="off-tag">15%</span>
-                                    <img th:src="@{/images/flash-deal-1.jpg}" alt="Product">
+                                    <span class="off-tag">[[${product.discountPercent}]]</span>
+                                    <img th:src="@{${product.mainImagePath}}" alt="Product">
                                 </div>
+                                 <div class="text-center">
+							<input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
+										th:value="${product.averageRating}"/>
+                                    <span style="color: red;">&nbsp;&nbsp;&nbsp;[[${product.reviewCount}]] rating(s)</span>
+							</div>
                                 <div class="part-txt">
-                                    <h4 class="product-name"><a href="shop-details.html">White short checkered</a></h4>
-                                    <p class="price"><span>$96.00</span>$75.00</p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp"></i>
-                                    </div>
+                                    <h4 class="product-name"><a th:href="@{${product.URI}}">[[${product.shortName}]]</a></h4>
+                                    <div th:replace="product/product_fragment :: product_price"></div>
+                                    
                                 </div>
                                 <div class="cart-option">
                                     <ul>
@@ -365,184 +304,60 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 </div>
                             </div>
                         </div>
-                        <div class="custom-col">
-                            <div class="single-product-card">
-                                <div class="part-img">
-                                    <span class="off-tag">15%</span>
-                                    <img th:src="@{/images/flash-deal-2.jpg}" alt="Product">
-                                </div>
-                                <div class="part-txt">
-                                    <h4 class="product-name"><a href="shop-details.html">White short checkered</a></h4>
-                                    <p class="price"><span>$96.00</span>$75.00</p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp"></i>
-                                    </div>
-                                </div>
-                                <div class="cart-option">
-                                    <ul>
-                                        <li>
-                                            <a role="button" class="add-to-cart">
-                                                <i class="fa-light fa-cart-shopping"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="add-to-wish">
-                                                <i class="fa-light fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="quick-view">
-                                                <i class="fa-light fa-image"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-details.html" class="view-product">
-                                                <i class="fa-light fa-eye"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="custom-col">
-                            <div class="single-product-card">
-                                <div class="part-img">
-                                    <span class="off-tag">15%</span>
-                                    <img th:src="@{/images/flash-deal-3.jpg}" alt="Product">
-                                </div>
-                                <div class="part-txt">
-                                    <h4 class="product-name"><a href="shop-details.html">White short checkered</a></h4>
-                                    <p class="price"><span>$96.00</span>$75.00</p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp"></i>
-                                    </div>
-                                </div>
-                                <div class="cart-option">
-                                    <ul>
-                                        <li>
-                                            <a role="button" class="add-to-cart">
-                                                <i class="fa-light fa-cart-shopping"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="add-to-wish">
-                                                <i class="fa-light fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="quick-view">
-                                                <i class="fa-light fa-image"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-details.html" class="view-product">
-                                                <i class="fa-light fa-eye"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="custom-col">
-                            <div class="single-product-card">
-                                <div class="part-img">
-                                    <span class="off-tag">15%</span>
-                                    <img th:src="@{/images/flash-deal-4.jpg}" alt="Product">
-                                </div>
-                                <div class="part-txt">
-                                    <h4 class="product-name"><a href="shop-details.html">White short checkered</a></h4>
-                                    <p class="price"><span>$96.00</span>$75.00</p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp"></i>
-                                    </div>
-                                </div>
-                                <div class="cart-option">
-                                    <ul>
-                                        <li>
-                                            <a role="button" class="add-to-cart">
-                                                <i class="fa-light fa-cart-shopping"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="add-to-wish">
-                                                <i class="fa-light fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="quick-view">
-                                                <i class="fa-light fa-image"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-details.html" class="view-product">
-                                                <i class="fa-light fa-eye"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="custom-col">
-                            <div class="single-product-card">
-                                <div class="part-img">
-                                    <span class="off-tag">15%</span>
-                                    <img th:src="@{/images/flash-deal-5.jpg}" alt="Product">
-                                </div>
-                                <div class="part-txt">
-                                    <h4 class="product-name"><a href="shop-details.html">White short checkered</a></h4>
-                                    <p class="price"><span>$96.00</span>$75.00</p>
-                                    <div class="star">
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp rated"></i>
-                                        <i class="fa-solid fa-star-sharp"></i>
-                                    </div>
-                                </div>
-                                <div class="cart-option">
-                                    <ul>
-                                        <li>
-                                            <a role="button" class="add-to-cart">
-                                                <i class="fa-light fa-cart-shopping"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="add-to-wish">
-                                                <i class="fa-light fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a role="button" class="quick-view">
-                                                <i class="fa-light fa-image"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-details.html" class="view-product">
-                                                <i class="fa-light fa-eye"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--------------------------------- FLASH DEAL SECTION END --------------------------------->
+    
+      <!--------------------------------- BEST SELLER SECTION START --------------------------------->
+    <div class="best-seller py-25">
+        <div class="container">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <h2 class="title">Daily Discover</h2>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-end">
+                                <a th:href="@{/}" class="explore-section">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row g-3">
+                        <div class="col-xl-4 col-lg-6 col-6" th:each="product : ${listProducts}">
+                            <div class="single-box">
+                                <div class="part-img">
+                                    <a href="#"><img th:src="@{${product.mainImagePath}}" alt="Image" width="150px;"></a>
+                                </div>
+                                 <div class="text-center">
+							<input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
+										th:value="${product.averageRating}"/>
+                                    <span style="color: red;">&nbsp;&nbsp;&nbsp;[[${product.reviewCount}]] rating(s)</span>
+							</div>
+                                <div class="part-txt">
+                                    <a th:href="@{${product.URI}}" class="title">[[${product.shortName}]]</a>
+                                   
+                                    <a th:href="@{${product.URI}}" class="part-btn">[[${product.shop.name}]]</a>
+                                </div>
+                            </div>
+                        </div>
+                   
+                       
+                      
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------- BEST SELLER SECTION END --------------------------------->
+	
 
 
 
@@ -553,12 +368,16 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<span th:replace="homepage/all_categories_section :: content">All Categories Section</span>
 	</div>
 	
+	<div th:unless="${#lists.isEmpty(section.productSections)}">
+			<div th:replace="homepage/product_section :: content">Product Section</div>	
+		</div>		
 	 <!--------------------------------- TOP BRANDS SECTION START --------------------------------->
 	<div th:unless="${#lists.isEmpty(section.brandSections)}">
 		<span th:replace="homepage/brand_section :: content">Brand Section</span>
 	</div>
     <!--------------------------------- TOP BRANDS SECTION END --------------------------------->
-	
+    
+   
 </th:block>	
    
     <!--------------------------------- FEATURES SECTION START --------------------------------->
@@ -568,8 +387,15 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <!--------------------------------- FOOTER SECTION START --------------------------------->
    <span th:replace="footer:: footer"></span>
     <!--------------------------------- FOOTER SECTION END --------------------------------->
-
-    <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script>
+<script type="text/javascript">	
+	$(".product-detail-rating-star").rating({
+		displayOnly: true,
+		hoverOnClera: false,
+		showCaption: false,
+		theme: 'krajee-svg'
+	});
+</script>
+   <!--  <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script> -->
     <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.flagstrap.min.js}"></script>
     <script th:src="@{/vendor/js/slick.min.js}"></script>

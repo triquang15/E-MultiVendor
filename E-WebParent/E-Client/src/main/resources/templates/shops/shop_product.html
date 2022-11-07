@@ -69,7 +69,7 @@
                                                 <td>
 												<img th:src="@{${product.mainImagePath}}" style="width: 120px" class="img-fluid" />
 												</td>
-                                                <td><span class="name">>[[${product.shortName}]] </span></td>
+                                                <td><span class="name">[[${product.shortName}]] </span></td>
                                                 <td><span class="date">[[${product.brand.name}]]</span></td>
                                                 <td><span class="amount">[[${product.category.name}]]</span></td>
                                                  <td><span class="amount">[[${product.shop.name}]]</span></td>
@@ -87,7 +87,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div th:replace="fragments :: pagination('/shops', 'shops')"></div>
+                                <div th:replace="fragments :: pagination('/products', 'product')"></div>
                                	<div th:replace="fragments :: confirm_modal" />
                             </div>
                         </div>

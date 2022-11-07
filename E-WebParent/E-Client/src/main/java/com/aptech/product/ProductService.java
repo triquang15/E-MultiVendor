@@ -19,9 +19,8 @@ import com.aptech.common.exception.ProductNotFoundException;
 import com.aptech.paging.PagingAndSortingHelper;
 
 @Service
-@Transactional
 public class ProductService {
-	public static final int PRODUCTS_PER_PAGE = 10;
+	public static final int PRODUCTS_PER_PAGE = 5;
 	public static final int SEARCH_RESULTS_PER_PAGE = 10;
 	
 	@Autowired private ProductRepository repo;
