@@ -133,6 +133,14 @@ public class ProductController {
 			List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
 			List<Question> listQuestions = questionService.getTop3VotedQuestions(product.getId());
 			Page<Review> listReviews = reviewService.list3MostVotedReviewsByProduct(product);
+			
+			List<Section> listSections = sectionService.listEnabledSections();
+			model.addAttribute("listSections", listSections);	
+			
+			if (hasAllCategoriesSection(listSections)) {
+				List<Category> listCategories = categoryService.listNoChildrenCategories();
+				model.addAttribute("listCategories", listCategories);
+			}
 
 			Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 

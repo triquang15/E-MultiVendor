@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.aptech.ControllerHelper;
 import com.aptech.address.AddressService;
+import com.aptech.category.CategoryService;
 import com.aptech.common.entity.Address;
 import com.aptech.common.entity.CartItem;
+import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.ShippingRate;
+import com.aptech.common.entity.section.Section;
+import com.aptech.common.entity.section.SectionType;
+import com.aptech.section.SectionService;
 import com.aptech.shipping.ShippingRateService;
 
 @Controller
@@ -23,11 +28,21 @@ public class ShoppingCartController {
 	@Autowired private ShoppingCartService cartService;
 	@Autowired private AddressService addressService;
 	@Autowired private ShippingRateService shipService;
+	@Autowired SectionService sectionService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@GetMapping("/cart")
 	public String viewCart(Model model, HttpServletRequest request) {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		List<CartItem> cartItems = cartService.listCartItems(customer);
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);	
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
 		
 		float estimatedTotal = 0.0F;
 		
@@ -52,5 +67,15 @@ public class ShoppingCartController {
 		model.addAttribute("estimatedTotal", estimatedTotal);
 		
 		return "cart/shopping_cart";
+	}
+
+	private boolean hasAllCategoriesSection(List<Section> listSections) {
+		for (Section section : listSections) {
+			if (section.getType().equals(SectionType.ALL_CATEGORIES)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
