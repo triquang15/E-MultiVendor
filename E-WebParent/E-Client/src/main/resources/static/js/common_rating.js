@@ -1,11 +1,11 @@
-// Common Javascript code for book reviews/rating
+// Common Javascript code for product reviews/rating
 $(document).ready(function() {
 	formatRatingNumber();
 });
 	
-$(".book-detail-rating-star").rating({
+$(".product-detail-rating-star").rating({
 	displayOnly: true,
-	hoverOnClera: false,
+	hoverOnClear: false,
 	showCaption: false,
 	theme: 'krajee-svg'
 });
