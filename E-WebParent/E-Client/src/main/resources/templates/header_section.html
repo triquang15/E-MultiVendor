@@ -90,10 +90,19 @@
                                             </a>
                                             
                                         </li>
+                                        
+                                          
+                                        <th:block th:each="headerMenu : ${headerMenuItems}">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{'/m/' + ${headerMenu.alias}}">[[${headerMenu.title}]]</a>
+				</li>						
+				</th:block>
+				<!-- End of Dynamic Header Menu Items -->
                                        
                                         <li class="nav-item">
                                            <a class="nav-link" th:href="@{/contacts}">Contact</a>
                                         </li>
+                                      
                                     </ul>
                                 </div>
                             </div>

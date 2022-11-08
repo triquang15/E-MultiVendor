@@ -17,6 +17,8 @@ public class DashboardService {
 		DashboardInfo summary = new DashboardInfo();
 		Query query = entityManager.createQuery("SELECT "
 					+ "(SELECT COUNT(DISTINCT u.id) AS totalUsers FROM User u),"
+					+ "(SELECT COUNT(DISTINCT s.id) AS totalShops FROM Shop s),"
+					
 					+ "(SELECT COUNT(DISTINCT c.id) AS totalCategories FROM Category c), "
 					+ "(SELECT COUNT(DISTINCT b.id) AS totalBrands FROM Brand b), "
 					+ "(SELECT COUNT(DISTINCT p.id) AS totalProducts FROM Product p), "
@@ -29,7 +31,7 @@ public class DashboardService {
 					+ "(SELECT COUNT(DISTINCT m.id) AS totalMenuItems FROM Menu m), "
 					+ "(SELECT COUNT(DISTINCT se.id) AS totalSections FROM Section se), "
 					+ "(SELECT COUNT(DISTINCT u.id) AS disabledUsers FROM User u WHERE u.enabled=false), "
-					+ "(SELECT COUNT(DISTINCT u.id) AS enabledUsers FROM User u WHERE u.enabled=true), "
+					+ "(SELECT COUNT(DISTINCT u.id) AS enabledUsers FROM User u WHERE u.enabled=true), "					
 					+ "(SELECT COUNT(DISTINCT c.id) AS rootCategories FROM Category c WHERE c.parent is null), "
 					+ "(SELECT COUNT(DISTINCT c.id) AS enabledCategories FROM Category c WHERE c.enabled=true), "
 					+ "(SELECT COUNT(DISTINCT c.id) AS disabledCategories FROM Category c WHERE c.enabled=false), "
@@ -76,6 +78,7 @@ public class DashboardService {
 		
 		int count = 0;
 		summary.setTotalUsers((Long) arrayCounts[count++]);
+		summary.setTotalShops((Long) arrayCounts[count++]);
 		summary.setTotalCategories((Long) arrayCounts[count++]);
 		summary.setTotalBrands((Long) arrayCounts[count++]);
 		summary.setTotalProducts((Long) arrayCounts[count++]);

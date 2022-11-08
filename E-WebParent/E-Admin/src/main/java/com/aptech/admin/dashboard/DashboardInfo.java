@@ -13,6 +13,7 @@ public class DashboardInfo {
 	private long totalOrders;
 	private long totalMenuItems;
 	private long totalSections;
+	private long totalShops;
 	
 	private long disabledUsersCount;
 	private long enabledUsersCount;
@@ -69,6 +70,16 @@ public class DashboardInfo {
 	
 	private String mailServer;
 	
+	
+	
+	public long getTotalShops() {
+		return totalShops;
+	}
+
+	public void setTotalShops(long totalShops) {
+		this.totalShops = totalShops;
+	}
+
 	public long getTotalUsers() {
 		return totalUsers;
 	}
