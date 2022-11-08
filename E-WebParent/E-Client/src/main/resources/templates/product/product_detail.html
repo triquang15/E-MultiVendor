@@ -15,13 +15,6 @@
     </div>
     <!-- preloader end -->
 
-    <!--------------------------------- HEADER CART LIST START --------------------------------->
-    <span th:replace="header_cart:: header_cart"></span>
-    <!--------------------------------- HEADER CART LIST END --------------------------------->
-
-    <!--------------------------------- HEADER WISH LIST START --------------------------------->
-  	<span th:replace="header_wish:: header_wish"></span>
-    <!--------------------------------- HEADER WISH LIST END --------------------------------->
 
     <!--------------------------------- HEADER SECTION START --------------------------------->
     <span th:replace="header_section2:: content"></span>
@@ -78,33 +71,14 @@
                                 <li>Brands: <span>[[${product.brand.name}]]</span></li>
                             </ul>
                             <p th:utext="${product.shortDescription}" class="dscr"></p>
-                            <form>
-                                <div class="row g-xl-4 g-3">
-                                        
-                                    <div class="col-lg-4 col-md-12 col-sm-4">
-                                        <div class="quantity-wrap">
-                                            <label>QTY</label>
-                                            <div class="product-count">
-                                                <div class="quantity rapper-quantity">
-                                                    <input type="number" min="1" max="100" step="1" value="1" readonly>
-                                                    <div class="quantity-nav">
-                                                        <div class="quantity-button quantity-down">
-                                                            <i class="fa-solid fa-minus"></i>
-                                                        </div>
-                                                        <div class="quantity-button quantity-up">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="btn-box">
-                                <button id="addToCart"><span><i class="fa-light fa-cart-shopping"></i></span> add to cart</button>
+                           <th:block th:if="${product.inStock}">
+								<div th:replace="cart/quantity_control :: quantity_control(1, ${product.id})"></div>
+								 <div class="btn-box">
+                                <button id="buttonAdd2Cart"><span><i class="fa-light fa-cart-shopping"></i></span> add to cart</button>
                                 <button id="addToWishList"><span><i class="fa-light fa-heart"></i></span> add to wishlist</button>
                             </div>
+							</th:block>
+                           
                             <div class="product-share">
                                 <span>Share Link:</span>
                                 <div class="social">

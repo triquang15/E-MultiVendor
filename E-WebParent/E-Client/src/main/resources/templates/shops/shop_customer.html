@@ -11,19 +11,6 @@
     <!-- preloader end -->
 
 
-
-    <!--------------------------------- HEADER CART LIST START --------------------------------->
-    <span th:replace="header_cart:: header_cart"></span>
-    <!--------------------------------- HEADER CART LIST END --------------------------------->
-
-
-
-    <!--------------------------------- HEADER WISH LIST START --------------------------------->
-  <span th:replace="header_wish:: header_wish"></span>
-    <!--------------------------------- HEADER WISH LIST END --------------------------------->
-
-
-
     <!--------------------------------- HEADER SECTION START --------------------------------->
     <span th:replace="header_section:: content"></span>
     <!--------------------------------- HEADER SECTION END --------------------------------->
@@ -45,11 +32,8 @@
                         </div>
                         <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true"><span class="icon"><i class="fa-duotone fa-objects-column"></i></span> <span class="txt">Dashboard</span></button>
-                            <button class="nav-link" id="v-pills-purchase-tab" data-bs-toggle="pill" data-bs-target="#v-pills-purchase" type="button" role="tab" aria-controls="v-pills-purchase" aria-selected="false"><span class="icon"><i class="fa-duotone fa-file-invoice"></i></span> <span class="txt">Add New Shop</span></button>
-                            <button class="nav-link" id="v-pills-conversation-tab" data-bs-toggle="pill" data-bs-target="#v-pills-conversation" type="button" role="tab" aria-controls="v-pills-conversation" aria-selected="false"><span class="icon"><i class="fa-duotone fa-messages"></i></span> <span class="txt">Add New Product</span></button>
-                            <button class="nav-link" id="v-pills-wallet-tab" data-bs-toggle="pill" data-bs-target="#v-pills-wallet" type="button" role="tab" aria-controls="v-pills-wallet" aria-selected="false"><span class="icon"><i class="fa-duotone fa-wallet"></i></span> <span class="txt">My Wallet</span></button>
-                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="icon"><i class="fa-duotone fa-user-vneck"></i></span> <span class="txt">Manage Profile</span></button>
-                            <a th:href="@{/products}" class="nav-link"><span class="icon"><i class="fa-duotone fa-power-off"></i></span> <span class="txt">Manage Products</span></a>
+                            <button class="nav-link" id="v-pills-purchase-tab" data-bs-toggle="pill" data-bs-target="#v-pills-purchase" type="button" role="tab" aria-controls="v-pills-purchase" aria-selected="false"><span class="icon"><i class="fa-duotone fa-file-invoice"></i></span> <span class="txt">Add New Shop</span></button>                       
+                            <a th:href="@{/products}" class="nav-link"><span class="icon"><i class="fa-duotone fa-wallet"></i></span> <span class="txt">Manage Products</span></a>
                         </div>
                     </div>
                 </div>
@@ -124,11 +108,12 @@
                                             <input type="text" placeholder="Name:" th:field="*{name}" required="required" minlength="3" maxlength="256">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="Alias:" th:field="*{alias}" required="required" minlength="3" maxlength="256">
-                                        </div>
-                                        <div class="col-sm-6">
                                             <input type="text" placeholder="Delivery Address:" th:field="*{deliveryAddress}" required="required" minlength="3" maxlength="256">
                                         </div>
+                                        <div class="col-sm-12">
+                                            <textarea placeholder="Description" class="form-control" th:field="*{alias}" rows="5" required="required" minlength="3" maxlength="256"></textarea>
+                                        </div>
+                                        
 
                                         <div class="col-12">
                                             <div class="btn-box">
@@ -143,104 +128,8 @@
                             </div>
                         </div>
                        
-                        <div class="tab-pane fade" id="v-pills-wallet" role="tabpanel" aria-labelledby="v-pills-wallet-tab" tabindex="0">
-                            <h2 class="account-title">My Wallet</h2>
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <div class="total-balance">
-                                        <div class="top">
-                                            <h4>Total Balance</h4>
-                                            <div class="tags">
-                                                <span class="tag tag-up"><i class="fa-light fa-arrow-up-right"></i> $600.99</span>
-                                                <span class="tag tag-down"><i class="fa-light fa-arrow-down-left"></i> $700.99</span>
-                                            </div>
-                                        </div>
-                                        <div class="middle">
-                                            <h3>$ 7,950.96</h3>
-                                        </div>
-                                        <div class="btn-box">
-                                            <a href="#" class="def-btn">Deposit</a>
-                                            <a href="#" class="def-btn">Withdraw</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="chart-panel">
-                                        <div class="custom-legend">
-                                            <div class="single-legend">income</div>
-                                            <div class="single-legend">withdrawals</div>
-                                        </div>
-                                        <div id="overviewChart"></div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="table-wrap">
-                                        <div class="table-top">
-                                            <h4 class="title">Transfer History</h4>
-                                            <form class="search-box">
-                                                <input type="search" placeholder="Search">
-                                                <button type="submit"><i class="fa-regular fa-magnifying-glass"></i></button>
-                                            </form>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Date</th>
-                                                        <th>Transfer type</th>
-                                                        <th>Amount</th>
-                                                        <th>User</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>INV-012-345</td>
-                                                        <td>Jun 21, 2022</td>
-                                                        <td><div class="details"><a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a></div></td>
-                                                        <td>$256</td>
-                                                        <td>Steven Smith</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>INV-012-346</td>
-                                                        <td>Apr 09, 2022</td>
-                                                        <td><div class="details"><a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a></div></td>
-                                                        <td>$123</td>
-                                                        <td>Steven Smith</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>INV-012-347</td>
-                                                        <td>Mar 15, 2022</td>
-                                                        <td><div class="details"><a href="shop-details.html" class="product-name">Revel eCommerce-Multi vendor</a></div></td>
-                                                        <td>$174</td>
-                                                        <td>Steven Smith</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="table-bottom">
-                                            <div class="part-txt">
-                                                <p>Showing 03 from 50 data</p>
-                                            </div>
-                                            <div class="pagination">
-                                                <button disabled><i class="fa-solid fa-chevron-left"></i></button>
-                                                <button class="active">1</button>
-                                                <button>2</button>
-                                                <button>3</button>
-                                                <button><i class="fa-solid fa-chevron-right"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-                            <h2 class="account-title">Manage Profile</h2>
-                            <div class="profile-panel">
-                               
-                                ---------
-                            </div>
-                        </div>
+                   
+                     
                     </div>
                 </div>
             </div>
@@ -248,104 +137,7 @@
 
 </div>
 
-        <!--------------------------------- INVOICE MODAL START --------------------------------->
-        <div class="invoice-modal modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="account-title mb-0" id="invoiceModalLabel">Invoice</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="invoice-wrap">
-                            <div class="invoice-top d-flex justify-content-between align-items-center">
-                                <div class="left">
-                                    <div class="logo"><img th:src="@{/images/Logo.png}" alt="LOGO"></div>
-                                    <p>Invoice</p>
-                                </div>
-                                <div class="right">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Date:</th>
-                                                <td>17 Aug 2022</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Invoice No:</th>
-                                                <td>IVIP48452022</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Order No:</th>
-                                                <td>166779322</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="invoice-body">
-                                <div class="details">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <h3>Bill to</h3>
-                                            <p>
-                                                <span>Jetimpex Inc</span>
-                                                <span>915 SE 2 Court,</span>
-                                                <span>Ft. Lauderdale,</span>
-                                                <span>FL 33301</span>
-                                                <span>EIN: 42-1774657</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h3>Supplier</h3>
-                                            <p>
-                                                <span>Khorshed Alam</span>
-                                                <span>Ruhul amin Complex, Mokimabad,</span>
-                                                <span>590573362138</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="items">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item ID</th>
-                                                    <th class="text-center">Qty</th>
-                                                    <th>Description</th>
-                                                    <th class="text-end">Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>35130092</td>
-                                                    <td class="text-center">1</td>
-                                                    <td>Revel eCommerce-Multi vendor Ecommerce PSD Template</td>
-                                                    <td class="text-end"><span class="price">$8.00</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="total ms-auto">
-                                        <h5>Invoice Total: <span>USD $8.00</span></h5>
-                                        <p>Paid via Skrill</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invoice-footer">
-                                <span>THANK YOU FOR YOUR BUSINESS!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="def-btn">Print <i class="fa-regular fa-print"></i></button>
-                        <button type="button" class="def-btn">Download <i class="fa-regular fa-download"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--------------------------------- INVOICE MODAL END --------------------------------->
-
+   
     </div>
     <!--------------------------------- ACCOUNT END --------------------------------->
 

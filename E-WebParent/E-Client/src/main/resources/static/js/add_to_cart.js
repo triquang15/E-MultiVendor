@@ -5,8 +5,8 @@ $(document).ready(function() {
 });
 
 function addToCart() {
-	quantity = $("#quantity" + bookId).val();
-	url = contextPath + "cart/add/" + bookId + "/" + quantity;
+	quantity = $("#quantity" + productId).val();
+	url = contextPath + "cart/add/" + productId + "/" + quantity;
 	
 	$.ajax({
 		type: "POST",
@@ -17,6 +17,6 @@ function addToCart() {
 	}).done(function(response) {
 		showModalDialog("Shopping Cart", response);
 	}).fail(function() {
-		showErrorModal("Error while adding book to shopping cart.");
+		showErrorModal("Error while adding product to shopping cart.");
 	});
 }

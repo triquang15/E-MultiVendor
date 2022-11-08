@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	$(".linkMinus").on("click", function(evt) {
+	$(".quantity-down").on("click", function(evt) {
 		evt.preventDefault();
-		bookId = $(this).attr("pid");
-		quantityInput = $("#quantity" + bookId);
+		productId = $(this).attr("pid");
+		quantityInput = $("#quantity" + productId);
 		newQuantity = parseInt(quantityInput.val()) - 1;
 		
 		if (newQuantity > 0) {
@@ -12,10 +12,10 @@ $(document).ready(function() {
 		}
 	});
 	
-	$(".linkPlus").on("click", function(evt) {
+	$(".quantity-up").on("click", function(evt) {
 		evt.preventDefault();
-		bookId = $(this).attr("pid");
-		quantityInput = $("#quantity" + bookId);
+		productId = $(this).attr("pid");
+		quantityInput = $("#quantity" + productId);
 		newQuantity = parseInt(quantityInput.val()) + 1;
 		
 		if (newQuantity <= 5) {
