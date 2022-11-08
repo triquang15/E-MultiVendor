@@ -9,34 +9,28 @@
                     <div class="col-xxl-6 col-xl-7 col-lg-7">
                         <ul class="top-header-link d-lg-flex d-none">
                             <li>
-                                <a href="#">SHOP EVENTS & SAVE UP TO 65% OFF!</a>
+                                <a th:href="@{/}">SHOP EVENTS & SAVE UP TO 65% OFF!</a>
                             </li>
+                           
                             <li>
-                                <a href="#">Call Us: 001-1234-88888</a>
+                                <a th:href="@{/shops}">Seller Centre </a>
                             </li>
-                            <li>
-                                <a th:href="@{/shops}">Sell On Revel </a>
-                            </li>
+                            
                         </ul>
                     </div>
                     <div class="col-xxl-6 col-xl-5 col-lg-5">
                         <ul class="top-header-link justify-content-lg-end justify-content-center">
                             
+                            <th:block sec:authorize="isAuthenticated()"> 
                             <li>
-                                <select name="currency" id="currency" class="select">
-                                    <option value="USD">Dollar (USD)</option>
-                                    <option value="BDT">Taka (BDT)</option>
-                                </select>
+                                <a th:href="@{/address_book}"><i class="fa fa-address-book"></i>
+                                       Address Book </a>
                             </li>
-                            <li>
-                                <div class="select-language">
-                                    <div class="language">
-                                        <div class="select-lang">
-                                            <div id="aw" data-input-name="country" data-selected-country="UK" data-scrollable-height="250px"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                         
+                             <li>
+                               <span style="color: white;">Hi,&nbsp;<b ><a th:href="@{/dashboards}" sec:authentication="principal.fullName"></a></b></span>
                             </li>
+                            </th:block>
                           
                         </ul>
                     </div>
@@ -88,6 +82,12 @@
                                         <li class="nav-item">
                                            <a class="nav-link" th:href="@{/contacts}">Contact</a>
                                         </li>
+                                        
+                                         <li class="nav-item">
+                                <a th:href="@{/cart}" class="nav-link">
+                                    <i class="fa-light fa-cart-shopping"></i>
+                                </a>
+                            </li>
                                     </ul>
                                 </div>
                             </div>

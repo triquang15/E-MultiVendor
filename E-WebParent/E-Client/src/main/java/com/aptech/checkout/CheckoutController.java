@@ -20,15 +20,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.aptech.ControllerHelper;
 import com.aptech.Utility;
 import com.aptech.address.AddressService;
+import com.aptech.category.CategoryService;
 import com.aptech.checkout.paypal.PayPalApiException;
 import com.aptech.checkout.paypal.PayPalService;
 import com.aptech.common.entity.Address;
 import com.aptech.common.entity.CartItem;
+import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.ShippingRate;
 import com.aptech.common.entity.order.Order;
 import com.aptech.common.entity.order.PaymentMethod;
+import com.aptech.common.entity.section.Section;
+import com.aptech.common.entity.section.SectionType;
 import com.aptech.order.OrderService;
+import com.aptech.section.SectionService;
 import com.aptech.setting.CurrencySettingBag;
 import com.aptech.setting.EmailSettingBag;
 import com.aptech.setting.PaymentSettingBag;
@@ -47,10 +52,21 @@ public class CheckoutController {
 	@Autowired private OrderService orderService;
 	@Autowired private SettingService settingService;
 	@Autowired private PayPalService paypalService;
+	@Autowired SectionService sectionService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@GetMapping("/checkout")
 	public String showCheckoutPage(Model model, HttpServletRequest request) {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);	
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
 		
 		Address defaultAddress = addressService.getDefaultAddress(customer);
 		ShippingRate shippingRate = null;
@@ -83,6 +99,16 @@ public class CheckoutController {
 		return "checkout/checkout";
 	}
 	
+	private boolean hasAllCategoriesSection(List<Section> listSections) {
+		for (Section section : listSections) {
+			if (section.getType().equals(SectionType.ALL_CATEGORIES)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	@PostMapping("/place_order")
 	public String placeOrder(HttpServletRequest request) 
 			throws UnsupportedEncodingException, MessagingException {
