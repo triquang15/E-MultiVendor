@@ -14,14 +14,14 @@ import com.aptech.admin.dashboard.DashboardService;
 @Controller
 public class MainController {
 
-//	@Autowired private DashboardService dashboardService;
+	@Autowired private DashboardService dashboardService;
 	
 	@GetMapping("")
 	public String viewHomePage(Model model) {
 		
-//		  DashboardInfo summary = dashboardService.loadSummary();
-//		  model.addAttribute("summary", summary);
-//		 
+		  DashboardInfo summary = dashboardService.loadSummary();
+		  model.addAttribute("summary", summary);
+		 
 		return "index";
 	}
 	
