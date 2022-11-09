@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments :: page_head('Dashboard', 'none')" />
+<head th:replace="fragments :: page_head('My Questions', 'none')" />
 
 <body class="inner">
     <!-- preloader begin -->
@@ -30,174 +30,70 @@
                       
                         </div>
                         <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true"><span class="icon"><i class="fa-duotone fa-objects-column"></i></span> <span class="txt">Purchase History</span></button>
-                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="icon"><i class="fa-duotone fa-user-vneck"></i></span> <span class="txt">Manage Profile</span></button>
-                            <a href="javascript: document.logoutForm.submit()" class="nav-link"><span class="icon"><i class="fa-duotone fa-power-off"></i></span> <span class="txt">Log out</span></a>
+                            <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true"><span class="icon"><i class="fa-duotone fa-objects-column"></i></span> <span class="txt">Reviews Posted</span></button>
+                           
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-8">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab" tabindex="0">
-                            <h2 class="account-title">My Orders</h2>
+                            <h2 class="account-title">Questions asked by me</h2>
                             <div class="table-wrap">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
-                                        <thead>
+                                        <thead >
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Order Time</th>
-                                                <th>Products</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
+                                                <th>Product</th>
+                                                <th>Question</th>
+                                                <th>Ask Time</th>
+                                                <th>Approved</th>
+                                                <th>Answered</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="order : ${listOrders}">
-                                                <td th:text="${order.id}"><span class="invoice-id">ID</span></td>
-                                                <td><span class="name" th:replace="fragments :: format_time(${order.orderTime})">Order Time</span></td>
-                                                <td><span class="date" th:utext="${order.productNames}"></span></td>
-                                                <td><span class="amount" th:replace="fragments :: format_currency(${order.total})">Amount</span></td>
-                                                <td><span class="status" th:class="'textOrderStatus' + ${order.id}">[[${order.status}]]</span></td>
-                                                <td>
-						<a class="fas fa-file-alt icon-green link-detail" 
-							th:href="@{'/orders/detail/' + ${order.id}}" 
-							title="View details of this order"></a>
-									
-						<th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
-							&nbsp;&nbsp;&nbsp;		
-							<a class="fas fa-undo icon-red linkReturnOrder" href=""
-								th:classappend="'linkReturn' + ${order.id}"
-								th:orderId="${order.id}" 
-								title="Return this order"></a>
-						</th:block> 
-					</td>
-                                            </tr>
+                                            <tr th:each="question : ${listQuestions}">
+												<td th:text="${question.id}">ID</td>
+												<td>
+													<a th:href="@{${question.product.URI}}" target="_blank" th:title="${question.product.name}">[[${question.product.shortName}]]</a>
+												</td>
+												<td th:text="${question.questionContent}">Question</td>
+												<td th:text="${question.askTime}">Ask Time</td>
+												
+												<td>
+													<span class="fas" th:classappend="${question.approved ? 'fa-check-circle icon-green' : 'fa-circle icon-dark'}"></span>
+												</td>
+												
+												<td>
+													<span class="fas" th:classappend="${question.answered ? 'fa-check-circle icon-green' : 'fa-circle icon-dark'}"></span>
+												</td>					
+							
+												<td>
+													<a class="fas fa-file-alt icon-green link-detail" th:href="@{'/customer/questions/detail/' + ${question.id}}" title="View details of this question"></a>
+												</td>
+										</tr>
                                            
                                         </tbody>
                                     </table>
                                 </div>
                                 
                                 
-                                <div th:replace="fragments :: pagination('/dashboards', 'orders')"></div>
-                                <div th:replace="orders/return_order_modal :: content"></div>
-                                <div class="modal fade" id="detailModal">
-								  <div class="modal-dialog modal-xl">
-								    <div class="modal-content">
-								    </div>
-								  </div>
-								</div>	
+                               <<div th:replace="fragments :: pagination('/customer/questions', 'questions')"></div>
+                               <div class="modal fade" id="detailModal">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+									</div>
+								</div>
+							</div>		
 								
                             </div>
                         </div>
                       
                
                 
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-                            <h2 class="account-title">Manage Profile</h2>
-                            <div class="profile-panel">
-                               
-                                <form th:action="@{/update_account_details}" method="post" th:object="${customer}">
-                                <input type="hidden" th:field="*{id}" />
-								<input type="hidden" name="redirect" th:value="${param.redirect}" />
-								<div th:if="${message != null}" class="alert alert-success text-center">
-									[[${message}]]
-								</div>		
-                                    <div class="row g-lg-4 g-3">
-                                    
-                                        <div class="col-sm-3">
-                                        <label>Authentication Type:</label>
-                                            <input type="text" th:field="*{authenticationType}" class="form-control" readonly="readonly"/>
-                                        </div>
-                                        <div class="col-sm-3">
-                                         	<label>First Name:</label>
-                                            <input type="text" th:field="*{firstName}" class="form-control"
-											required="required" maxlength="45" minlength="2" />
-                                        </div>
-                                         <div class="col-sm-3">
-                                         	<label>Last Name:</label>
-                                            <input type="text" th:field="*{lastName}" class="form-control"
-											required="required" maxlength="45" minlength="2" />
-                                        </div>
-                                        <div class="col-sm-3">
-                                        <label>Email:</label>
-                                            <input type="text" th:field="*{email}" class="form-control" readonly="readonly"/>
-                                        </div>
-                                         <div class="col-sm-3">
-                                         <label>Phone Number:</label>
-                                            <input type="text" th:field="*{phoneNumber}" class="form-control"
-											 maxlength="10" minlength="10" pattern="^[0-9]*$" required="required" />
-                                        </div>
-                                                                            
-                                        
-                                        <th:block th:if="${customer.authenticationType.name() == 'DATABASE'}">
-                                        <div class="col-sm-3">
-                                         <label>New Password</label>
-                                            <input type="password" th:field="*{password}" class="form-control" placeholder="New Password"
-					maxlength="15" minlength="8"
-					oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
-					 />
-                                        </div>
-                                        
-                                        <div class="col-sm-3">
-                                         <label>Confirm Password</label>
-                                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password"
-					maxlength="15" minlength="8"
-					oninput="checkPasswordMatch(this)"
-					 />
-                                        </div>
-                                        </th:block>
-                                        
-                                         <div class="col-sm-3">
-                                        <label>Address Line 1:</label>
-                                            <input type="text" th:field="*{addressLine1}" class="form-control"
-					required="required" maxlength="64" minlength="3" />
-                                        </div>
-                                       
-                                        <div class="col-sm-3">
-                                        <label>Address Line 2:</label>
-                                            <input type="text" th:field="*{addressLine2}" class="form-control"
-					maxlength="64" />
-                                        </div>
-                                        
-                                        <div class="col-sm-3">
-                                        <label>City:</label>
-                                            <input type="text" th:field="*{city}" class="form-control"
-					maxlength="45" minlength="2" />
-                                        </div>
-                                        
-                                        <div class="col-sm-3">
-                                        <label>Country:</label>
-                                            <select class="form-control" th:field="*{country}">
-					<th:block th:each="country : ${listCountries}">
-					<option th:value="${country.id}">[[${country.name}]]</option>
-					</th:block>
-				</select>
-                                        </div>
-                                        
-                                        <div class="col-sm-3">
-                                        <label>State/Province:</label>
-                                           <input type="text" th:field="*{state}" class="form-control"
-					maxlength="45" minlength="3" list="listStates" />
-				<datalist id="listStates"></datalist>
-                                        </div>
-                                        
-                                        <div class="col-sm-3">
-                                        <label>Postal Code:</label>
-                                            <input type="text" th:field="*{postalCode}" class="form-control"
-					maxlength="10" minlength="3" />
-                                        </div>
-                                       
-                                        <div class="col-12">
-                                            <div class="btn-box">
-                                                <button type="submit" class="def-btn">Save Change</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+             
                     </div>
                 </div>
             </div>
@@ -318,11 +214,8 @@
    <span th:replace="footer:: footer"></span>
     <!--------------------------------- FOOTER SECTION END --------------------------------->
 <script type="text/javascript">
-	contextPath = "[[@{/}]]";
-	moduleURL = "[[@{/orders}]]";
-	var csrfHeaderName = "[[${_csrf.headerName}]]";
-	var csrfValue = "[[${_csrf.token}]]";
-
+	moduleURL = "[[@{/customer/questions}]]";
+	
 	$(document).ready(function(){
 		handleDefaultDetailLinkClick();
 	});
@@ -338,8 +231,6 @@
     <script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/account.js}"></script>
-    <script th:src="@{/js/common_customer_form.js}"></script>
-    <script th:src="@{/js/return_order.js}"></script>
     
 </body>
 

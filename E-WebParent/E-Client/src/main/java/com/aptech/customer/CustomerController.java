@@ -48,7 +48,6 @@ public class CustomerController {
 	
 	@Autowired private OrderService orderService;
 	@Autowired private ControllerHelper controllerHelper;
-	@Autowired private ReviewService reviewService;
 	
 	@GetMapping("/register")
 	public String showRegisterForm(Model model) {
@@ -159,24 +158,6 @@ public class CustomerController {
 		return "customer/dashboard";
 	}
 
-//	@GetMapping("/dashboards")
-//	public String viewDashboard(Model model, HttpServletRequest request) {
-//		List<Section> listSections = sectionService.listEnabledSections();
-//		model.addAttribute("listSections", listSections);
-//		
-//		if (hasAllCategoriesSection(listSections)) {
-//			List<Category> listCategories = categoryService.listNoChildrenCategories();
-//			model.addAttribute("listCategories", listCategories);
-//		}
-//		
-//		String email = getEmailOfAuthenticatedCustomer(request);
-//		Customer customer = customerService.getCustomerByEmail(email);
-//		List<Country> listCountries = customerService.listAllCountries();
-//		
-//		model.addAttribute("customer", customer);
-//		model.addAttribute("listCountries", listCountries);
-//		return "customer/dashboard";
-//	}
 	
 	private boolean hasAllCategoriesSection(List<Section> listSections) {
 		for (Section section : listSections) {

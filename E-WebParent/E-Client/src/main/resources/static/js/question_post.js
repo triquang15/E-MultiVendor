@@ -11,7 +11,7 @@ $(document).ready(function() {
 });
 
 function postQuestion() {
-	url = contextPath + "post_question/" + bookId;
+	url = contextPath + "post_question/" + productId;
 	question = $("#question").val();
 	
 	jsonData = {questionContent: question};
