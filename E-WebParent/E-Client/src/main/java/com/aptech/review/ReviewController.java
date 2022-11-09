@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aptech.ControllerHelper;
+import com.aptech.category.CategoryService;
+import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Review;
 import com.aptech.common.entity.product.Product;
+import com.aptech.common.entity.section.Section;
+import com.aptech.common.entity.section.SectionType;
 import com.aptech.common.exception.ProductNotFoundException;
 import com.aptech.common.exception.ReviewNotFoundException;
 import com.aptech.product.ProductService;
 import com.aptech.review.vote.ReviewVoteService;
+import com.aptech.section.SectionService;
 
 @Controller
 public class ReviewController {
@@ -30,6 +35,8 @@ public class ReviewController {
 	@Autowired private ControllerHelper controllerHelper;
 	@Autowired private ProductService productService;
 	@Autowired private ReviewVoteService voteService;
+	@Autowired private CategoryService categoryService;
+	@Autowired private SectionService sectionService;
 	
 	@GetMapping("/reviews")
 	public String listFirstPage(Model model) {
@@ -43,6 +50,14 @@ public class ReviewController {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		Page<Review> page = reviewService.listByCustomerByPage(customer, keyword, pageNum, sortField, sortDir);		
 		List<Review> listReviews = page.getContent();
+		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
 		
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("totalItems", page.getTotalElements());
@@ -68,6 +83,16 @@ public class ReviewController {
 		return "reviews/reviews_customer";
 	}
 	
+	private boolean hasAllCategoriesSection(List<Section> listSections) {
+		for (Section section : listSections) {
+			if (section.getType().equals(SectionType.ALL_CATEGORIES)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	@GetMapping("/reviews/detail/{id}")
 	public String viewReview(@PathVariable("id") Integer id, Model model, 
 			RedirectAttributes ra, HttpServletRequest request) {
@@ -173,6 +198,15 @@ public class ReviewController {
 	
 	@PostMapping("/post_review")
 	public String saveReview(Model model, Review review, Integer productId, HttpServletRequest request) {
+		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
+		
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		
 		Product product = null;

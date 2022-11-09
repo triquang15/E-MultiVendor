@@ -20,26 +20,22 @@
                             </li>
                         </ul>
                     </div>
+                    
                     <div class="col-xxl-6 col-xl-5 col-lg-5">
                         <ul class="top-header-link justify-content-lg-end justify-content-center">
                             
-                            <li>
-                                <select name="currency" id="currency" class="select">
-                                    <option value="USD">Dollar (USD)</option>
-                                    <option value="BDT">Taka (BDT)</option>
-                                </select>
-                            </li>
-                            <li>
-                                <div class="select-language">
-                                    <div class="language">
-                                        <div class="select-lang">
-                                            <div id="aw" data-input-name="country" data-selected-country="UK" data-scrollable-height="250px"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
                             
-                             <th:block sec:authorize="isAuthenticated()">                         
+                             <th:block sec:authorize="isAuthenticated()">       
+                             
+                                  <li>
+                                    <a th:href="@{/reviews}"><i class="fa fa-comment"></i>
+                                      Recommendations</a>
+                                 </li>
+                                 
+                                  <li>
+                                    <a th:href="@{/customer/questions}"><i class="fa fa-question-circle"></i>
+                                      Questions & Answer</a>
+                                 </li>                  
                              <li>
                                <span style="color: white;">Hi,&nbsp;<b ><a style="color: white;" th:href="@{/dashboards}" sec:authentication="principal.fullName"></a></b></span>
                             </li>
