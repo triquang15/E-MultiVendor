@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,16 +18,21 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aptech.ControllerHelper;
 import com.aptech.Utility;
 import com.aptech.category.CategoryService;
 import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Country;
 import com.aptech.common.entity.Customer;
+import com.aptech.common.entity.order.Order;
 import com.aptech.common.entity.section.Section;
 import com.aptech.common.entity.section.SectionType;
+import com.aptech.order.OrderService;
+import com.aptech.review.ReviewService;
 import com.aptech.section.SectionService;
 import com.aptech.security.CustomerUserDetails;
 import com.aptech.security.oauth.CustomerOAuth2User;
@@ -39,6 +45,10 @@ public class CustomerController {
 	@Autowired private SettingService settingService;
 	@Autowired private CategoryService categoryService;
 	@Autowired private SectionService sectionService;
+	
+	@Autowired private OrderService orderService;
+	@Autowired private ControllerHelper controllerHelper;
+	@Autowired private ReviewService reviewService;
 	
 	@GetMapping("/register")
 	public String showRegisterForm(Model model) {
@@ -99,9 +109,17 @@ public class CustomerController {
 		return "register/" + (verified ? "verify_success" : "verify_fail");
 	}
 	
-	
 	@GetMapping("/dashboards")
-	public String viewDashboard(Model model, HttpServletRequest request) {
+	public String listFirstPage(Model model, HttpServletRequest request) {
+		return viewDashboard(model, request, 1, "orderTime", "desc", null);
+	}
+	
+	
+	
+	@GetMapping("/dashboards/page/{pageNum}")
+	public String viewDashboard(Model model, HttpServletRequest request, @PathVariable(name = "pageNum") int pageNum,
+			String sortField, String sortDir, String keyword) {
+		
 		List<Section> listSections = sectionService.listEnabledSections();
 		model.addAttribute("listSections", listSections);
 		
@@ -110,14 +128,55 @@ public class CustomerController {
 			model.addAttribute("listCategories", listCategories);
 		}
 		
-		String email = getEmailOfAuthenticatedCustomer(request);
-		Customer customer = customerService.getCustomerByEmail(email);
+		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		Page<Order> page = orderService.listForCustomerByPage(customer, pageNum, sortField, sortDir, keyword);
+		List<Order> listOrders = page.getContent();
 		List<Country> listCountries = customerService.listAllCountries();
+		
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("listOrders", listOrders);
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("moduleURL", "/orders");
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("customer", customer);
 		model.addAttribute("listCountries", listCountries);
+		
+		long startCount = (pageNum - 1) * OrderService.ORDERS_PER_PAGE + 1;
+		model.addAttribute("startCount", startCount);
+		
+		long endCount = startCount + OrderService.ORDERS_PER_PAGE - 1;
+		if (endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("endCount", endCount);
+		
 		return "customer/dashboard";
 	}
+
+//	@GetMapping("/dashboards")
+//	public String viewDashboard(Model model, HttpServletRequest request) {
+//		List<Section> listSections = sectionService.listEnabledSections();
+//		model.addAttribute("listSections", listSections);
+//		
+//		if (hasAllCategoriesSection(listSections)) {
+//			List<Category> listCategories = categoryService.listNoChildrenCategories();
+//			model.addAttribute("listCategories", listCategories);
+//		}
+//		
+//		String email = getEmailOfAuthenticatedCustomer(request);
+//		Customer customer = customerService.getCustomerByEmail(email);
+//		List<Country> listCountries = customerService.listAllCountries();
+//		
+//		model.addAttribute("customer", customer);
+//		model.addAttribute("listCountries", listCountries);
+//		return "customer/dashboard";
+//	}
 	
 	private boolean hasAllCategoriesSection(List<Section> listSections) {
 		for (Section section : listSections) {
