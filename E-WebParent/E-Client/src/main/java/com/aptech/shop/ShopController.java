@@ -1,9 +1,14 @@
 package com.aptech.shop;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -11,16 +16,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.aptech.ControllerHelper;
-import com.aptech.Utility;
+import com.aptech.FileUploadUtil;
 import com.aptech.category.CategoryService;
 import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Customer;
+import com.aptech.common.entity.product.Product;
+import com.aptech.common.entity.product.ProductImage;
 import com.aptech.common.entity.Shop;
 import com.aptech.common.entity.section.Section;
 import com.aptech.common.entity.section.SectionType;
@@ -30,6 +39,8 @@ import com.aptech.section.SectionService;
 
 @Controller
 public class ShopController {
+
+	
 	@Autowired private ShopService shopService;
 	@Autowired private ControllerHelper controllerHelper;
 	@Autowired private CategoryService categoryService;
@@ -103,10 +114,16 @@ public class ShopController {
 	
 	
 	@PostMapping("/shops/save")
-	public String createShop(RedirectAttributes redirectAttributes, HttpServletRequest request, Shop shop) {	
+	public String createShop(RedirectAttributes redirectAttributes, HttpServletRequest request, Shop shop,
+			@RequestParam("fileImage") MultipartFile mainImageMultipart
+			) throws IOException {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
-		shopService.createShop(shop, customer);
-		
+		String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
+		shop.setImage(fileName);
+		Shop saveShop = shopService.createShop(shop, customer);
+		String uploadDir = "../shop-images/" + saveShop.getId(); 
+		FileUploadUtil.cleanDir(uploadDir);
+		FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);						
 		redirectAttributes.addFlashAttribute("message", "The shop has been create successfully.");
 		return "redirect:/shops";
 		
@@ -142,6 +159,7 @@ public class ShopController {
 			HttpServletRequest request) throws ShopNotFoundException {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		shopService.updateShop(shop, customer);
+	
 		ra.addFlashAttribute("message", "Your shop details have been updated.");
 			
 		return "redirect:/shops";
@@ -153,6 +171,9 @@ public class ShopController {
 			Model model, RedirectAttributes ra) {
 		try {
 			shopService.delete(id);
+			String shopImageDir = "../shop-images/" + id;
+			FileUploadUtil.removeDir(shopImageDir);
+			
 			ra.addFlashAttribute("message", "The shop ID " + id + " has been deleted.");
 		} catch (ShopNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());

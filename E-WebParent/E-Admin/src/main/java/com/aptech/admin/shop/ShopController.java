@@ -20,6 +20,7 @@ public class ShopController {
 	
 	@GetMapping("/shops")
 	public String listFirstPage(Model model) {
+		
 		return defaultRedirectURL;
 	}
 

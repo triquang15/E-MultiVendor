@@ -11,6 +11,9 @@
 	  	<li class="nav-item">
 	    	<a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">Address</a>
 	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link" id="image-tab" data-bs-toggle="tab" href="#image" role="tab" aria-controls="image" aria-selected="false">Image</a>
+	  	</li>
 	</ul>
 	 
 	<div class="tab-content" id="myTabContent">
@@ -65,7 +68,14 @@
 			    	<input type="text" readonly class="form-control" th:value="${shop.customer.email}" />
 			    </div>
 			</div>   
-		</div>	 
+		</div>	
+		
+		<div class="tab-pane fade show p-3" id="image" role="tabpanel" aria-labelledby="image-tab"> 
+			<div class="col-sm-6">
+				<img th:src="@{${shop.imagePath}}"/>
+			
+			</div>
+		</div>
 		
 		
 	</div>    

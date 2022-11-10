@@ -1,12 +1,22 @@
 package com.aptech.common.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.aptech.common.entity.Customer;
+import com.aptech.common.entity.IdBasedEntity;
+import com.aptech.common.entity.product.ProductImage;
 
 @Entity
 @Table(name = "shops")
@@ -16,6 +26,9 @@ public class Shop extends IdBasedEntity {
 
 	@Column(length = 255, nullable = false)
 	private String alias;
+	
+	@Column(nullable = false)
+	private String image;
 
 	@Column(name = "created_time")
 	private Date createdTime;
@@ -28,6 +41,9 @@ public class Shop extends IdBasedEntity {
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
+	
+//	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private Set<ShopImage> images = new HashSet<>();
 
 	public Shop() {
 		super();
@@ -81,6 +97,46 @@ public class Shop extends IdBasedEntity {
 		this.customer = customer;
 		
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+//	public Set<ShopImage> getImages() {
+//		return images;
+//	}
+//
+//	public void setImages(Set<ShopImage> images) {
+//		this.images = images;
+//	}
+//	
+//	public boolean containsImageName(String imageName) {
+//		Iterator<ShopImage> iterator = images.iterator();
+//		
+//		while (iterator.hasNext()) {
+//			ShopImage image = iterator.next();
+//			if (image.getName().equals(imageName)) {
+//				return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
+	
+	
+	
+	@Transient public String getImagePath() {
+		if(this.id == null || this.image == null)
+			return "/images/image-thumbnail.png"; 
+			return "/shop-images/" + this.id + "/" + this.image;
+			
+	}
+	 
+	
 
 	
 	
