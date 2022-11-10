@@ -22,6 +22,7 @@
 						<thead class="thead-dark">
 							<tr>
 								<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
+								<th>Image</th>
 								<th th:replace="fragments :: column_link('name', 'Shop Name', 'none')" />
 								<th th:replace="fragments :: column_link('alias', 'Description', 'none')" />
 								<th th:replace="fragments :: column_link('deliveryAddress', 'Delivery Address', 'none')" />
@@ -35,6 +36,9 @@
 						<tbody>
 							<tr th:each="shop : ${listShops}">
 								<td>[[${shop.id}]]</td>
+								<td>
+									<img th:src="@{${shop.imagePath}}" style="height: 50px" width="50px">
+								</td>
 								<td>[[${shop.name}]]</td>
 								<td>[[${shop.alias}]]</td>
 								<td>[[${shop.deliveryAddress}]]</td>	
