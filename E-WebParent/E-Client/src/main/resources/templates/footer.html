@@ -10,14 +10,14 @@
                             <div class="footer-logo">
                                 <img th:src="@{/images/Logo-2.png}" alt="Logo">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+                            <p>Amazon internal data, FY2021 survey of 21.2K U.S. multichannel sellers</p>
                             <ul>
                                 <li>
                                     <div class="icon">
                                         <span><i class="flaticon-map"></i></span>
                                     </div>
                                     <div class="txt">
-                                        <span>4920 Trails End Road Ft United States, FL 33311</span>
+                                        <span>Amazon Payment Products</span>
                                     </div>
                                 </li>
                                 <li>
@@ -25,8 +25,7 @@
                                         <span><i class="flaticon-email"></i></span>
                                     </div>
                                     <div class="txt">
-                                        <a href="#">info@example.com</a>
-                                        <a href="#">test@example.com</a>
+                                        <a href="#">quangtri.nguyen@dxc.com</a>                                      
                                     </div>
                                 </li>
                                 <li>
@@ -34,7 +33,6 @@
                                         <span><i class="flaticon-telephone"></i></span>
                                     </div>
                                     <div class="txt">
-                                        <a href="#">+123 456 679 123</a>
                                         <a href="#">+123 456 789</a>
                                     </div>
                                 </li>
@@ -44,23 +42,21 @@
                     <div class="custom-col-2">
                         <div class="link-wrap">
                             <div class="footer-link">
-                                <h3 class="footer-title">Information</h3>
+                                <h3 class="footer-title">Get to Know Us</h3>
                                 <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="blog.html">Blogs</a></li>
-                                    <li><a href="#">Terms Of Use</a></li>
-                                    <li><a href="#">Privacy Policies</a></li>
+                                <th:block th:each="footerMenu : ${footerMenuItems}">
+                                    <li><a th:href="@{'/m/' + ${footerMenu.alias}}">[[${footerMenu.title}]]</a></li>
+                                     </th:block>                                
                                 </ul>
                             </div>
                             <div class="footer-link">
                                 <h3 class="footer-title">Information</h3>
                                 <ul>
-                                    <li><a href="cart.html">My Order</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="account.html">My Credit</a></li>
-                                    <li><a href="register.html">Login</a></li>
-                                    <li><a href="account.html">Personal Info</a></li>
+                                    <li><a th:href="@{/}">My Order</a></li>
+                                    <li><a th:href="@{/}">Wishlist</a></li>
+                                    <li><a th:href="@{/}">My Credit</a></li>
+                                    <li><a th:href="@{/login}">Login</a></li>
+                                    <li><a th:href="@{/}">Personal Info</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -111,7 +107,7 @@
                     <div class="custom-col">
                         <div class="footer-subscribe">
                             <h3 class="footer-title">Subscribe</h3>
-                            <p>Lorem ipsum dolor si consectetur adipisicing elit, sed eiusmotempor incididunt ut labore et
+                            <p>Registration is easy, free, and the first step to growing your business with Amazon devices and services.
                             </p>
                             <form>
                                 <input type="email" name="email" placeholder="Your Email">

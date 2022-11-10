@@ -122,17 +122,17 @@
 					</div>
 					
 					<div class="row mt-2">
-						<div class="col">Items: </div>
+						<div class="col">Merchandise Subtotal: </div>
 						<div class="col" style="color: green;"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>
 					</div>
 					
 					<div class="row mt-2">
-						<div class="col">Shipping & handling: </div>
+						<div class="col">Shipping & Handling: </div>
 						<div class="col" style="color: green;;"><div th:replace="fragments :: format_currency(${checkoutInfo.shippingCostTotal})"></div></div>
 					</div>
 							
 					<div class="row mt-2">
-						<div class="col" >Order total: </div>
+						<div class="col" >Order Total: </div>
 						<div class="col" style="color: red;"><b><div th:replace="fragments :: format_currency(${checkoutInfo.paymentTotal})"></div></b></div>
 					</div>										
 				</div>
