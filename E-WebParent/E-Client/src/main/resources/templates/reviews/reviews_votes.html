@@ -11,14 +11,14 @@
                                 <div class="single-review">
                                     <div class="user">
                                         <div class="part-img">
-                                            <img th:src="@{/images/avatar.png}" alt="User">
+                                            <img th:src="@{/images/avatar.png}" alt="User" width="70px;">
                                         </div>
                                        
                                         <div class="txt">
                                             <span class="name">[[${review.customer.fullName}]]</span>
-                                            <span class="date"><div th:replace="fragments :: format_time(${review.reviewTime})"></div></span>
-                                            
+                                            <span class="date"><div th:replace="fragments :: format_time(${review.reviewTime})"></div></span>          
                                         </div>
+                                        <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs" th:value="${review.rating}" />
                                         
                                     </div>
                                     <div class="comment-area">

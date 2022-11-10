@@ -100,7 +100,7 @@
                                 <a th:href="@{/}" class="def-btn">Continue Shopping</a>
                                 <button class="def-btn" id="cartUpdate" disabled>Update Cart</button>
                             </div>
-                            <div class="cart-total-panel">
+                            <div class="cart-total-panel" th:unless="${#lists.isEmpty(cartItems)}" id="sectionTotal">
                                 <h3 class="title">Cart Total</h3>
                                 <div class="panel-body">
                                     <div class="row">
