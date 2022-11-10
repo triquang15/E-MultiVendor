@@ -38,6 +38,7 @@ public class ReviewController {
 	@Autowired private CategoryService categoryService;
 	@Autowired private SectionService sectionService;
 	
+	
 	@GetMapping("/reviews")
 	public String listFirstPage(Model model) {
 		return defaultRedirectURL;
@@ -129,6 +130,14 @@ public class ReviewController {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		if (customer != null) {
 			voteService.markReviewsVotedForProductByCustomer(listReviews, product.getId(), customer.getId());
+		}
+		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
 		}
 		
 		model.addAttribute("totalPages", page.getTotalPages());
