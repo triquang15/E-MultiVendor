@@ -1,9 +1,12 @@
 package com.aptech.shop;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.digest;
+
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.aptech.ControllerHelper;
 import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Shop;
@@ -23,6 +27,7 @@ public class ShopService {
 	public static final int SHOPS_PER_PAGE = 5;
 	
 	@Autowired private ShopRepository shopRepository;
+
 
 	
 	public Page<Shop> listForCustomerByPage(Customer customer, int pageNum, String sortField, String sortDir,
@@ -44,13 +49,14 @@ public class ShopService {
 		return shop == null;
 	}
 
-	public void createShop(Shop shop, Customer customer) {	
+	public Shop createShop(Shop shop, Customer customer) {
 		
 		shop.setCreatedTime(new Date());
 		shop.setEnabled(true);
 		shop.setCustomer(customer);
-		
-	    shopRepository.save(shop);
+		Shop updateShop = shopRepository.save(shop);
+		return updateShop;
+//	    shopRepository.save(shop);
 	}
 
 	public Shop get(Integer id) throws ShopNotFoundException {
