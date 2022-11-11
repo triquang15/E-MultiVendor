@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `emultivendor` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `emultivendor`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: emultivendor
@@ -180,7 +182,7 @@ CREATE TABLE `cart_items` (
   KEY `FK1re40cjegsfvw58xrkdp6bac6` (`product_id`),
   CONSTRAINT `FK1re40cjegsfvw58xrkdp6bac6` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `FKdagcsk6v6x4n1kxw3rkp57921` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +345,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'triquang.15qt@gmail.com','$2a$10$zN0ElJCwqteE.5bh6olgCuYAnVHcswwJphFEb7qHK2ugGIF8096k2','Quang','Trí','','',NULL,'','',234,'','2022-11-01 17:15:34.908000',_binary '',NULL,'DATABASE',NULL),(2,'triquang.95qt@gmail.com','','Quang','Trí','','',NULL,'','',234,'','2022-11-01 17:18:01.098000',_binary '',NULL,'GOOGLE',NULL),(3,'triquang.74qt@gmail.com','$2a$10$mkN/Jh4dOUx9eTll/xWKGuF.Q5E5bwnEpCJcH50lldX5EvQufKl8a','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City',242,'1224256','2022-11-01 17:19:06.656000',_binary '',NULL,'GOOGLE',NULL),(4,'mina.nguyen@dxc.com','$2a$10$yjimF2bcjg1VWdj8sMFKhuigJVDL0qfMN./H9M90eDEMI4648DhpK','Ana','Mi','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Cambridge',10,'122425678','2022-11-01 18:12:37.539000',_binary '',NULL,'DATABASE','14DmRRI2xLGlBpeYWXE9MCf9tes9Hy'),(5,'adalane.18@gmail.com','$2a$10$jyIgB3l.699w1986AoOFquHjRgeAmSacZLMo9PvpxMoWBfdsvqKvO','Tri','Quang','0987774191',' ',' ',' ','Cambridge',13,' ','2022-11-03 20:10:58.071000',_binary '\0','7twMy1xlZ47ibCbklpG2gNqQnKR0UudCA9OBK2pKpTSpsONdH9cVe9ILbLq5nPFo','DATABASE',NULL),(6,'herntyi.nguyen@dxc.com','$2a$10$zN0ElJCwqteE.5bh6olgCuYAnVHcswwJphFEb7qHK2ugGIF8096k2','Leo','Messi','0987774191',' ',' ',' ','Tasmania',14,' ','2022-11-11 15:26:50.249000',_binary '',NULL,'DATABASE','Q2nMlq8hG8n5lPyiOYfGxFwoEFYD9D');
+INSERT INTO `customers` VALUES (1,'triquang.15qt@gmail.com','$2a$10$zN0ElJCwqteE.5bh6olgCuYAnVHcswwJphFEb7qHK2ugGIF8096k2','Quang','Trí','','',NULL,'','',234,'','2022-11-01 17:15:34.908000',_binary '',NULL,'DATABASE',NULL),(2,'triquang.95qt@gmail.com','','Quang','Trí','','',NULL,'','',234,'','2022-11-01 17:18:01.098000',_binary '',NULL,'GOOGLE',NULL),(3,'triquang.74qt@gmail.com','$2a$10$mkN/Jh4dOUx9eTll/xWKGuF.Q5E5bwnEpCJcH50lldX5EvQufKl8a','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City',242,'1224256','2022-11-01 17:19:06.656000',_binary '',NULL,'FACEBOOK',NULL),(4,'mina.nguyen@dxc.com','$2a$10$yjimF2bcjg1VWdj8sMFKhuigJVDL0qfMN./H9M90eDEMI4648DhpK','Ana','Mi','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Cambridge',10,'122425678','2022-11-01 18:12:37.539000',_binary '',NULL,'DATABASE','14DmRRI2xLGlBpeYWXE9MCf9tes9Hy'),(5,'adalane.18@gmail.com','$2a$10$jyIgB3l.699w1986AoOFquHjRgeAmSacZLMo9PvpxMoWBfdsvqKvO','Tri','Quang','0987774191',' ',' ',' ','Cambridge',13,' ','2022-11-03 20:10:58.071000',_binary '\0','7twMy1xlZ47ibCbklpG2gNqQnKR0UudCA9OBK2pKpTSpsONdH9cVe9ILbLq5nPFo','DATABASE',NULL),(6,'herntyi.nguyen@dxc.com','$2a$10$zN0ElJCwqteE.5bh6olgCuYAnVHcswwJphFEb7qHK2ugGIF8096k2','Leo','Messi','0987774191',' ',' ',' ','Tasmania',14,' ','2022-11-11 15:26:50.249000',_binary '',NULL,'DATABASE','Q2nMlq8hG8n5lPyiOYfGxFwoEFYD9D');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,7 +403,7 @@ CREATE TABLE `order_details` (
   KEY `FK4q98utpd73imf4yhttm3w0eax` (`product_id`),
   CONSTRAINT `FK4q98utpd73imf4yhttm3w0eax` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `FKjyu2qbqt8gnvno9oe9j2s2ldk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +412,7 @@ CREATE TABLE `order_details` (
 
 LOCK TABLES `order_details` WRITE;
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
-INSERT INTO `order_details` VALUES (9,11,5,2,74.25,148.5,6,18),(10,12,1,1,131.92,131.92,3,6),(11,13,19,2,134.5,269,12,24),(12,13,16,1,49.5,49.5,5,9),(13,14,18,3,209.25,627.75,15,27),(14,14,14,5,199.5,997.5,10,45),(15,14,17,1,299.25,299.25,5,12);
+INSERT INTO `order_details` VALUES (9,11,5,2,74.25,148.5,6,18),(10,12,1,1,131.92,131.92,3,6),(11,13,19,2,134.5,269,12,24),(12,13,16,1,49.5,49.5,5,9),(13,14,18,3,209.25,627.75,15,27),(14,14,14,5,199.5,997.5,10,45),(15,14,17,1,299.25,299.25,5,12),(16,15,26,1,508.5,508.5,6,29.1367),(17,15,20,1,349.36,349.36,3,9),(18,15,19,2,134.5,269,12,24),(19,15,21,1,374.25,374.25,5,15);
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,7 +432,7 @@ CREATE TABLE `order_track` (
   PRIMARY KEY (`id`),
   KEY `FK31jv1s212kajfn3kk1ksmnyfl` (`order_id`),
   CONSTRAINT `FK31jv1s212kajfn3kk1ksmnyfl` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,7 +441,7 @@ CREATE TABLE `order_track` (
 
 LOCK TABLES `order_track` WRITE;
 /*!40000 ALTER TABLE `order_track` DISABLE KEYS */;
-INSERT INTO `order_track` VALUES (20,11,'NEW','2022-11-09 04:57:20.000000','Order was placed by the customer'),(21,11,'PROCESSING','2022-11-09 04:58:04.000000','Order is being processed'),(22,11,'PICKED','2022-11-09 04:58:07.000000','Shipper picked the package'),(23,11,'SHIPPING','2022-11-09 04:58:16.000000','Shipper is delivering the package'),(24,11,'DELIVERED','2022-11-09 04:58:19.000000','Customer received products'),(25,12,'NEW','2022-11-09 05:04:11.000000','Order was placed by the customer'),(26,12,'PROCESSING','2022-11-09 17:04:44.000000','Order is being processed'),(27,12,'PICKED','2022-11-09 17:04:47.000000','Shipper picked the package'),(28,12,'SHIPPING','2022-11-09 17:04:53.000000','Shipper is delivering the package'),(29,12,'DELIVERED','2022-11-09 17:04:57.000000','Customer received products'),(30,13,'NEW','2022-11-10 05:05:38.000000','Order was placed by the customer'),(31,13,'PROCESSING','2022-11-10 17:06:44.000000','Order is being processed'),(32,13,'PICKED','2022-11-10 17:06:47.000000','Shipper picked the package'),(33,13,'SHIPPING','2022-11-10 17:06:51.000000','Shipper is delivering the package'),(34,13,'DELIVERED','2022-11-10 17:06:54.000000','Customer received products'),(35,14,'NEW','2022-11-11 15:09:46.086000','Order was placed by the customer');
+INSERT INTO `order_track` VALUES (20,11,'NEW','2022-11-09 04:57:20.000000','Order was placed by the customer'),(21,11,'PROCESSING','2022-11-09 04:58:04.000000','Order is being processed'),(22,11,'PICKED','2022-11-09 04:58:07.000000','Shipper picked the package'),(23,11,'SHIPPING','2022-11-09 04:58:16.000000','Shipper is delivering the package'),(24,11,'DELIVERED','2022-11-09 04:58:19.000000','Customer received products'),(25,12,'NEW','2022-11-09 05:04:11.000000','Order was placed by the customer'),(26,12,'PROCESSING','2022-11-09 17:04:44.000000','Order is being processed'),(27,12,'PICKED','2022-11-09 17:04:47.000000','Shipper picked the package'),(28,12,'SHIPPING','2022-11-09 17:04:53.000000','Shipper is delivering the package'),(29,12,'DELIVERED','2022-11-09 17:04:57.000000','Customer received products'),(30,13,'NEW','2022-11-10 05:05:38.000000','Order was placed by the customer'),(31,13,'PROCESSING','2022-11-10 17:06:44.000000','Order is being processed'),(32,13,'PICKED','2022-11-10 17:06:47.000000','Shipper picked the package'),(33,13,'SHIPPING','2022-11-10 17:06:51.000000','Shipper is delivering the package'),(34,13,'DELIVERED','2022-11-10 17:06:54.000000','Customer received products'),(35,14,'NEW','2022-11-11 15:09:46.086000','Order was placed by the customer'),(36,15,'NEW','2022-11-11 17:08:26.789000','Order was placed by the customer');
 /*!40000 ALTER TABLE `order_track` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,7 +477,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `FKpxtb8awmi0dk6smoh2vp1litg` (`customer_id`),
   CONSTRAINT `FKpxtb8awmi0dk6smoh2vp1litg` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +486,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (11,3,'2022-11-09 16:57:20.680000','COD',6,18,148.5,0,166.5,'DELIVERED','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-14 00:00:00.000000'),(12,3,'2022-11-09 17:04:11.754000','COD',3,6,131.92,0,137.92,'NEW','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-14 00:00:00.000000'),(13,3,'2022-11-10 17:05:38.211000','COD',17,33,318.5,0,351.5,'NEW','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-15 00:00:00.000000'),(14,3,'2022-11-11 15:09:46.086000','PAYPAL',30,84,1924.5,0,2008.5,'PAID','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-16 15:09:46.086000');
+INSERT INTO `orders` VALUES (11,3,'2022-11-09 16:57:20.680000','COD',6,18,148.5,0,166.5,'DELIVERED','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-14 00:00:00.000000'),(12,3,'2022-11-09 17:04:11.754000','COD',3,6,131.92,0,137.92,'NEW','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-14 00:00:00.000000'),(13,3,'2022-11-10 17:05:38.211000','COD',17,33,318.5,0,351.5,'NEW','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-15 00:00:00.000000'),(14,3,'2022-11-11 15:09:46.086000','PAYPAL',30,84,1924.5,0,2008.5,'PAID','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-16 15:09:46.086000'),(15,3,'2022-11-11 17:08:26.789000','PAYPAL',26,77.1367,1501.11,0,1578.25,'PAID','Trí','Quang','0987774191','Viet Nam','Ho Chi Minh','Ha Noi','Ho Chi Minh City','1224256','Vietnam',5,'2022-11-16 17:08:26.789000');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1086,4 +1088,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-11 16:25:20
+-- Dump completed on 2022-11-11 17:11:56
