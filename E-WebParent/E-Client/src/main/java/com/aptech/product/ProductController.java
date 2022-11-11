@@ -186,6 +186,14 @@ public class ProductController {
 	public String searchByPage(String keyword, @PathVariable("pageNum") int pageNum, Model model) {
 		Page<Product> pageProducts = productService.search(keyword, pageNum);
 		List<Product> listResult = pageProducts.getContent();
+		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);	
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
 
 		long startCount = (pageNum - 1) * ProductService.SEARCH_RESULTS_PER_PAGE + 1;
 		long endCount = startCount + ProductService.SEARCH_RESULTS_PER_PAGE - 1;
