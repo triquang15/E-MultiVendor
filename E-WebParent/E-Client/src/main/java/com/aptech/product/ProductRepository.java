@@ -20,9 +20,8 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 	
 	public Product findByAlias(String alias);
 	
-	@Query(value = "SELECT * FROM products WHERE enabled = true AND "
-			+ "MATCH(name, short_description, full_description) AGAINST (?1)", 
-			nativeQuery = true)
+	@Query("SELECT p FROM Product p WHERE p.name LIKE %?1% " 			
+			+ "OR p.shop.name LIKE %?1% ")
 	public Page<Product> search(String keyword, Pageable pageable);
 	
 	@Query("Update Product p SET p.averageRating = COALESCE((SELECT AVG(r.rating) FROM Review r WHERE r.product.id = ?1), 0),"

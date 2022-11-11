@@ -175,6 +175,15 @@ public class CheckoutController {
 	@PostMapping("/process_paypal_order")
 	public String processPayPalOrder(HttpServletRequest request, Model model) 
 			throws UnsupportedEncodingException, MessagingException {
+		
+		List<Section> listSections = sectionService.listEnabledSections();
+		model.addAttribute("listSections", listSections);	
+		
+		if (hasAllCategoriesSection(listSections)) {
+			List<Category> listCategories = categoryService.listNoChildrenCategories();
+			model.addAttribute("listCategories", listCategories);
+		}
+		
 		String orderId = request.getParameter("orderId");
 		
 		String pageTitle = "Checkout Failure";
