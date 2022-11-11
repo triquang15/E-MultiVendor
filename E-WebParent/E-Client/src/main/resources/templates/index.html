@@ -42,14 +42,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     </div>
                     <div class="col-xxl-6 col-xl-7 col-lg-8 col-sm-6 col-12 search-col">
                         <div class="header-search">
-                            <form>
+                            <form th:action="@{/search}" method="get">
                                 <div class="wrap">
                                     <select name="categoryId" id="dropdownCategory" class="select">
                                        <option value="0">All Categories</option>
                                        
                                     </select>
                                     <span class="devider"></span>
-                                    <input type="search" name="search" placeholder="What do you need?">
+                                    <input type="search" name="keyword" th:value="${searchKeyword}" required placeholder="What do you need?">
                                 </div>
                                 <button type="submit">
                                     <span><i class="fa-light fa-magnifying-glass"></i></span>
@@ -115,6 +115,8 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                         <li class="nav-item">
                                             <a class="nav-link" th:href="@{/contacts}">Contact</a>
                                         </li>
+                                        
+                                        
                      
                                     </ul>
                                 </div>
@@ -256,7 +258,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                             <div class="single-product-card">
                                 <div class="part-img">
                                     <span class="off-tag">[[${product.discountPercent}]]</span>
-                                    <img th:src="@{${product.mainImagePath}}" alt="Product" style="height: 300px; width: 400px;">
+                                    <img th:src="@{${product.mainImagePath}}" alt="Product" style="height: 300px; width: 350px;">
                                 </div>
                                  <div class="text-center">
 							<input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
@@ -323,7 +325,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                         <div class="col-xl-4 col-lg-6 col-6" th:each="product : ${listProducts}">
                             <div class="single-box">
                                 <div class="part-img">
-                                    <a href="#"><img th:src="@{${product.mainImagePath}}" alt="Image" width="150px;"></a>
+                                    <a href="#"><img th:src="@{${product.mainImagePath}}" alt="Image" style="height: 150px; width: 170px;"></a>
                                 </div>
                                  <div class="text-center">
 							<input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
