@@ -6,7 +6,6 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<script th:src="@{/star-rating/js/star-rating.js}" type="text/javascript"></script>
 	<link rel="stylesheet" th:href="@{/star-rating/themes/krajee-svg/theme.css}" media="all" type="text/css"/>
 	<script th:src="@{/star-rating/themes/krajee-svg/theme.js}" type="text/javascript"></script>	
-<body>
 
 <body>
     <!-- preloader begin -->
@@ -14,7 +13,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         <img th:src="@{/images/loader.gif}" alt="Gif">
     </div>
     <!-- preloader end -->
-    
+	
     <!--------------------------------- PRODUCT QUICK VIEW PANEL START --------------------------------->
     <div class="product-quick-view-panel">
         <div class="img">
@@ -60,8 +59,8 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     <div class="col-xl-3 col-xl-3 col-lg-2 col-sm-2 col-6">
                         <ul class="bottom-header-right d-flex align-items-center justify-content-end">
                             <li class="live-chat d-xl-flex d-none align-items-center">
-                                <div class="icon">
-                                    <img th:src="@{/images/call-icon.png}" alt="call">
+                                <div class="icon">                           
+                                		<img th:src="@{/images/call-icon.png}" alt="call">                                                           
                                 </div>
                                 <div class="txt">
                                     <span class="d-block">Live Chat or :</span>
@@ -379,6 +378,33 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <!--------------------------------- FOOTER SECTION START --------------------------------->
    <span th:replace="footer:: footer"></span>
     <!--------------------------------- FOOTER SECTION END --------------------------------->
+    
+     <div class="social-button">
+	    <div class="social-button-content">
+	       <!-- <a href="tel:0981481368" class="call-icon" rel="nofollow">
+	          <i class="fa fa-whatsapp" aria-hidden="true"></i>
+	          <div class="animated alo-circle"></div>
+	          <div class="animated alo-circle-fill  "></div>
+	           <span>Hotline: 098 148 1368</span>
+	        </a> -->
+	        
+	        <a href="sms:0981481368" class="sms" target="_blank">
+	          <i class="fab fa-facebook-messenger" aria-hidden="true"></i>
+	          <span>Messenger Facebook</span>
+	          <div class="animated alo-circle"></div>
+	          <div class="animated alo-circle-fill"></div>
+	        </a>
+	        <a th:href="@{https://www.facebook.com/AptechShop/}" class="mes" target="_blank">
+	          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+	          <span>Fanpage Facebook</span>
+	        </a>
+	        <a th:href="@{http://zalo.me/0902711017}" class="zalo" target="_blank">
+	          <i class="fa-solid fa-square-z" aria-hidden="true"></i>
+	          <span>Zalo: 0902.71.10.17</span>
+	        </a>
+	    </div>
+  </div>
+  
 <script type="text/javascript">	
 	$(".product-detail-rating-star").rating({
 		displayOnly: true,
@@ -386,7 +412,37 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		showCaption: false,
 		theme: 'krajee-svg'
 	});
+	
+	$(document).ready(function(){
+	    $('.user-support').click(function(event) {
+	      $('.social-button-content').slideToggle();
+	    });
+	    });
 </script>
+
+<!-- <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "111252218470237");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    Your SDK code
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v15.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script> -->
    <!--  <script th:src="@{/vendor/js/jquery-3.6.0.min.js}"></script> -->
     <script th:src="@{/vendor/js/jquery.nice-select.min.js}"></script>
     <script th:src="@{/vendor/js/jquery.flagstrap.min.js}"></script>
