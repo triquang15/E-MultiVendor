@@ -67,7 +67,7 @@ function showUpdateConfirmModal(link) {
 	confirmText.text("Are you sure you want to update status of the order ID #" + orderId
 					 + " to " + status + "?");
 					 
-	confirmModalDialog.modal();
+	confirmModalDialog.modal('show');
 }
 
 function showMessageModal(message) {
