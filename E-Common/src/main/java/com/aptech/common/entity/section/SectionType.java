@@ -23,5 +23,9 @@ public enum SectionType {
 	
 	ALL_CATEGORIES {
 		public String toString() { return "All_Categories"; }
+	},	
+	
+	ALL_SHOPS {
+		public String toString() { return "All_Shops"; }
 	}	
 }

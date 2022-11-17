@@ -64,6 +64,7 @@
                                             	<th>QTY</th>
                                                 <th>Image</th>
                                                 <th>Product Name</th>
+                                                <th>Shop</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
                                                 <th>Total</th>
@@ -81,6 +82,7 @@
                                                 </td>
                                                 <td><a th:href="@{'/p/' + ${product.alias}}" target="_blank"
 							th:title="${product.name}" class="product-name">[[${product.shortName}]]</a></td>
+												 <td><div class="divCount">[[${product.shop.name}]]</div></td>
                                                 <td><div th:replace="product/product_fragment :: product_price"></div></td>
                                                 <td>
                                                     <div th:replace="cart/quantity_control :: quantity_control(${item.quantity}, ${product.id})"></div>
