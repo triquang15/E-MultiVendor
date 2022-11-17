@@ -1,13 +1,9 @@
 package com.aptech.shop;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.digest;
 
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.aptech.ControllerHelper;
-import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.Shop;
 import com.aptech.common.exception.ShopNotFoundException;

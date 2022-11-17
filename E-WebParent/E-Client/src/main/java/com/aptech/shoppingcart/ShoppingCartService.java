@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.aptech.common.entity.CartItem;
 import com.aptech.common.entity.Customer;
+import com.aptech.common.entity.Shop;
 import com.aptech.common.entity.product.Product;
 import com.aptech.product.ProductRepository;
 
