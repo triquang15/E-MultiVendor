@@ -61,11 +61,11 @@ public class ShopService {
 		}
 	}
 
-	public void updateShop(Shop shopInForm, Customer customer) throws ShopNotFoundException {
+	public Shop updateShop(Shop shopInForm, Customer customer) throws ShopNotFoundException {
 		Shop shopInDB = shopRepository.findByIdAndCustomer(shopInForm.getId(), customer);
 		
 		if (shopInDB == null) {
-			throw new ShopNotFoundException("Order ID " + shopInForm.getId() + " not found");
+			throw new ShopNotFoundException("Shop ID " + shopInForm.getId() + " not found");
 		}
 		shopInDB.setName(shopInForm.getName());
 		shopInDB.setAlias(shopInForm.getAlias());
@@ -73,7 +73,7 @@ public class ShopService {
 		shopInDB.setDeliveryAddress(shopInForm.getDeliveryAddress());
 		shopInDB.setCustomer(customer);
 		
-		shopRepository.save(shopInDB);
+		return shopRepository.save(shopInDB);
 	}
 
 	public void delete(Integer id) throws ShopNotFoundException {
