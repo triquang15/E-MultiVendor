@@ -31,6 +31,7 @@ import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.product.Product;
 import com.aptech.common.entity.product.ProductImage;
 import com.aptech.common.entity.Shop;
+import com.aptech.common.entity.User;
 import com.aptech.common.entity.section.Section;
 import com.aptech.common.entity.section.SectionType;
 import com.aptech.common.exception.ShopNotFoundException;
@@ -155,11 +156,25 @@ public class ShopController {
 	}
 	
 	@PostMapping("/update_shop")
-	public String updateShopDetails(Model model, Shop shop, RedirectAttributes ra,
-			HttpServletRequest request) throws ShopNotFoundException {
+	public String updateShopDetails(Shop shop, RedirectAttributes ra, @RequestParam("fileImage") MultipartFile multipartFile,
+			HttpServletRequest request) throws ShopNotFoundException, IOException {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
-		shopService.updateShop(shop, customer);
-	
+		
+		if (!multipartFile.isEmpty()) {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			shop.setImage(fileName);
+			Shop savedShop = shopService.updateShop(shop, customer);
+			
+			String uploadDir = "../shop-images/" + savedShop.getId();
+			
+			FileUploadUtil.cleanDir(uploadDir);
+			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			
+		} else {
+			if (shop.getImage().isEmpty()) shop.setImage(null);
+			shopService.updateShop(shop, customer);
+		}
+			
 		ra.addFlashAttribute("message", "Your shop details have been updated.");
 			
 		return "redirect:/shops";
