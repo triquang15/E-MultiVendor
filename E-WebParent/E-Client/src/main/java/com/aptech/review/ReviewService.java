@@ -85,8 +85,24 @@ public class ReviewService {
 		return savedReview;
 	}
 
-	public int getNumberOfFiveStar(Integer productId) {
-		return reviewRepo.countFiveStar(productId);
+	public int getNumberOf5Star(Integer productId) {
+		return reviewRepo.count5Star(productId);
+	}
+	
+	public int getNumberOf4Star(Integer productId) {
+		return reviewRepo.count4Star(productId);
+	}
+	
+	public int getNumberOf3Star(Integer productId) {
+		return reviewRepo.count3Star(productId);
+	}
+	
+	public int getNumberOf2Star(Integer productId) {
+		return reviewRepo.count2Star(productId);
+	}
+	
+	public int getNumberOf1Star(Integer productId) {
+		return reviewRepo.count1Star(productId);
 	}
 	
 }
