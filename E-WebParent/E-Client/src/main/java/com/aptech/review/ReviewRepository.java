@@ -37,7 +37,19 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	public Integer getVoteCount(Integer reviewId);
 
 	@Query("SELECT COUNT (r) FROM Review r WHERE r.rating = 5 and r.product.id =?1")
-	public int countFiveStar(Integer productId);
+	public int count5Star(Integer productId);
+	
+	@Query("SELECT COUNT (r) FROM Review r WHERE r.rating = 4 and r.product.id =?1")
+	public int count4Star(Integer productId);
+	
+	@Query("SELECT COUNT (r) FROM Review r WHERE r.rating = 3 and r.product.id =?1")
+	public int count3Star(Integer productId);
+	
+	@Query("SELECT COUNT (r) FROM Review r WHERE r.rating = 2 and r.product.id =?1")
+	public int count2Star(Integer productId);
+	
+	@Query("SELECT COUNT (r) FROM Review r WHERE r.rating = 1 and r.product.id =?1")
+	public int count1Star(Integer productId);
 
 }
 
