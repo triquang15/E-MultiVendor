@@ -161,12 +161,20 @@ public class ProductController {
 
 			int numberOfQuestions = questionService.getNumberOfQuestions(product.getId());
 			int numberOfAnsweredQuestions = questionService.getNumberOfAnsweredQuestions(product.getId());
-			int numberOfFiveStar = reviewService.getNumberOfFiveStar(product.getId());
+			int numberOf5Star = reviewService.getNumberOf5Star(product.getId());
+			int numberOf4Star = reviewService.getNumberOf4Star(product.getId());
+			int numberOf3Star = reviewService.getNumberOf3Star(product.getId());
+			int numberOf2Star = reviewService.getNumberOf2Star(product.getId());
+			int numberOf1Star = reviewService.getNumberOf1Star(product.getId());
 
 			model.addAttribute("listQuestions", listQuestions);
 			model.addAttribute("numberOfQuestions", numberOfQuestions);
 			model.addAttribute("numberOfAnsweredQuestions", numberOfAnsweredQuestions);
-			model.addAttribute("numberOfFiveStar", numberOfFiveStar);
+			model.addAttribute("numberOf5Star", numberOf5Star);
+			model.addAttribute("numberOf4Star", numberOf4Star);
+			model.addAttribute("numberOf3Star", numberOf3Star);
+			model.addAttribute("numberOf2Star", numberOf2Star);
+			model.addAttribute("numberOf1Star", numberOf1Star);
 
 			model.addAttribute("listCategoryParents", listCategoryParents);
 			model.addAttribute("product", product);
