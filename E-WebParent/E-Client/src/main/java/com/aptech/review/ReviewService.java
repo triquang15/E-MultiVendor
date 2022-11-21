@@ -84,4 +84,9 @@ public class ReviewService {
 		
 		return savedReview;
 	}
+
+	public int getNumberOfFiveStar(Integer productId) {
+		return reviewRepo.countFiveStar(productId);
+	}
+	
 }
