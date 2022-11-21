@@ -72,8 +72,12 @@ public class ShopService {
 		shopInDB.setCreatedTime(new Date());
 		shopInDB.setDeliveryAddress(shopInForm.getDeliveryAddress());
 		shopInDB.setCustomer(customer);
+		if ( shopInDB.getImage() != null) {
+			shopInDB.setImage(shopInForm.getImage());
+		}
 		
 		return shopRepository.save(shopInDB);
+
 	}
 
 	public void delete(Integer id) throws ShopNotFoundException {
