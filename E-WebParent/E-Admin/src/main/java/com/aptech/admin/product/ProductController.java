@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aptech.admin.AmazonS3Util;
 import com.aptech.admin.FileUploadUtil;
 import com.aptech.admin.brand.BrandService;
 import com.aptech.admin.category.CategoryService;
@@ -123,11 +124,11 @@ public class ProductController {
 			Model model, RedirectAttributes redirectAttributes) {
 		try {
 			productService.delete(id);
-			String productExtraImagesDir = "../product-images/" + id + "/extras";
-			String productImagesDir = "../product-images/" + id;
+			String productExtraImagesDir = "product-images/" + id + "/extras";
+			String productImagesDir = "product-images/" + id;
 			
-			FileUploadUtil.removeDir(productExtraImagesDir);
-			FileUploadUtil.removeDir(productImagesDir);
+			AmazonS3Util.removeFolder(productExtraImagesDir);
+			AmazonS3Util.removeFolder(productImagesDir);
 			
 			redirectAttributes.addFlashAttribute("message", 
 					"The product ID " + id + " has been deleted successfully");
