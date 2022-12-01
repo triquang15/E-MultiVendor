@@ -25,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.aptech.ControllerHelper;
 import com.aptech.FileUploadUtil;
+import com.aptech.AmazonS3Util;
 import com.aptech.category.CategoryService;
+import com.aptech.common.entity.Brand;
 import com.aptech.common.entity.Category;
 import com.aptech.common.entity.Customer;
 import com.aptech.common.entity.product.Product;
@@ -121,10 +123,13 @@ public class ShopController {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
 		shop.setImage(fileName);
+		
 		Shop saveShop = shopService.createShop(shop, customer);
-		String uploadDir = "../shop-images/" + saveShop.getId(); 
-		FileUploadUtil.cleanDir(uploadDir);
-		FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);						
+		String uploadDir = "shop-images/" + saveShop.getId(); 
+		
+		AmazonS3Util.removeFolder(uploadDir);
+		AmazonS3Util.uploadFile(uploadDir, fileName, mainImageMultipart.getInputStream());
+		
 		redirectAttributes.addFlashAttribute("message", "The shop has been create successfully.");
 		return "redirect:/shops";
 		
@@ -163,12 +168,11 @@ public class ShopController {
 		if (!multipartFile.isEmpty()) {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			shop.setImage(fileName);
-			Shop savedShop = shopService.updateShop(shop, customer);
+			Shop saveShop = shopService.createShop(shop, customer);
+			String uploadDir = "shop-images/" + saveShop.getId(); 
 			
-			String uploadDir = "../shop-images/" + savedShop.getId();
-			
-			FileUploadUtil.cleanDir(uploadDir);
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			AmazonS3Util.removeFolder(uploadDir);
+			AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 			
 		} else {
 			if (shop.getImage().isEmpty()) shop.setImage(null);
@@ -186,8 +190,8 @@ public class ShopController {
 			Model model, RedirectAttributes ra) {
 		try {
 			shopService.delete(id);
-			String shopImageDir = "../shop-images/" + id;
-			FileUploadUtil.removeDir(shopImageDir);
+			String shopDir = "shop-images/" + id;
+			AmazonS3Util.removeFolder(shopDir);
 			
 			ra.addFlashAttribute("message", "The shop ID " + id + " has been deleted.");
 		} catch (ShopNotFoundException ex) {

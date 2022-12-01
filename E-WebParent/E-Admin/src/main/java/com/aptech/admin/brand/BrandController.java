@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aptech.admin.AmazonS3Util;
 import com.aptech.admin.FileUploadUtil;
 import com.aptech.admin.category.CategoryService;
 import com.aptech.admin.paging.PagingAndSortingHelper;
@@ -61,14 +62,10 @@ public class BrandController {
 			brand.setLogo(fileName);
 			
 			Brand savedBrand = brandService.save(brand);
-			String uploadDir = "../brand-logos/" + savedBrand.getId();
-	//		String uploadDir = "brand-logos/" + savedBrand.getId();
+			String uploadDir = "brand-logos/" + savedBrand.getId();
 			
-			FileUploadUtil.cleanDir(uploadDir);
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-			
-//			AmazonS3Util.removeFolder(uploadDir);
-//			AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
+			AmazonS3Util.removeFolder(uploadDir);
+			AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 		} else {
 			brandService.save(brand);
 		}
@@ -101,11 +98,9 @@ public class BrandController {
 			RedirectAttributes redirectAttributes) {
 		try {
 			brandService.delete(id);
-			String authorDir = "../brand-logos/" + id;
-			FileUploadUtil.removeDir(authorDir);
 			
-//			String brandDir = "brand-logos/" + id;
-//			AmazonS3Util.removeFolder(brandDir);
+			String brandDir = "brand-logos/" + id;
+			AmazonS3Util.removeFolder(brandDir);
 			
 			redirectAttributes.addFlashAttribute("message", 
 					"The brand ID " + id + " has been deleted successfully");

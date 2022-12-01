@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aptech.AmazonS3Util;
 import com.aptech.ControllerHelper;
 import com.aptech.FileUploadUtil;
 import com.aptech.brand.BrandService;
@@ -335,11 +336,11 @@ public class ProductController {
 			RedirectAttributes redirectAttributes) {
 		try {
 			productService.delete(id);
-			String productExtraImagesDir = "../product-images/" + id + "/extras";
-			String productImagesDir = "../product-images/" + id;
-
-			FileUploadUtil.removeDir(productExtraImagesDir);
-			FileUploadUtil.removeDir(productImagesDir);
+			String productExtraImagesDir = "product-images/" + id + "/extras";
+			String productImagesDir = "product-images/" + id;
+			
+			AmazonS3Util.removeFolder(productExtraImagesDir);
+			AmazonS3Util.removeFolder(productImagesDir);
 
 			redirectAttributes.addFlashAttribute("message", "The product ID " + id + " has been deleted successfully");
 		} catch (ProductNotFoundException ex) {

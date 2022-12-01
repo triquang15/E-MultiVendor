@@ -1,12 +1,15 @@
 server:
   port: 80
-  servlet:
-    context-path: /Client
+#  servlet:
+#    context-path: /Client
 spring:
   datasource:
     password: 1234567
     url: jdbc:mysql://localhost:3306/emultivendor
     username: root
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 2
   jpa:
     hibernate:
       ddl-auto: update

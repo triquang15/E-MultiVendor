@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.aptech.admin.AmazonS3Util;
 import com.aptech.admin.paging.PagingAndSortingHelper;
 import com.aptech.admin.paging.PagingAndSortingParam;
 import com.aptech.common.entity.Shop;
@@ -77,7 +79,9 @@ public class ShopController {
 	@GetMapping("/shops/delete/{id}")
 	public String deleteShop(@PathVariable Integer id, RedirectAttributes ra) {
 		try {
-			service.delete(id);			
+			service.delete(id);		
+			String shopDir = "shop-images/" + id;
+			AmazonS3Util.removeFolder(shopDir);
 			ra.addFlashAttribute("message", "The Shop ID " + id + " has been deleted successfully.");
 			
 		} catch (ShopNotFoundException ex) {
