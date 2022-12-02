@@ -43,7 +43,7 @@
                     <ul>
                                      <th:block th:each="section : ${listSections}">          
                         <li class="category-item" th:each="catSection : ${section.categorySections}" th:with="cat = ${catSection.category}">
-                            <a href="#">
+                            <a th:href="@{'/c/' + ${cat.alias}}">
                                 <div class="icon">
                                     <span><i class="fa-solid fa-star-sharp rated"></i></span>
                                 </div>
